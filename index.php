@@ -1,4 +1,25 @@
+<<<<<<< HEAD
 <!--Using PHP to use the code from another files once-->
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page at index</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-image: url('assets/img/clocks.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+            padding: 1em;
+        }
+    </style>
+</head>
+<body>
+>>>>>>> 0e724d116980876312ce95901bb4b49e5e43d473
 <?php require_once "templates/header.php"; ?>
 <?php require_once "templates/main-header.php"; ?>
 
@@ -26,3 +47,6 @@
 
 <?php require_once "templates/main-footer.php"; ?>
 <?php require_once "templates/footer.php"; ?>
+
+</body>
+</html>

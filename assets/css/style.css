@@ -9,10 +9,14 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+<<<<<<< HEAD
     display: flex;
     flex-flow: column nowrap;
     min-height: 100vh;
 
+=======
+    overflow-x: hidden;
+>>>>>>> 0e724d116980876312ce95901bb4b49e5e43d473
 }
 
 .full-page-width
@@ -144,6 +148,7 @@ header {
     justify-content: space-between;
     align-items: center;
     font-weight: bold;
+    background-color: #fff;
 }
 
 header h1 {
@@ -198,6 +203,7 @@ nav a:hover::after {
     }
 }
 
+<<<<<<< HEAD
 /* Main Content Styles */
 #index-main {
     background-image: url("../img/clocks.jpg");
@@ -236,6 +242,8 @@ nav a:hover::after {
     background-color: #6a0dad;
 }
 
+=======
+>>>>>>> 0e724d116980876312ce95901bb4b49e5e43d473
 /* Footer Styles */
 footer {
     position: fixed;
@@ -248,12 +256,46 @@ footer {
     }
 }
 
+/* Main Content Styles */
+.content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.center-box {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.center-box p {
+    margin-bottom: 20px;
+}
+
+.start-here-button {
+    background-color: purple;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.start-here-button:hover {
+    background-color: darkmagenta;
+}
+
 /* Banner Styles */
 .banner {
     position: relative;
     height: 200px;
     overflow: hidden;
-    margin: auto; /* Adjusted from 'center' to 'auto' */
+    margin: auto;
     display: block;
 }
 
@@ -269,19 +311,65 @@ footer {
 /* Privacy Content Styles */
 .privacy-content {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding-top: 100px;
-    padding-left: 10%;
+    padding: 50px;
 }
 
 .privacy-content .image {
-    flex: 0 0 auto;
-    width: 30%;
-    padding-right: 20px;
+    width: 80%;
+    max-width: 200px;
+    padding: 0;
+    margin-bottom: 20px;
 }
 
 .privacy-content .image img {
     width: 100%;
     height: auto;
+}
+
+.privacy-content .text {
+    width: 100%;
+    text-align: center;
+}
+
+.privacy-content .text h2, .privacy-content .text h3 {
+    font-size: 5vw;
+}
+
+.privacy-content .text p {
+    font-size: 4vw;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+@media only screen and (min-width: 601px) {
+    .privacy-content {
+        flex-direction: row;
+        padding-top: 100px;
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+
+    .privacy-content .image {
+        flex: 0 0 auto;
+        width: 20%;
+        padding-right: 20px;
+        margin-bottom: 0; 
+    }
+
+    .privacy-content .text {
+        flex: 1;
+        padding-left: 20px;
+        text-align: left;
+    }
+
+    .privacy-content .text h2, .privacy-content .text h3 {
+        font-size: initial;
+    }
+
+    .privacy-content .text p {
+        font-size: initial;
+    }
 }
