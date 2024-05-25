@@ -1,21 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HOURSMANAGER</title>
-    <link rel="stylesheet" href="assets\css\style.css">
-</head>
-<body>
-    <header>
-        <h1>HOURSMANAGER</h1>
-        <nav>
-            <a href="index.php">HOME</a>
-            <a href="about.php">ABOUT</a>
-            <a href="contact.php">CONTACT</a>
-            <a href="privacy.php">PRIVACY</a>
-            <a href="#lnr">LOGIN/REGISTER</a>
-        </nav>
-    </header>
-</body>
-</html>
+<header>
+    <!--Using PHP defined variables to build up HTML link atrributes-->
+    <!--This is needed to ensure resources lead to where they are inteded in our web server -->
+    <!--In my case this translates to http://localhost/projects/hours-manager/-->
+    <h1><a class="silent-link purple-color purple-color-hover" href="<?=$websiteUrl?>">HOURSMANAGER</a></h1>
+    <nav>
+        <a href="<?=$websiteUrl?>/about.php">ABOUT</a>
+
+        <!--In my case this translates to http://localhost/projects/hours-manager/contact.php-->
+        <a href="<?=$websiteUrl?>/contact.php">CONTACT</a>
+
+         <!--In my case this translates to http://localhost/projects/hours-manager/privacy.php-->
+        <a href="<?=$websiteUrl?>/privacy.php">PRIVACY</a>
+
+         <!--In my case this translates to http://localhost/projects/hours-manager/register.php-->
+        <a href="<?=$websiteUrl?>/register.php">REGISTER</a>
+
+         <!--In my case this translates to http://localhost/projects/hours-manager/login.php-->
+        <a href="<?=$websiteUrl?>/login.php">LOGIN</a>
+    </nav>
+</header>

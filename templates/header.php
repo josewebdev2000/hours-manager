@@ -21,8 +21,8 @@ $websiteUrl = getWebsiteUrl();
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="<?=$websiteUrl?>assets/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="<?=$websiteUrl?>assets/plugins/bootstrap-5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?=$websiteUrl?>assets/dist/css/adminlte.min.css?v=3.2.0">
-    <link rel="stylesheet" href="<?=$websiteURL?>/assets/plugins/cookiealert/cookiealert.css">
+    <link rel="stylesheet" href="<?=$websiteUrl?>assets/dist/css/adminlte.css">
+    <link rel="stylesheet" href="<?=$websiteURL?>assets/plugins/cookiealert/cookiealert.css">
 
     <!--Custom StyleSheets-->
     <link rel="stylesheet" href="<?=$websiteUrl?>assets/css/style.css">

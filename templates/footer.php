@@ -4,7 +4,7 @@ $websiteUrl = getWebsiteUrl();
 
 ?> 
     <!--Dependency DOM Scripts-->
-    <script src="<?=$websiteUrl?>assets/dist/js/adminlte.js?v=3.2.0"></script>
+    <script src="<?=$websiteUrl?>assets/dist/js/adminlte.js"></script>
     <script src="<?=$websiteUrl?>assets/plugins/cookiealert/cookiealert.js"></script>
 
     <!--Custom Scripts-->
@@ -18,8 +18,11 @@ $websiteUrl = getWebsiteUrl();
     <!--JS HTML Snippets-->
 
     <!--JS OOP Classes-->
+    <script src="<?=$websiteUrl?>/assets/js/oop/ResponsiveElement.js"></script>
 
     <!--Page Scripts-->
+    <script src="<?=$websiteUrl?>/assets/js/index.js"></script>
+
     <?php require_once __DIR__ . "/../helpers/index.php";
 
         // Grab the name of the current page

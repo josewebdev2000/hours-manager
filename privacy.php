@@ -1,7 +1,7 @@
 <?php require_once "templates/header.php"; ?>
 <?php require_once "templates/main-header.php"; ?>
 
-<main>
+<main class="flex-065">
     <section class="banner">
         <img src="assets/img/pocket_watch.jpg" alt="Clock">
     </section>
