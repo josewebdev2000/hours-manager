@@ -5,7 +5,7 @@
     <section class="banner">
         <img src="assets/img/pocket_watch.jpg" alt="Clock">
     </section>
-    <section class="content">
+    <section class="content mb-5">
         <div class="privacy-content">
             <div class="image">
                 <img src="assets/img/purple_hourglass.jpg" alt="Hourglass">
