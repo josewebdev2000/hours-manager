@@ -9,14 +9,9 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-<<<<<<< HEAD
     display: flex;
     flex-flow: column nowrap;
     min-height: 100vh;
-
-=======
-    overflow-x: hidden;
->>>>>>> 0e724d116980876312ce95901bb4b49e5e43d473
 }
 
 .full-page-width
@@ -203,7 +198,6 @@ nav a:hover::after {
     }
 }
 
-<<<<<<< HEAD
 /* Main Content Styles */
 #index-main {
     background-image: url("../img/clocks.jpg");
@@ -242,8 +236,6 @@ nav a:hover::after {
     background-color: #6a0dad;
 }
 
-=======
->>>>>>> 0e724d116980876312ce95901bb4b49e5e43d473
 /* Footer Styles */
 footer {
     position: fixed;
