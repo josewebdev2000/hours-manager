@@ -10,15 +10,15 @@ function mainIndex()
 function makeHeroContainerResponsive()
 {
     // Grab the hero container of the index page
-    const indexMain = $("#index-main");
+    const main = $("main");
     const indexHeroContainer = $("#index-hero-container");
 
     // Run only in indexMain is present
-    if (indexMain.length)
+    if (main.length)
     {
         // Generate a new responsive for the index Main Element
         new ResponsiveElement(
-            "#index-main",
+            "#main",
             644,
             "flex-065",
             "full-page-height"
