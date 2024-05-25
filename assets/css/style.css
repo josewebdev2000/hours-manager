@@ -3,6 +3,14 @@ body {
     margin: 0;
     padding: 0;
 }
+
+#page-container {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
 header {
     color: black;
     padding: 10px 20px;
@@ -11,18 +19,22 @@ header {
     align-items: center;
     font-weight: bold;
 }
+
 header h1 {
     color: purple;
 }
+
 nav {
     display: flex;
 }
+
 nav a {
     color: black;
     text-decoration: none;
     padding: 10px 20px;
     position: relative;
 }
+
 nav a::after {
     content: '';
     position: absolute;
@@ -33,17 +45,90 @@ nav a::after {
     background-color: transparent;
     transition: background-color 0.3s;
 }
+
 nav a:hover {
     color: purple;
 }
+
 nav a:hover::after {
     background-color: purple;
 }
+
 @media only screen and (max-width: 600px) {
     header {
         padding: 10px; /* Adjust header padding for smaller screens */
+        flex-direction: column;
+        align-items: center;
+    }
+    nav {
+        margin-top: 10px;
+        flex-direction: column;
+        align-items: center;
     }
     nav a {
-        padding: 10px; /* Adjust navigation link padding for smaller screens */
+        padding: 10px;
     }
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #333; /* Footer background color */
+    padding: 20px;
+    text-align: center;
+    color: #fff;
+    height: 2.5rem; /* Footer height */
+    font-size: 14px; /* Adjust font size for smaller screens */
+}
+
+@media only screen and (max-width: 600px) {
+    footer {
+        padding: 10px; /* Adjust footer padding for smaller screens */
+    }
+}
+
+/* INDEX ITEM */
+
+.background-image {
+    background-image: url('path_to_your_image.jpg'); /* Replace 'path_to_your_image.jpg' with the actual path to your background image */
+    background-size: cover;
+    background-position: center;
+    height: calc(100vh - 5rem); /* Subtracting header and footer height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+    width: 80%;
+    max-width: 800px;
+}
+
+.center-box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.center-box p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #333;
+}
+
+.start-here-button {
+    display: inline-block;
+    background-color: purple;
+    color: white;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.start-here-button:hover {
+    background-color: #6a0dad;
 }

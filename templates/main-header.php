@@ -10,11 +10,11 @@
     <header>
         <h1>HOURSMANAGER</h1>
         <nav>
-            <a href="#">HOME</a>
-            <a href="#">ABOUT</a>
-            <a href="#">CONTACT</a>
-            <a href="#">PRIVACY</a>
-            <a href="#">LOGIN/REGISTER</a>
+            <a href="index.php">HOME</a>
+            <a href="about.php">ABOUT</a>
+            <a href="contact.php">CONTACT</a>
+            <a href="privacy.php">PRIVACY</a>
+            <a href="#lnr">LOGIN/REGISTER</a>
         </nav>
     </header>
 </body>
