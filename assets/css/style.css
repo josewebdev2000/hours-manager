@@ -1,9 +1,11 @@
+/* Global Styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
 }
 
+/* Page Container Styles */
 #page-container {
     position: relative;
     min-height: 100vh;
@@ -11,6 +13,7 @@ body {
     flex-direction: column;
 }
 
+/* Header Styles */
 header {
     color: black;
     padding: 10px 20px;
@@ -24,6 +27,7 @@ header h1 {
     color: purple;
 }
 
+/* Navigation Styles */
 nav {
     display: flex;
 }
@@ -54,9 +58,10 @@ nav a:hover::after {
     background-color: purple;
 }
 
+/* Responsive Styles */
 @media only screen and (max-width: 600px) {
     header {
-        padding: 10px; /* Adjust header padding for smaller screens */
+        padding: 10px;
         flex-direction: column;
         align-items: center;
     }
@@ -70,52 +75,39 @@ nav a:hover::after {
     }
 }
 
-footer {
-    position: absolute;
-    bottom: 0;
+/* Main Content Styles */
+.index-main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('assets/img/clocks.jpg') no-repeat center center/cover;
+    min-height: calc(100vh - 4.5rem);
+}
+
+.content {
     width: 100%;
-    background-color: #333; /* Footer background color */
-    padding: 20px;
-    text-align: center;
-    color: #fff;
-    height: 2.5rem; /* Footer height */
-    font-size: 14px; /* Adjust font size for smaller screens */
-}
-
-@media only screen and (max-width: 600px) {
-    footer {
-        padding: 10px; /* Adjust footer padding for smaller screens */
-    }
-}
-
-/* INDEX ITEM */
-
-.background-image {
-    background-image: url('path_to_your_image.jpg'); /* Replace 'path_to_your_image.jpg' with the actual path to your background image */
-    background-size: cover;
-    background-position: center;
-    height: calc(100vh - 5rem); /* Subtracting header and footer height */
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.content {
-    width: 80%;
-    max-width: 800px;
-}
-
 .center-box {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
+    background-color: greenyellow;
+    padding: 40px;
     text-align: center;
+    width: 100%;
+    max-width: 800px;
+    box-sizing: border-box;
+    margin: 20px;
+    min-height: calc(100vh - 4.5rem);
 }
 
 .center-box p {
-    font-size: 18px;
+    font-size: 24px;
     line-height: 1.6;
     color: #333;
+    font-weight: bold;
 }
 
 .start-here-button {
@@ -127,8 +119,67 @@ footer {
     border-radius: 5px;
     text-decoration: none;
     transition: background-color 0.3s;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 .start-here-button:hover {
     background-color: #6a0dad;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #333;
+    padding: 20px;
+    text-align: center;
+    color: #fff;
+    height: 2.5rem;
+    font-size: 14px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}
+
+@media only screen and (max-width: 600px) {
+    footer {
+        padding: 10px;
+    }
+}
+
+/* Banner Styles */
+.banner {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+    margin: auto; /* Adjusted from 'center' to 'auto' */
+    display: block;
+}
+
+.banner img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: auto;
+}
+
+/* Privacy Content Styles */
+.privacy-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 100px;
+    padding-left: 10%;
+}
+
+.privacy-content .image {
+    flex: 0 0 auto;
+    width: 30%;
+    padding-right: 20px;
+}
+
+.privacy-content .image img {
+    width: 100%;
+    height: auto;
 }
