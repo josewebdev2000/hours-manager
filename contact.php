@@ -5,7 +5,7 @@
     <section class="banner">
         <img src="<?=$websiteUrl?>assets/img/contact_computer.jpg" alt="Contact Computer Banner">
     </section>
-    <section class="d-flex container-fluid justify-content-center align-items-center w-100 p-5">
+    <section class="d-flex container-fluid justify-content-center align-items-center w-100 p-5 mt-5">
         <div class="row">
             <div class="col-12 col-sm-12 col-md-1">
             </div>

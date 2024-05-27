@@ -31,6 +31,12 @@ $websiteUrl = getWebsiteUrl();
         // Dynamically Load Content For Each Page
         switch($currentPage)
         {
+            case "about.php":
+            {
+                echo "<script src='$websiteUrl/assets/js/about.js'></script>";
+                break;
+            }
+
             case "contact.php":
             {
                 echo "<script src='$websiteUrl/assets/js/contact.js'></script>";
