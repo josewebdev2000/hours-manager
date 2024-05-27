@@ -32,11 +32,11 @@
                             <div class="accordion" id="values-accordion">
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="simplicity-header">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#simplicity-content" aria-expanded="true" aria-controls="simplicity-content">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#simplicity-content" aria-expanded="false" aria-controls="simplicity-content">
                                             Simplicity
                                         </button>
                                     </h2>
-                                    <div id="simplicity-content" class="accordion-collapse collapse show" aria-labelledby="#simplicity-header" data-bs-parent="#values-accordion">
+                                    <div id="simplicity-content" class="accordion-collapse collapse" aria-labelledby="#simplicity-header" data-bs-parent="#values-accordion">
                                         <div class="accordion-body">
                                             <p>We believe in keeping things simple.</p>
                                             <p>Our user-friendly interface ensures that you can start managing your time without any steep learning curve.</p>
