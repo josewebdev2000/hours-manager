@@ -19,55 +19,28 @@
                 <p>That's why we created HoursManager – to simplify and streamline the process for you.</p>
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-12 text-center">
                             <h3>Our Mission</h3>
                             <p>At HoursManager, our mission is to provide an intuitive and secure platform that helps individuals and organizations manage their time effectively. We aim to enhance productivity and ensure accurate time tracking with ease.</p>
                         </div>
-                        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-12 text-center">
                             <h3>Our Story</h3>
                             <p>HoursManager was founded by a group of professionals who experienced firsthand the challenges of tracking work hours and managing time efficiently. We realized the need for a simple, yet powerful tool that could help people stay organized and focused on their tasks without the hassle of complicated software.</p>
                         </div>
-                        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12 text-center">
                             <h3>Our Values</h3>
-                            <div class="accordion" id="values-accordion">
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="simplicity-header">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#simplicity-content" aria-expanded="false" aria-controls="simplicity-content">
-                                            Simplicity
-                                        </button>
-                                    </h2>
-                                    <div id="simplicity-content" class="accordion-collapse collapse" aria-labelledby="#simplicity-header" data-bs-parent="#values-accordion">
-                                        <div class="accordion-body">
-                                            <p>We believe in keeping things simple.</p>
-                                            <p>Our user-friendly interface ensures that you can start managing your time without any steep learning curve.</p>
-                                        </div>
-                                    </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <h5>Simplicity</h5>
+                                    <p>We believe in keeping things simple. Our user-friendly interface ensures that you can start managing your time without any steep learning curve.</p>
                                 </div>
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header text-center" id="security-header">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#security-content" aria-expanded="false" aria-controls="security-content">
-                                            Security
-                                        </button>
-                                    </h2>
-                                    <div id="security-content" class="accordion-collapse collapse" aria-labelledby="#security-header" data-bs-parent="#values-accordion">
-                                        <div class="accordion-body">
-                                            <p>Your data's security is our top priority.</p>
-                                            <p>We use advanced encryption methods to protect your information and ensure it remains confidential.</p>
-                                        </div>
-                                    </div>
+                                <div class="col-12">
+                                    <h5>Security</h5>
+                                    <p>Your data's security is our top priority. We use advanced encryption methods to protect your information and ensure it remains confidential.</p>
                                 </div>
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header text-center" id="efficiency-header">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#efficiency-content" aria-expanded="false" aria-controls="efficiency-content">
-                                            Efficiency
-                                        </button>
-                                    </h2>
-                                    <div id="efficiency-content" class="accordion-collapse collapse" aria-labelledby="#efficiency-header" data-bs-parent="#values-accordion">
-                                        <div class="accordion-body">
-                                            <p>Time is valuable.</p>
-                                            <p>HoursManager is designed to save you time by automating and simplifying time tracking, so you can focus on what matters most.</p>
-                                        </div>
-                                    </div>
+                                <div class="col-12">
+                                    <h5>Efficiency</h5>
+                                    <p>Time is valuable. HoursManager is designed to save you time by automating and simplifying time tracking, so you can focus on what matters most.</p>
                                 </div>
                             </div>
                         </div>
