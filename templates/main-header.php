@@ -4,6 +4,8 @@
     <!--In my case this translates to http://localhost/projects/hours-manager/-->
     <h1><a class="silent-link purple-color purple-color-hover" href="<?=$websiteUrl?>">HOURSMANAGER</a></h1>
     <nav>
+        <a href="<?=$websiteUrl?>">HOME</a>
+        
         <a href="<?=$websiteUrl?>about.php">ABOUT</a>
 
         <!--In my case this translates to http://localhost/projects/hours-manager/contact.php-->

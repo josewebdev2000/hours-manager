@@ -10,18 +10,21 @@ $websiteUrl = getWebsiteUrl();
     <!--Custom Scripts-->
     
     <!--JS Constants-->
-    <script src="<?=$websiteUrl?>/assets/js/constants.js"></script>
+    <script src="<?=$websiteUrl?>assets/js/constants.js"></script>
 
     <!--JS Helpers-->
-    <script src="<?=$websiteUrl?>/assets/js/helpers.js"></script>
+    <script src="<?=$websiteUrl?>assets/js/helpers.js"></script>
 
     <!--JS HTML Snippets-->
+    <script src="<?=$websiteUrl?>assets/js/snippets/spinners/loading.js"></script>
+    <script src="<?=$websiteUrl?>assets/js/snippets/alerts/error.js"></script>
+    <script src="<?=$websiteUrl?>assets/js/snippets/alerts/success.js"></script>
 
     <!--JS OOP Classes-->
-    <script src="<?=$websiteUrl?>/assets/js/oop/ResponsiveElement.js"></script>
+    <script src="<?=$websiteUrl?>assets/js/oop/ResponsiveElement.js"></script>
 
     <!--Page Scripts-->
-    <script src="<?=$websiteUrl?>/assets/js/index.js"></script>
+    <script src="<?=$websiteUrl?>assets/js/index.js"></script>
 
     <?php require_once __DIR__ . "/../helpers/index.php";
 

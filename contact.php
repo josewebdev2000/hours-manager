@@ -25,6 +25,8 @@
                                 </span>
                             </div>
                             <input type="text" class="form-control" name="name" id="name" placeholder="Enter your name">
+                            <div class="valid-tooltip name">Name Looks Good</div>
+                            <div class="invalid-tooltip name"></div>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -36,6 +38,8 @@
                                 </span>
                             </div>
                             <input type="email" class="form-control" name="email" id="email" placeholder="Enter your email">
+                            <div class="valid-tooltip email">Email Looks Good</div>
+                            <div class="invalid-tooltip email"></div>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -47,20 +51,24 @@
                                 </span>
                             </div>
                             <input type="text" class="form-control" name="subject" id="subject" placeholder="Enter subject of your message">
+                            <div class="valid-tooltip subject">Subject Looks Good</div>
+                            <div class="invalid-tooltip subject"></div>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="message" class="col-sm-2 col-form-label">Message</label>
                         <div class="col-sm-10 input-group">
                             <textarea class="summernote form-control" name="message" id="message" required></textarea>
+                            <div class="valid-tooltip message">Message Looks Good</div>
+                            <div class="invalid-tooltip message"></div>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col" id="form-alerts-container"></div>
+                        <div class="offset-sm-2 col-sm-10" id="form-alerts-container"></div>
                     </div>
                     <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10">
-                            <button class="btn btn-purple btn-block btn-lg text-white">Submit</button>
+                            <button id="send" class="btn btn-purple btn-block btn-lg text-white">Submit</button>
                         </div>
                     </div>
                 </form>

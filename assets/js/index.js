@@ -10,11 +10,7 @@ function mainIndex()
 function makeHeroContainerResponsive()
 {
     // Grab the hero container of the index page
-<<<<<<< HEAD
     const main = $("main");
-=======
-    const main = $("#index-main");
->>>>>>> jose_about_contact_page
     const indexHeroContainer = $("#index-hero-container");
 
     // Run only in indexMain is present
@@ -22,11 +18,7 @@ function makeHeroContainerResponsive()
     {
         // Generate a new responsive for the index Main Element
         new ResponsiveElement(
-<<<<<<< HEAD
-            "main",
-=======
-            `${main.attr("id")}`,
->>>>>>> jose_about_contact_page
+            `#${main.attr("id")}`,
             644,
             "flex-065",
             "full-page-height"

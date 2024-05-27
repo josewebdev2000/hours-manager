@@ -25,17 +25,17 @@ $capitalLettersPageName = (ucfirst(explode(".", getActualPageName())[0]) != "Ind
     <link rel="stylesheet" href="<?=$websiteUrl?>assets/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="<?=$websiteUrl?>assets/plugins/bootstrap-5/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?=$websiteUrl?>assets/dist/css/adminlte.css">
-    <link rel="stylesheet" href="<?=$websiteURL?>assets/plugins/cookiealert/cookiealert.css">
+    <link rel="stylesheet" href="<?=$websiteUrl?>assets/plugins/cookiealert/cookiealert.css">
 
     <!--Custom StyleSheets-->
     <link rel="stylesheet" href="<?=$websiteUrl?>assets/css/style.css">
-    <link rel="stylesheet" href="<?=$websiteUrl?>/assets/plugins/summernote/summernote-bs4.min.css">
+    <link rel="stylesheet" href="<?=$websiteUrl?>/assets/plugins/summernote/summernote-bs5.min.css">
 
 
     <!--Plugin Scripts-->
     <script src="<?=$websiteUrl?>assets/plugins/bootstrap-5/js/bootstrap.bundle.min.js"></script>
     <script src="<?=$websiteUrl?>assets/plugins/jquery/jquery.min.js"></script>
-    <script src="<?=$websiteUrl?>/assets/plugins/summernote/summernote-bs4.min.js"></script>
+    <script src="<?=$websiteUrl?>/assets/plugins/summernote/summernote-bs5.min.js"></script>
 
 </head>
 <body>
