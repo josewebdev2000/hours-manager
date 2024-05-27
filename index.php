@@ -18,7 +18,7 @@
             <p class="fsize-120">What are you waiting for?</p>
             
             <!--Using PHP defined variables to build up HTML link atrributes-->
-            <a href="<?=$websiteUrl?>/register.php" class="start-here-button">Start Here</a>
+            <a href="<?=$websiteUrl?>register.php" class="start-here-button btn-purple silent-link">Start Here</a>
             
         </div>
     </div>

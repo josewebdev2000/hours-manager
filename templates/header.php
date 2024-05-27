@@ -4,13 +4,16 @@
 
 // Grab the website URL
 $websiteUrl = getWebsiteUrl();
+
+// Grab actual page name with capital letter
+$capitalLettersPageName = (ucfirst(explode(".", getActualPageName())[0]) != "Index") ? ucfirst(explode(".", getActualPageName())[0]) : "Home";
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HoursManager</title>
+    <title><?=$capitalLettersPageName?> | HoursManager</title>
 
     <!--Favicon-->
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -26,11 +29,13 @@ $websiteUrl = getWebsiteUrl();
 
     <!--Custom StyleSheets-->
     <link rel="stylesheet" href="<?=$websiteUrl?>assets/css/style.css">
+    <link rel="stylesheet" href="<?=$websiteUrl?>/assets/plugins/summernote/summernote-bs4.min.css">
 
 
     <!--Plugin Scripts-->
     <script src="<?=$websiteUrl?>assets/plugins/bootstrap-5/js/bootstrap.bundle.min.js"></script>
     <script src="<?=$websiteUrl?>assets/plugins/jquery/jquery.min.js"></script>
+    <script src="<?=$websiteUrl?>/assets/plugins/summernote/summernote-bs4.min.js"></script>
 
 </head>
 <body>

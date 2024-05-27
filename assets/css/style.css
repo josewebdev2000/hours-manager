@@ -34,6 +34,10 @@ body {
     height: 100%;
 }
 
+.pointy
+{
+    cursor: pointer;
+}
 
 .flex-0
 {
@@ -85,6 +89,21 @@ body {
     text-decoration: none;
 }
 
+.silent-link:hover
+{
+    color: white;
+}
+
+.fsize-200
+{
+    font-size: 2rem;
+}
+
+.fsize-200-e
+{
+    font-size: 2em !important;
+}
+
 .fsize-150
 {
     font-size: 1.5rem;
@@ -98,6 +117,11 @@ body {
 .purple-color
 {
     color: purple;
+}
+
+.dark-purple-color
+{
+    color: #6a0dad;
 }
 
 .purple-color-hover:hover
@@ -221,7 +245,6 @@ nav a:hover::after {
 
 .start-here-button {
     display: inline-block;
-    background-color: purple;
     color: white;
     padding: 10px 20px;
     margin-top: 20px;
@@ -232,15 +255,17 @@ nav a:hover::after {
     font-weight: bold;
 }
 
-.start-here-button:hover {
+.btn-purple
+{
+    background-color: purple;
+}
+
+.btn-purple:hover
+{
     background-color: #6a0dad;
 }
 
 /* Footer Styles */
-footer {
-    position: fixed;
-    bottom: 0;
-}
 
 @media only screen and (max-width: 600px) {
     footer {
@@ -285,7 +310,7 @@ footer {
 /* Banner Styles */
 .banner {
     position: relative;
-    height: 200px;
+    height: 50vh;
     overflow: hidden;
     margin: auto;
     display: block;
@@ -326,7 +351,7 @@ footer {
     text-align: center;
 }
 
-.privacy-content .text h2, .privacy-content .text h3 {
+.privacy-content .text h2 {
     font-size: 5vw;
 }
 
@@ -355,10 +380,6 @@ footer {
         flex: 1;
         padding-left: 20px;
         text-align: left;
-    }
-
-    .privacy-content .text h2, .privacy-content .text h3 {
-        font-size: initial;
     }
 
     .privacy-content .text p {
