@@ -71,6 +71,6 @@
 ## Copyright
 <div>
     <blockquote>
-        <a href="https://github.com/josewebdev2000">&copy; HoursManager</a> 2024
+        <a href="https://hoursmanager.000webhostapp.com/">&copy; HoursManager</a> 2024
     </blockquote>
 </div>

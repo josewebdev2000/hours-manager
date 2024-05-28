@@ -12,6 +12,6 @@ function getWebsiteUrl()
      * what's the URL of your server for the index.php of
      * HoursManager
      */
-    return "http://localhost/projects/hours-manager/";
+    return "https://hoursmanager.000webhostapp.com/";
 }
 ?>
