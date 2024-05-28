@@ -26,17 +26,6 @@
 
 ## Tools
 <div>
-    <p>The following people participated in the development of <em><b>HoursManager</b></em></p>
-    <ul style="list-style-type: square;">
-        <li><b>Jose Brache Garcia</b>: Team Leader, Lead Developer, Full-Stack Web Developer</li>
-        <li><b>Lener Exilus</b>: Project Manager, UI/UX Tester</li>
-        <li><b>Saad Abdulrahman F Aldawsari</b>: Web Designer, Multimedia Content Editor</li>
-        <li><b>Ronny Jara Benitez</b>: Front-End Web Developer</li>
-    </ul>
-</div>
-
-## Tools
-<div>
     <p>The following tools were used to build <em><b>HoursManager</b></em></p>
     <ul style="list-style-type: square;">
         <li>
