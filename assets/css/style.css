@@ -5,6 +5,11 @@
     box-sizing: border-box;
 }
 
+a[title="Hosted on free web hosting 000webhost.com. Host your own website for FREE."]
+{
+    display: none;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
