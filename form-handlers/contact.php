@@ -5,15 +5,8 @@ error_reporting(E_ALL);
 // Enable displaying errors
 ini_set('display_errors', 1);
 
-require_once "../helpers/index.php"; 
-require_once "../envs.php";
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
-require_once '../vendor/autoload.php';
-
-loadEnvVarsWhenRequired();
+require_once __DIR__ . "/../helpers/index.php"; 
+require_once __DIR__ . "/../private/index.php";
 
 /** Handle POST Request for Contact Page */
 
@@ -129,64 +122,16 @@ function build_no_reply_email_for_user($email_assoc)
 
      $result_assoc = [
         "htmlMessage" => $no_reply_template_string,
-        "host" => $_ENV["SMTP_HOST"],
+        "host" => SMTP_HOST,
         "from" => "No Reply HoursManager Email Sender",
         "subject" => $email_assoc["subject"],
-        "sender" => $_ENV["SMTP_NO_REPLY_USER"],
-        "senderPass" => $_ENV["SMTP_NO_REPLY_PASS"],
+        "sender" => SMTP_NO_REPLY_USER,
+        "senderPass" => SMTP_NO_REPLY_PASS,
         "recipient" => $email_assoc["email"]
      ];
 
      return $result_assoc;
 
-}
-
-function send_html_email($email_assoc, $email_template_building_function)
-{
-    /** Send an Email with an HTML Template */
-
-    // Call the email template building function
-    $building_response_assoc = call_user_func($email_template_building_function ,$email_assoc);
-
-    // Generate a new instance of PHP Mailer
-    $mailer = new PHPMailer(true);
-
-    try
-    {
-        // Configure creds according to the assoc gotten from the template building function
-        $mailer->SMTPDebug = 0;
-        $mailer->isSMTP();
-        $mailer->isHTML(true);
-        $mailer->SMTPAuth = true;
-        $mailer->Host = $building_response_assoc["host"];
-        $mailer->Username = $building_response_assoc["sender"];
-        $mailer->Password = $building_response_assoc["senderPass"];
-        // $mailer->SMTPSecure = 'tls'; // Use TLS encryption
-        $mailer->Port = 587;
-
-        // Set the email of the sender as the SMTP email
-        $mailer->setFrom($building_response_assoc["sender"], $building_response_assoc['from']);
-        $mailer->addAddress($building_response_assoc['recipient']);
-        $mailer->Subject = $building_response_assoc['subject'];
-        $mailer->Body = $building_response_assoc['htmlMessage'];
-
-        // Set a timeout for the send operation
-        $timeout_seconds = 30; // Adjust as needed
-        $mailer->Timeout = $timeout_seconds;
-
-        // Send the email
-        if (!$mailer->send()) 
-        {
-            throw new Exception('Failed to send email: ' . $mailer->ErrorInfo);
-        }
-    }
-
-    catch (Exception $e)
-    {
-        return ["error" => $e->getMessage()];
-    }
-
-    return ["success" => "Email could be successfully sent"];
 }
 
 ?>
