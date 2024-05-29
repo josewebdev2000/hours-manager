@@ -352,6 +352,4 @@ function loginUser($email, $password)
 
 }
 
-
-
 ?>
