@@ -1,0 +1,45 @@
+/* StyleSheet for the Login Form */
+
+body {
+    background-color: #ffffff;
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 87.5vh;
+}
+.login-box {
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    border: none;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+.login-box h2 {
+    color: #6c2eb9;
+    margin-bottom: 20px;
+}
+.login-box .form-control {
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+.login-box .btn-purple {
+    background-color: #6c2eb9;
+    border: none;
+    color: #fff;
+    border-radius: 4px;
+    width: 100%;
+}
+.login-box .btn-purple:hover {
+    background-color: #5a2395;
+}
+.login-box a {
+    color: #6c2eb9;
+    text-decoration: none;
+}
+.login-box a:hover {
+    text-decoration: underline;
+}

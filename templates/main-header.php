@@ -14,9 +14,6 @@
          <!--In my case this translates to http://localhost/projects/hours-manager/privacy.php-->
         <a href="<?=$websiteUrl?>privacy.php">PRIVACY</a>
 
-         <!--In my case this translates to http://localhost/projects/hours-manager/register.php-->
-        <a href="<?=$websiteUrl?>register.php">REGISTER</a>
-
          <!--In my case this translates to http://localhost/projects/hours-manager/login.php-->
         <a href="<?=$websiteUrl?>login.php">LOGIN</a>
     </nav>

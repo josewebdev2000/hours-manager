@@ -29,6 +29,29 @@ $capitalLettersPageName = (ucfirst(explode(".", getActualPageName())[0]) != "Ind
 
     <!--Custom StyleSheets-->
     <link rel="stylesheet" href="<?=$websiteUrl?>assets/css/style.css">
+
+    <!--Conditionally Load Stylesheets Depending on the page we are-->
+    <?php require_once __DIR__ . "/../helpers/index.php";
+
+        // Grab the name of the current page
+        $currentPage = getActualPageName();
+
+        // Dynamically Load Content For Each Page
+        switch($currentPage)
+        {
+            case "login.php":
+            {
+                echo "<link rel='stylesheet' href='$websiteUrl/assets/css/login.css'>\n";
+                break;
+            }
+
+            case "register.php":
+            {
+                echo "<link rel='stylesheet' href='$websiteUrl/assets/css/register.css'>\n";
+                break;
+            }
+        }
+    ?>
     <link rel="stylesheet" href="<?=$websiteUrl?>/assets/plugins/summernote/summernote-bs5.min.css">
 
 
