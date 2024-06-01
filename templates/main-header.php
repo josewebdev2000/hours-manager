@@ -15,6 +15,6 @@
         <a href="<?=$websiteUrl?>privacy.php">PRIVACY</a>
 
          <!--In my case this translates to http://localhost/projects/hours-manager/login.php-->
-        <a href="<?=$websiteUrl?>login.php">LOGIN</a>
+        <a href="<?=$websiteUrl?>login.php"><i class="fas fa-user"></i></a>
     </nav>
 </header>
