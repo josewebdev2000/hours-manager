@@ -245,7 +245,7 @@ function registerNewUser($name, $email, $password)
     if ($trans_success)
     {
         // Build SQL query to insert a new user to the DB
-        $sql = "INSERT INTO users (name, username, password) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
 
         // Prepare the statement
         $stmt = $conn->prepare($sql);
@@ -268,7 +268,7 @@ function registerNewUser($name, $email, $password)
             $stmt->bind_param("sss", $name, $email, $hash_password);
 
             // Execute the statement
-            if ($stmt->execute())
+            if (!$stmt->execute())
             {
                 $trans_success = false;
                 $error = "Could not try to register new user";

@@ -15,7 +15,7 @@
                     <p>We are here to assist you with any questions or concerns you may have about HoursManager.</p>
                     <p>Whether you need help with your account, have a question about our services, or want to provide feedback, we're just a message away.</p>
                 </div>
-                <form id="contact-form" enctype="multipart/form-data" novalidate>
+                <form id="contact-form"  novalidate>
                     <div class="form-group row">
                         <label for="name" class="col-sm-2 col-form-label">Name</label>
                         <div class="col-sm-10 input-group">

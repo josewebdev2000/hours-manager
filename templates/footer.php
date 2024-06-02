@@ -52,6 +52,18 @@ $websiteUrl = getWebsiteUrl();
                 echo "<script src='$websiteUrl/assets/js/privacy.js'></script>\n";
                 break;
             }
+
+            case "register.php":
+            {
+                echo "<script src='$websiteUrl/assets/js/register.js'></script>";
+                break;
+            }
+
+            case "login.php":
+            {
+                echo "<script src='$websiteUrl/assets/js/login.js'></script>";
+                break;
+            }
         }
     ?>
 </body>

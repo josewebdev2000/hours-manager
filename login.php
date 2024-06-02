@@ -1,5 +1,20 @@
 <?php require_once "templates/header.php"; ?>
 <?php require_once "templates/main-header.php"; ?>
+<?php require_once "helpers/index.php";
+
+    // Redirect user to the dashboard in case the user is set
+    if (isset($_SESSION["id"]))
+    {
+        header("Location: $websiteUrl" . "dashboard/");
+    }
+
+    // Start user session in case register was successful
+    // Detect POST request
+    if (is_post_request())
+    {
+        // Place the user id as a new session and redirect the user to the dashboard
+    }
+?>
 
 <main>
     <div class="login-container">
@@ -25,6 +40,14 @@
                 </div>
             </form>
         </div>
+        <div class="d-none" id="hidden-login-form">
+        <form action="<?=$websiteUrl?>register.php" method="POST">
+            <input type="text" name="name" id="hidden-name">
+            <input type="email" name="email" id="hidden-email">
+            <input type="password" name="password" id="hidden-password">
+            <input type="submit" name="submit" id="hidden-submit">
+        </form>
+    </div>
     </div>
 </main>
 
