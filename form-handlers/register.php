@@ -86,7 +86,7 @@ function validate_register_data($name, $email, $password)
 
         if (!preg_match(EMAIL_REGEX, $email))
         {
-                return ["error" => "Email must be Valid"];
+                return ["error" => "Email must be valid"];
         }
 
         if (strlen($password) == 0)

@@ -312,26 +312,51 @@ function registerNewUser($name, $email, $password)
 function loginUser($email, $password)
 {
     /** Function to login an existing user */
-    global $conn;
+    global $conn; 
 
-    // Prepare assoc for user data
-    $user = [];
+    // Make SQL query to grab all the user's data by the email
+    $sql = "SELECT id, name, email, password FROM users WHERE email = ?";
 
-    // Grab user by email
-    $user = getUserByEmail($email);
+    // Make prepared SQL statement
+    $stmt = $conn->prepare($sql);
 
-    // If there is an error, return an error
-    if (array_key_exists("error", $array))
+    // If statement could not be prepared return an early error assoc
+    if (!$stmt)
     {
         return [
-            "error" => $user["error"],
-            "error_code" => $user["error_code"]
+        "error" => "Could not prepare to get user of email: \"$email\"",
+        "error_code" => "preparation_error"
+    ];
+    }
+
+    // Bind the id parameter as an integer
+    $stmt->bind_param("s", $email);
+
+    // Execute the statement
+    // If there was an error return an error assoc
+    if (!$stmt->execute())
+    {
+        return [
+        "error" => "Could not try to get user of id: \"$email\"",
+        "error_code" => "excecution_error"
         ];
     }
 
-    // Grab the user's email and password
-    $user_email    = $user["email"];
-    $user_password = $user_password["password"];
+    // Grab the result
+    $result = $stmt->get_result();
+
+    // If the result does not have one row, the user could not be found
+    if ($result->num_rows != 1)
+    {
+        return [
+        "error" => "Incorrect Credentials",
+        "error_code" => "user_not_found_error"
+        ];
+    }
+       
+    // If the user was found, grab its password
+    $user = $result->fetch_assoc();
+    $user_password = $user["password"];
 
     // Compare the hash and verify the given password is the user_password
     // If the password is incorrect, return error
