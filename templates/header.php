@@ -1,12 +1,21 @@
-<?php require_once __DIR__ . "/../helpers/index.php"; 
+<?php 
+require_once __DIR__ . "/../helpers/index.php"; 
+require_once __DIR__ . "/../db/user-db-funcs.php"; 
+
 // Start session to deal with user authentication
-// session_start();
+session_start();
 
 // Grab the website URL
 $websiteUrl = getWebsiteUrl();
 
 // Grab actual page name with capital letter
 $capitalLettersPageName = (ucfirst(explode(".", getActualPageName())[0]) != "Index") ? ucfirst(explode(".", getActualPageName())[0]) : "Home";
+
+// If session id is set, then grab the user by its id
+if (isset($_SESSION["id"]))
+{
+    $user = getUserById($_SESSION["id"]);
+}
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +25,7 @@ $capitalLettersPageName = (ucfirst(explode(".", getActualPageName())[0]) != "Ind
     <title><?=$capitalLettersPageName?> | HoursManager</title>
 
     <!--Favicon-->
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="<?=$websiteUrl?>favicon.ico" type="image/x-icon">
 
     <!--Plugin StyleSheets-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> 
@@ -29,6 +38,29 @@ $capitalLettersPageName = (ucfirst(explode(".", getActualPageName())[0]) != "Ind
 
     <!--Custom StyleSheets-->
     <link rel="stylesheet" href="<?=$websiteUrl?>assets/css/style.css">
+
+    <!--Conditionally Load Stylesheets Depending on the page we are-->
+    <?php require_once __DIR__ . "/../helpers/index.php";
+
+        // Grab the name of the current page
+        $currentPage = getActualPageName();
+
+        // Dynamically Load Content For Each Page
+        switch($currentPage)
+        {
+            case "login.php":
+            {
+                echo "<link rel='stylesheet' href='$websiteUrl/assets/css/login.css'>\n";
+                break;
+            }
+
+            case "register.php":
+            {
+                echo "<link rel='stylesheet' href='$websiteUrl/assets/css/register.css'>\n";
+                break;
+            }
+        }
+    ?>
     <link rel="stylesheet" href="<?=$websiteUrl?>/assets/plugins/summernote/summernote-bs5.min.css">
 
 

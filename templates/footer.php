@@ -26,6 +26,7 @@ $websiteUrl = getWebsiteUrl();
     <!--Page Scripts-->
     <script src="<?=$websiteUrl?>assets/js/index.js"></script>
 
+    <!--Conditionally Load Scripts Depending on the Page We Are-->
     <?php require_once __DIR__ . "/../helpers/index.php";
 
         // Grab the name of the current page
@@ -36,19 +37,31 @@ $websiteUrl = getWebsiteUrl();
         {
             case "about.php":
             {
-                echo "<script src='$websiteUrl/assets/js/about.js'></script>";
+                echo "<script src='$websiteUrl/assets/js/about.js'></script>\n";
                 break;
             }
 
             case "contact.php":
             {
-                echo "<script src='$websiteUrl/assets/js/contact.js'></script>";
+                echo "<script src='$websiteUrl/assets/js/contact.js'></script>\n";
                 break;
             }
 
             case "privacy.php":
             {
-                echo "<script src='$websiteUrl/assets/js/privacy.js'></script>";
+                echo "<script src='$websiteUrl/assets/js/privacy.js'></script>\n";
+                break;
+            }
+
+            case "register.php":
+            {
+                echo "<script src='$websiteUrl/assets/js/register.js'></script>";
+                break;
+            }
+
+            case "login.php":
+            {
+                echo "<script src='$websiteUrl/assets/js/login.js'></script>";
                 break;
             }
         }

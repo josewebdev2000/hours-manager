@@ -25,6 +25,118 @@ function usernameValidate()
     }
 }
 
+function nameValidate() 
+{
+    const curName = $("#name").val();
+
+    if (curName.trim().length == 0)
+    {
+        $("#name").removeClass("is-valid");
+        $("#name").addClass("is-invalid");
+        $(".invalid-tooltip.name").text("Name cannot be empty");
+    }
+
+    else if (!nameRegex.test(curName.trim()))
+    {
+        $("#name").removeClass("is-valid");
+        $("#name").addClass("is-invalid");
+        $(".invalid-tooltip.name").text("Name cannot have numbers or special symbols");
+    }
+
+    else
+    {
+        $("#name").removeClass("is-invalid");
+        $(".invalid-tooltip.name").text("");
+        $("#name").addClass("is-valid");
+    }
+}
+
+function emailValidate()
+{
+    const curEmail = $("#email").val();
+
+    if (curEmail.trim().length == 0)
+    {
+        $("#email").removeClass("is-valid");
+        $("#email").addClass("is-invalid");
+        $(".invalid-tooltip.email").text("Email cannot be empty");
+    }
+
+    else if (!emailRegex.test(curEmail.trim()))
+    {
+        $("#email").removeClass("is-valid");
+        $("#email").addClass("is-invalid");
+        $(".invalid-tooltip.email").text("Invalid Email");
+    }
+
+    else
+    {
+        $("#email").removeClass("is-invalid");
+        $(".invalid-tooltip.email").text("");
+        $("#email").addClass("is-valid");
+    }
+}
+
+function passwordValidate(password_input_id)
+{
+    const curPassword = $(`#${password_input_id}`).val();
+
+    if (curPassword.trim().length == 0)
+    {
+        $(`#${password_input_id}`).removeClass("is-valid");
+        $(`#${password_input_id}`).addClass("is-invalid");
+        $(`.invalid-tooltip.${password_input_id}`).text("Password cannot be empty");
+    }
+
+    else if (!passwordRegex.test(curPassword.trim()))
+    {
+        $(`#${password_input_id}`).removeClass("is-valid");
+        $(`#${password_input_id}`).addClass("is-invalid");
+        $(`.invalid-tooltip.${password_input_id}`).text("Password needs at least one uppercase, one lowecase, one digit, and eight characters");
+    }
+
+    else
+    {
+        $(`#${password_input_id}`).removeClass("is-invalid");
+        $(`.invalid-tooltip.${password_input_id}`).text("");
+        $(`#${password_input_id}`).addClass("is-valid");
+    }
+}
+
+function confirmPasswordValidate(confirm_id, ori_id)
+{
+    // Confirm Password Input
+    const confirmP = $(`#${confirm_id}`).val();
+
+    // Original Password Input
+    const oriP = $(`#${ori_id}`).val();
+
+    // If they are not the same, then raise flags in both
+    if (confirmP != oriP)
+    {
+        $(`#${confirm_id}`).removeClass("is-valid");
+        $(`#${confirm_id}`).addClass("is-invalid");
+
+        $(`#${ori_id}`).removeClass("is-valid");
+        $(`#${ori_id}`).addClass("is-invalid");
+
+
+        $(`.invalid-tooltip.${confirm_id}`).text("Passwords Do Not Match"); 
+        $(`.invalid-tooltip.${ori_id}`).text("Passwords Do Not Match"); 
+    }
+
+    else
+    {
+        $(`#${confirm_id}`).removeClass("is-invalid");
+        $(`.invalid-tooltip.${confirm_id}`).text("");
+        $(`#${confirm_id}`).addClass("is-valid");
+
+        $(`#${ori_id}`).removeClass("is-invalid");
+        $(`.invalid-tooltip.${ori_id}`).text("");
+        $(`#${ori_id}`).addClass("is-valid");
+    }
+}
+
 function formControlFocusValidate(form_control_id)
 {
     /** Execute when input element is on focus */

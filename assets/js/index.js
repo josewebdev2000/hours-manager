@@ -18,7 +18,7 @@ function makeHeroContainerResponsive()
     {
         // Generate a new responsive for the index Main Element
         new ResponsiveElement(
-            `#${main.attr("id")}`,
+            `main`,
             644,
             "flex-065",
             "full-page-height"
