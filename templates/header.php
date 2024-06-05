@@ -25,7 +25,7 @@ if (isset($_SESSION["id"]))
     <title><?=$capitalLettersPageName?> | HoursManager</title>
 
     <!--Favicon-->
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="<?=$websiteUrl?>favicon.ico" type="image/x-icon">
 
     <!--Plugin StyleSheets-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> 

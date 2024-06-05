@@ -1,6 +1,4 @@
 <?php require_once "templates/header.php"; ?>
-<?php require_once "templates/main-header.php"; ?>
-
 <?php
     // Redirect user to the dashboard in case the user is set
     if (isset($_SESSION["id"]))
@@ -8,7 +6,7 @@
         header("Location: $websiteUrl" . "dashboard/");
     }
 ?>
-
+<?php require_once "templates/main-header.php"; ?>
 <main id="index-main">
     <div id="index-hero-container" class="content d-flex flex-column justify-content-center align-items-center">
         <div class="hero grayish-hero d-flex flex-column justify-content-center align-items-center text-center p-5 m-5">

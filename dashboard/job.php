@@ -11,9 +11,9 @@
     <!--IMPORT PRELOADER HERE-->
     <?php require_once "templates/dashboard-preloader.php"; ?>
 
-    <!--INCLUDE CODE FOR THE DASHBOARD PAGE INSIDE THE content-wrapper -->
+    <!--INCLUDE CODE TO SHOW/EDIT EACH JOB PROFILE PAGE INSIDE THE content-wrapper -->
     <div class="content-wrapper">
-        I am The Dashboard Page
+        I am The Job Page
     </div>
 </div>
 <?php require_once "../templates/footer.php";?>
