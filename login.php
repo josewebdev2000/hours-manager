@@ -1,6 +1,8 @@
-<?php require_once "templates/header.php"; ?>
-<?php require_once "templates/main-header.php"; ?>
+<?php require_once "templates/session-starter.php"; ?>
 <?php require_once "helpers/index.php";
+    
+    // Grab URL of this website
+    $websiteUrl = getWebsiteUrl();
 
     // Redirect user to the dashboard in case the user is set
     if (isset($_SESSION["id"]))
@@ -22,7 +24,8 @@
         }
     }
 ?>
-
+<?php require_once "templates/header.php"; ?>
+<?php require_once "templates/main-header.php"; ?>
 <main>
     <div class="login-container">
         <div class="login-box">

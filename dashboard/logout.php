@@ -1,5 +1,4 @@
-<?php require_once "../templates/header.php"; ?>
-<?php require_once "templates/dashboard-header.php"; ?>
+<?php require_once "../templates/session-starter.php"; ?>
 <?php require_once "../helpers/index.php";
 
 // Grab website URL

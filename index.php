@@ -1,11 +1,16 @@
-<?php require_once "templates/header.php"; ?>
-<?php
+<?php require_once "templates/session-starter.php"; ?>
+<?php require_once "helpers/index.php";
+    
+    // Grab the URL of the website
+    $websiteUrl = getWebsiteUrl();
+    
     // Redirect user to the dashboard in case the user is set
     if (isset($_SESSION["id"]))
     {
         header("Location: $websiteUrl" . "dashboard/");
     }
 ?>
+<?php require_once "templates/header.php"; ?>
 <?php require_once "templates/main-header.php"; ?>
 <main id="index-main">
     <div id="index-hero-container" class="content d-flex flex-column justify-content-center align-items-center">

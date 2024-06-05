@@ -1,5 +1,6 @@
-<?php require_once "../templates/header.php"; ?>
+<?php require_once "../templates/session-starter.php"; ?>
 <?php require_once "templates/dashboard-header.php"; ?>
+<?php require_once "../templates/header.php"; ?>
 <!--HTML CODE GOES HERE-->
 <div class="wrapper">
     <!--IMPORT MAIN HEADER CODE-->
