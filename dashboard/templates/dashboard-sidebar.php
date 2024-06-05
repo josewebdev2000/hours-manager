@@ -47,7 +47,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?=$websiteURL?>contact.php" class="nav-link">
+                    <a href="<?=$websiteUrl?>contact.php" class="nav-link">
                         <i class="nav-icon fas fa-envelope"></i>
                         <p>Contact</p>
                     </a>

@@ -21,12 +21,12 @@
                         </button>
                         <ul class="dropdown-menu bg-light" aria-labelledby="dropdownMenuButton">
                             <li><h6 class="dropdown-header fsize-150 text-black"><?=$user["name"];?></h6></li>
-                            <li><a class="dropdown-item user fsize-120" href="<?=$websiteUrl?>/dashboard/">Dashboard</a></li>
-                            <li><a class="dropdown-item user fsize-120" href="<?=$websiteUrl?>/dashboard/jobs.php">Jobs</a></li>
-                            <li><a class="dropdown-item user fsize-120" href="<?=$websiteUrl?>/dashboard/profile.php">Profile</a></li>
-                            <li><a class="dropdown-item user fsize-120" href="<?=$websiteUrl?>/dashboard/settings.php">Settings</a></li>
+                            <li><a class="dropdown-item user fsize-120" href="<?=$websiteUrl?>dashboard/">Dashboard</a></li>
+                            <li><a class="dropdown-item user fsize-120" href="<?=$websiteUrl?>dashboard/jobs.php">Jobs</a></li>
+                            <li><a class="dropdown-item user fsize-120" href="<?=$websiteUrl?>dashboard/profile.php">Profile</a></li>
+                            <li><a class="dropdown-item user fsize-120" href="<?=$websiteUrl?>dashboard/settings.php">Settings</a></li>
                             <li><hr class="dropdown-divider"></hr></li>
-                            <li><a class="dropdown-item logout fsize-120" href="<?=$websiteUrl?>/dashboard/logout.php">Log out</a></li>
+                            <li><a class="dropdown-item logout fsize-120" href="<?=$websiteUrl?>dashboard/logout.php">Log out</a></li>
                         </ul>
                     </div>
             </div>
