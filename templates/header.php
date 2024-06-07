@@ -39,15 +39,37 @@
                 echo "<link rel='stylesheet' href='$websiteUrl/assets/css/register.css'>\n";
                 break;
             }
+
+            case "contact.php":
+            {
+                echo "<link rel='stylesheet' href='$websiteUrl/assets/plugins/summernote/summernote-bs5.min.css'>\n";
+                break;
+            }
         }
     ?>
-    <link rel="stylesheet" href="<?=$websiteUrl?>/assets/plugins/summernote/summernote-bs5.min.css">
 
 
     <!--Plugin Scripts-->
     <script src="<?=$websiteUrl?>assets/plugins/bootstrap-5/js/bootstrap.bundle.min.js"></script>
     <script src="<?=$websiteUrl?>assets/plugins/jquery/jquery.min.js"></script>
-    <script src="<?=$websiteUrl?>/assets/plugins/summernote/summernote-bs5.min.js"></script>
+
+    <!--Conditionally Load JS Scripts depending on the page we are-->
+    <?php
+        // Dynamically Load Scripts for each page
+        switch($currentPage)
+        {
+            case "contact.php":
+            {
+                echo '<script src="' . $websiteUrl .'assets/plugins/summernote/summernote-bs5.min.js"></script>';
+                break;
+            }
+
+            case "job.php":
+            {
+                echo '<script src="' . $websiteUrl . 'assets/plugins/phonemask/src/phonemask.min.js"></script>';
+            }
+        }
+    ?>
 
 </head>
 <body>

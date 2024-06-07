@@ -64,6 +64,12 @@ $websiteUrl = getWebsiteUrl();
                 echo "<script src='$websiteUrl/assets/js/login.js'></script>";
                 break;
             }
+
+            case "job.php":
+            {
+                echo "<script src='$websiteUrl/assets/js/job.js'></script>";
+                break;
+            }
         }
     ?>
 </body>
