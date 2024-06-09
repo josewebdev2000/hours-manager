@@ -39,15 +39,26 @@
                 echo "<link rel='stylesheet' href='$websiteUrl/assets/css/register.css'>\n";
                 break;
             }
+
+            case "index.php":
+            {
+                echo "<link rel='stylesheet' href='$websiteUrl/assets/css/dashboard.css'>\n";
+                break;
+            }
         }
     ?>
     <link rel="stylesheet" href="<?=$websiteUrl?>/assets/plugins/summernote/summernote-bs5.min.css">
 
+    <!-- Add Chart.js and FullCalendar stylesheets -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.css" rel="stylesheet">
 
     <!--Plugin Scripts-->
     <script src="<?=$websiteUrl?>assets/plugins/bootstrap-5/js/bootstrap.bundle.min.js"></script>
     <script src="<?=$websiteUrl?>assets/plugins/jquery/jquery.min.js"></script>
     <script src="<?=$websiteUrl?>/assets/plugins/summernote/summernote-bs5.min.js"></script>
-
+    
+    <!-- Add Chart.js and FullCalendar scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.js"></script>
 </head>
 <body>
