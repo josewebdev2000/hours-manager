@@ -45,6 +45,11 @@
                 echo "<link rel='stylesheet' href='$websiteUrl/assets/plugins/summernote/summernote-bs5.min.css'>\n";
                 break;
             }
+
+            case "job.php":
+            {
+                break;
+            }
         }
     ?>
 
@@ -66,7 +71,9 @@
 
             case "job.php":
             {
-                echo '<script src="' . $websiteUrl . 'assets/plugins/phonemask/src/phonemask.min.js"></script>';
+                echo '<script src="' . $websiteUrl . 'assets/plugins/phonemask/src/phonemask.min.js"></script>' . "\n";
+                echo '<script src="' . $websiteUrl .'assets/plugins/moment/moment.js"></script>' . "\n";
+                break;
             }
         }
     ?>

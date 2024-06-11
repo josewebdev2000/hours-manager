@@ -140,11 +140,11 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="card card-pink">
+                                <div class="card card-success">
                                     <div class="card-header">
                                         <h2 class="card-title fsize-150">
-                                            <i class="fas fa-suitcase mr-sm-3"></i>
-                                            <span>Job</span>
+                                            <i class="fas fa-dollar-sign mr-sm-3"></i>
+                                            <span>Pay Rate</span>
                                         </h2>
                                         <div class="card-tools">
                                             <button class="btn btn-tool" type="button" data-card-widget="collapse" title="Collapse">
@@ -154,23 +154,148 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="form-group">
-                                            <label for="job-title">Job Title</label>
-                                            <input type="text" class="form-control" name="job-title" id="job-title">
+                                            <label for="rate-type">Rate Type</label>
+                                            <select name="rate-type" id="rate-type" class="form-select">
+                                                <option value="hourly">Hourly</option>
+                                                <option value="daily">Daily</option>
+                                                <option value="weekly">Weekly</option>
+                                                <option value="biweekly">Biweekly</option>
+                                                <option value="monthly">Monthly</option>
+                                            </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="job-role">Job Role</label>
-                                            <input type="text" class="form-control" name="job-role" id="job-role">
+                                            <label for="rate-amount">Rate Amount</label>
+                                            <input type="number" class="form-control" name="rate-amount" id="rate-amount" min="1">
                                         </div>
                                         <div class="form-group">
-                                            <label for="job-address">Job Address</label>
-                                            <input type="text" class="form-control" name="job-address" id="job-address">
+                                            <label for="effective-rate">Effective Date</label>
+                                            <input type="date" class="form-control" name="effective-date" id="effective-date">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                    <div class="card card-pink">
+                                        <div class="card-header">
+                                            <h2 class="card-title fsize-150">
+                                                <i class="fas fa-suitcase mr-sm-3"></i>
+                                                <span>Job</span>
+                                            </h2>
+                                            <div class="card-tools">
+                                                <button class="btn btn-tool" type="button" data-card-widget="collapse" title="Collapse">
+                                                    <i class="fas fa-minus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label for="job-title">Job Title</label>
+                                                <input type="text" class="form-control" name="job-title" id="job-title">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="job-role">Job Role</label>
+                                                <input type="text" class="form-control" name="job-role" id="job-role">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="job-address">Job Address</label>
+                                                <input type="text" class="form-control" name="job-address" id="job-address">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="job-description">Job Description</label>
+                                                <textarea class="form-control" name="job-description" id="job-description" rows="4"></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="job-start-date">Job Start Date</label>
+                                                <input type="date" class="form-control" name="job-start-date" id="job-start-date">
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card card-purple">
+                                    <div class="card-header">
+                                        <h2 class="card-title fsize-150">
+                                            <i class="fas fa-money-bill mr-sm-3"></i>
+                                            <span>Pay Roll</span>
+                                        </h2>
+                                        <div class="card-tools">
+                                            <button class="btn btn-tool" type="button" data-card-widget="collapse" title="Collapse">
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label for="pay-period-start">Starting Day</label>
+                                            <select class="form-select" name="pay-period-start" id="pay-period-start">
+                                                <option value="monday">Monday</option>
+                                                <option value="tuesday">Tueday</option>
+                                                <option value="wednesday">Wednesday</option>
+                                                <option value="thursday">Thursday</option>
+                                                <option value="friday">Friday</option>
+                                                <option value="saturday">Saturday</option>
+                                                <option value="sunday">Sunday</option>
+                                            </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="job-description">Job Description</label>
-                                            <textarea class="form-control" name="job-description" id="job-description" rows="4"></textarea>
+                                            <label for="pay-period-end">Ending Day</label>
+                                            <select class="form-select" name="pay-period-end" id="pay-period-end">
+                                                <option value="monday">Monday</option>
+                                                <option value="tuesday">Tueday</option>
+                                                <option value="wednesday">Wednesday</option>
+                                                <option value="thursday">Thursday</option>
+                                                <option value="friday">Friday</option>
+                                                <option value="saturday">Saturday</option>
+                                                <option value="sunday">Sunday</option>
+                                            </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="job-start-date">Job Start Date</label>
+                                            <label for="payment-day">Payment Day</label>
+                                            <select class="form-select" name="payment-day" id="payment-day">
+                                                <option value="monday">Monday</option>
+                                                <option value="tuesday">Tueday</option>
+                                                <option value="wednesday">Wednesday</option>
+                                                <option value="thursday">Thursday</option>
+                                                <option value="friday">Friday</option>
+                                                <option value="saturday">Saturday</option>
+                                                <option value="sunday">Sunday</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="total-hours">Predicted Total Hours</label>
+                                            <input type="number" class="form-control" name="total-hours" id="total-hours">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="total-pay">Predicted Total Payment</label>
+                                            <input type="number" class="form-control" name="total-pay" id="total-pay">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="tip-amount">Tips</label>
+                                            <input type="number" class="form-control" name="tip-amount" id="tip-amount" min="0">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-md-6">
+                                <div class="card card-indigo">
+                                    <div class="card-header">
+                                        <h2 class="card-title fsize-150">
+                                            <i class="fas fa-calendar-alt mr-sm-3"></i>
+                                            <span>Schedule</span>
+                                        </h2>
+                                        <div class="card-tools">
+                                            <button class="btn btn-tool" type="button" data-card-widget="collapse" title="Collapse">
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label for="working-days">Working Days</label>
                                             
                                         </div>
                                     </div>
