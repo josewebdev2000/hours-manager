@@ -15,8 +15,8 @@
 */
 ?>
 
-<?php $allowed_actions = ["add", "view", "update", "delete"]; // Actions Job Page May Do ?>
-<?php $id_required_actions = ["view", "update", "delete"]; // DB Id of Job Entry ?>
+<?php $allowed_actions = ["add", "view", "update"]; // Actions Job Page May Do ?>
+<?php $id_required_actions = ["view", "update"]; // DB Id of Job Entry ?>
 <!--HTML CODE GOES HERE-->
     <div class="wrapper">
         <!--IMPORT MAIN HEADER CODE-->
@@ -296,9 +296,17 @@
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label for="working-days">Working Days</label>
-                                            
+                                            <div id="schedule-calendar"></div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="btn-group w-100" role="group">
+                                    <button id="add-job-cancel-btn" class="btn btn-danger btn-lg">Cancel</button>
+                                    <button id="add-job-new-btn" class="btn btn-success btn-lg">Add New Job</button>
                                 </div>
                             </div>
                         </div>

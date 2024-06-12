@@ -69,15 +69,3 @@
         </nav>
     </div>
 </aside>
-<style>
-    .main-sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 250px; /* Adjust the width as needed */
-    z-index: 1000;
-    overflow-y: auto;
-    background-color: #343a40; /* Ensure the background color matches your theme */
-}
-</style>

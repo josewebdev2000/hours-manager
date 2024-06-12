@@ -32,6 +32,15 @@ $websiteUrl = getWebsiteUrl();
         // Grab the name of the current page
         $currentPage = getActualPageName();
 
+        // Grab the whole URI of the current page as well
+        $wholePageURI = getActualPageWithFolderName();
+
+        // If dashboard is in the whole URI, add it to the currentPage name
+        if (str_contains($wholePageURI, "dashboard"))
+        {
+            $currentPage = "dashboard/" . $currentPage; 
+        }
+
         // Dynamically Load Content For Each Page
         switch($currentPage)
         {
@@ -65,7 +74,7 @@ $websiteUrl = getWebsiteUrl();
                 break;
             }
 
-            case "job.php":
+            case "dashboard/job.php":
             {
                 echo "<script src='$websiteUrl/assets/js/job.js'></script>";
                 break;

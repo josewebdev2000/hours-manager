@@ -25,6 +25,16 @@
         // Grab the name of the current page
         $currentPage = getActualPageName();
 
+        // Grab the whole URI of the current page as well
+        $wholePageURI = getActualPageWithFolderName();
+
+        // If dashboard is in the whole URI, add it to the currentPage name
+        if (str_contains($wholePageURI, "dashboard"))
+        {
+            // Add dashboard/ before all dashboard pages
+            $currentPage = "dashboard/" . $currentPage; 
+        }
+
         // Dynamically Load Content For Each Page
         switch($currentPage)
         {
@@ -40,27 +50,21 @@
                 break;
             }
 
-    
-            case "index.php":
-            {
-                echo "<link rel='stylesheet' href='$websiteUrl/assets/css/dashboard.css'>\n";
-                break;
-            }
-        case "contact.php":
+            case "contact.php":
             {
                 echo "<link rel='stylesheet' href='$websiteUrl/assets/plugins/summernote/summernote-bs5.min.css'>\n";
                 break;
             }
 
-            case "job.php":
+            case "dashboard/index.php":
+            case "dashboard/job.php":
             {
+                echo "<link rel='stylesheet' href='$websiteUrl/assets/css/dashboard.css'>\n";
+                echo "<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/jqwidgets/12.0.0/jqwidgets/styles/jqx.base.css'>";
                 break;
             }
         }
     ?>
-
-    <!-- Add Chart.js and FullCalendar stylesheets -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.css" rel="stylesheet">
 
     <!--Plugin Scripts-->
     <script src="<?=$websiteUrl?>assets/plugins/bootstrap-5/js/bootstrap.bundle.min.js"></script>
@@ -77,17 +81,37 @@
                 break;
             }
 
-            case "job.php":
+            case "dashboard/index.php":
+            case "dashboard/job.php":
             {
-                echo '<script src="' . $websiteUrl . 'assets/plugins/phonemask/src/phonemask.min.js"></script>' . "\n";
-                echo '<script src="' . $websiteUrl .'assets/plugins/moment/moment.js"></script>' . "\n";
-                break;
+               echo "<script src='https://cdn.jsdelivr.net/npm/chart.js'></script>\n"; 
+               echo "<script src='$websiteUrl/assets/plugins/jqwidgets/jqxcore.js'></script>\n";
+               echo "<script src='$websiteUrl/assets/plugins/jqwidgets/jqxbuttons.js'></script>\n";
+               echo "<script src='$websiteUrl/assets/plugins/jqwidgets/jqxscrollbar.js'></script>\n";
+               echo "<script src='$websiteUrl/assets/plugins/jqwidgets/jqxdata.js'></script>\n";
+               echo "<script src='$websiteUrl/assets/plugins/jqwidgets/jqxdate.js'></script>\n";
+               echo "<script src='$websiteUrl/assets/plugins/jqwidgets/jqxscheduler.js'></script>\n";
+               echo "<script src='$websiteUrl/assets/plugins/jqwidgets/jqxscheduler.api.js'></script>\n";
+               echo "<script src='$websiteUrl/assets/plugins/jqwidgets/jqxdatetimeinput.js'></script>\n";
+               echo "<script src='$websiteUrl/assets/plugins/jqwidgets/jqxmenu.js'></script>\n";
+               echo "<script src='$websiteUrl/assets/plugins/jqwidgets/jqxcalendar.js'></script>\n";
+               echo "<script src='$websiteUrl/assets/plugins/jqwidgets/jqxtooltip.js'></script>\n";
+               echo "<script src='$websiteUrl/assets/plugins/jqwidgets/jqxwindow.js'></script>\n";
+               echo "<script src='$websiteUrl/assets/plugins/jqwidgets/jqxcheckbox.js'></script>\n";
+               echo "<script src='$websiteUrl/assets/plugins/jqwidgets/jqxlistbox.js'></script>\n";
+               echo "<script src='$websiteUrl/assets/plugins/jqwidgets/jqxdropdownlist.js'></script>\n";
+               echo "<script src='$websiteUrl/assets/plugins/jqwidgets/jqxnumberinput.js'></script>\n";
+               echo "<script src='$websiteUrl/assets/plugins/jqwidgets/jqxradiobutton.js'></script>\n";
+               echo "<script src='$websiteUrl/assets/plugins/jqwidgets/jqxinput.js'></script>\n";
+               echo "<script src='$websiteUrl/assets/plugins/jqwidgets/globalization/globalize.js'></script>\n";
+               echo "<script async src='https://www.googletagmanager.com/gtag/js?id=G-2FX5PV9DNT'></script>\n";
+               echo '<script src="' . $websiteUrl . 'assets/plugins/phonemask/src/phonemask.min.js"></script>' . "\n";
+               echo '<script src="' . $websiteUrl .'assets/plugins/moment/moment.js"></script>' . "\n";
+               echo "<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/index.global.min.js'></script>\n";
+               echo "<script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-2FX5PV9DNT');</script>\n";
+               break;
             }
         }
     ?>
-    
-    <!-- Add Chart.js and FullCalendar scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.js"></script>
 </head>
 <body>

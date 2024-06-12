@@ -5,6 +5,11 @@ function getActualPageName()
     return basename($_SERVER["PHP_SELF"]);
 }
 
+function getActualPageWithFolderName()
+{
+    return $_SERVER["PHP_SELF"];
+}
+
 function getWebsiteUrl()
 {
     /**
