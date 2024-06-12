@@ -210,6 +210,49 @@ function encodeTextFileToBase64(textFileObj)
     return readFilePromise;
 }
 
+function formatTime(dateString) 
+{
+    // Grab hours and minutes from dateString
+    const hours = dateString.substring(dateString.indexOf('T') + 1, dateString.indexOf(':', dateString.indexOf('T')));
+    const firstColonIndex = dateString.indexOf(':');
+    const secondColonIndex = dateString.indexOf(':', firstColonIndex + 1);
+    const minutes = dateString.substring(firstColonIndex + 1, secondColonIndex);
+
+    const hoursInt = parseInt(hours);
+
+    if (hoursInt < 12)
+    {
+        return `${(hours < 1) ? 12 : hours}:${minutes} AM`;
+    }
+
+    else
+    {
+        return `${(hours % 12 < 10) ? `0${(hours % 12)}`:hours % 12}:${minutes} PM`;
+    }
+}
+
+function getDayOfWeek(i)
+{
+    // Return a name of the day of the week based on index value
+    switch (i)
+    {
+        case 0:
+            return "Sunday";
+        case 1:
+            return "Monday";
+        case 2:
+            return "Tuesday";
+        case 3:
+            return "Wednesday";
+        case 4:
+            return "Thursday";
+        case 5:
+            return "Friday";
+        case 6:
+            return "Saturday";
+    }
+}
+
 function decodeBase64TextFile(encodedTextFile, fileName)
 {
     /** Decode the encoded text content in Base64 of a text file
