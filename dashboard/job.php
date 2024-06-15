@@ -15,8 +15,8 @@
 */
 ?>
 
-<?php $allowed_actions = ["add", "view", "update"]; // Actions Job Page May Do ?>
-<?php $id_required_actions = ["view", "update"]; // DB Id of Job Entry ?>
+<?php $allowed_actions = ["add", "view", "edit"]; // Actions Job Page May Do ?>
+<?php $id_required_actions = ["view", "edit"]; // DB Id of Job Entry ?>
 <!--HTML CODE GOES HERE-->
     <div class="wrapper">
         <!--IMPORT MAIN HEADER CODE-->
@@ -308,6 +308,26 @@
                             </div>
                         </div>
                     </div>
+                </section>
+            <>
+            <?php // Show Edit Page for a Job?>
+            <?php elseif ($_GET["action"] == "edit"): ?>
+                <section class="content-header">
+                    <h1>Edit Job Page</h1>
+                    <p>Ronny, Code Edit Job Page Here</p>
+                </section>
+                <section class="content">
+
+                </section>
+            
+            <?php // Show View Page for a Job?>
+            <?php elseif ($_GET["action"] == "view"):?>
+                <section class="content-header">
+                    <h1>View Job Page</h1>
+                    <p>Ronny, Code View Job Page Here</p>
+                </section>
+                <section class="content">
+
                 </section>
             <?php endif; ?>
         </div>
