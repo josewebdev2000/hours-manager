@@ -310,22 +310,130 @@
                     </div>
                 </section>
             <>
-            <?php // Show Edit Page for a Job?>
+            <?php // Show Edit Page for a Job ?>
             <?php elseif ($_GET["action"] == "edit"): ?>
                 <section class="content-header">
                     <h1>Edit Job Page</h1>
                     <p>Ronny, Code Edit Job Page Here</p>
                 </section>
+                <section class="container-fluid">
+                    <form>
+                        <section class="row justify-content-center">
+                            <section class="col-md-8">
+                                <section class="card">
+                                    <section class="card-header">
+                                        <h3>General</h3>
+                                    </section>
+                                    <section class="card-body">
+                                        <div class="form-group">
+                                            <label for="jobName">Job Name</label>
+                                            <input type="text" class="form-control" id="jobName" name="jobName">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="ratePerHour">Rate per Hour</label>
+                                            <input type="text" class="form-control" id="ratePerHour" name="ratePerHour">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Working Days</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="monday" name="workingDays[]" value="Monday">
+                                                <label class="form-check-label" for="monday">Monday</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="tuesday" name="workingDays[]" value="Tuesday">
+                                                <label class="form-check-label" for="tuesday">Tuesday</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="wednesday" name="workingDays[]" value="Wednesday">
+                                                <label class="form-check-label" for="wednesday">Wednesday</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="thursday" name="workingDays[]" value="Thursday">
+                                                <label class="form-check-label" for="thursday">Thursday</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="friday" name="workingDays[]" value="Friday">
+                                                <label class="form-check-label" for="friday">Friday</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="saturday" name="workingDays[]" value="Saturday">
+                                                <label class="form-check-label" for="saturday">Saturday</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="sunday" name="workingDays[]" value="Sunday">
+                                                <label class="form-check-label" for="sunday">Sunday</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="payRollDay">Pay Roll Day</label>
+                                            <input type="text" class="form-control" id="payRollDay" name="payRollDay">
+                                        </div>
+                                    </section>
+                                    <section class="card-footer text-right">
+                                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                                        <button type="button" class="btn btn-secondary">Cancel</button>
+                                    </section>
+                                </section>
+                            </section>
+                        </section>
+                    </form>
+                </section>
                 <section class="content">
 
                 </section>
             
-            <?php // Show View Page for a Job?>
-            <?php elseif ($_GET["action"] == "view"):?>
-                <section class="content-header">
-                    <h1>View Job Page</h1>
-                    <p>Ronny, Code View Job Page Here</p>
-                </section>
+                <?php // Show View Page for a Job ?>
+                <?php elseif ($_GET["action"] == "view"): ?>
+                    <section class="content-header">
+                        <h1>View Job Page</h1>
+                        <p>Ronny, Code View Job Page Here</p>
+                    </section>
+                    <section class="container-fluid">
+                        <?php
+                        $job = [
+                            'jobName' => 'Developer',
+                            'ratePerHour' => '50',
+                            'workingDays' => ['Monday', 'Wednesday', 'Friday'],
+                            'payRollDay' => 'Friday',
+                        ];
+                        ?>
+                        <section class="row justify-content-center">
+                            <section class="col-md-8">
+                                <section class="card">
+                                    <section class="card-header">
+                                        <h3>Job Details</h3>
+                                    </section>
+                                    <section class="card-body">
+                                        <div class="form-group">
+                                            <label for="jobName">Job Name</label>
+                                            <p id="jobName"><?php echo htmlspecialchars($job['jobName']); ?></p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="ratePerHour">Rate per Hour</label>
+                                            <p id="ratePerHour"><?php echo htmlspecialchars($job['ratePerHour']); ?></p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Working Days</label>
+                                            <ul>
+                                                <?php foreach ($job['workingDays'] as $day): ?>
+                                                    <li><?php echo htmlspecialchars($day); ?></li>
+                                                <?php endforeach; ?>
+                                            </ul>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="payRollDay">Pay Roll Day</label>
+                                            <p id="payRollDay"><?php echo htmlspecialchars($job['payRollDay']); ?></p>
+                                        </div>
+                                    </section>
+                                    <section class="card-footer">
+                                        <a href="your_edit_page_url" class="btn btn-primary">Edit</a>
+                                        <a href="your_list_page_url" class="btn btn-secondary">Back to List</a>
+                                    </section>
+                                </section>
+                            </section>
+                        </section>
+                    </section>
+
                 <section class="content">
 
                 </section>
