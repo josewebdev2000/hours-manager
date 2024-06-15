@@ -36,21 +36,21 @@ function validateAndSubmitContactForm()
 {
     // Validate the name input
     $("#name").on({
-        input: nameValidate,
+        input: () => nameValidate("name"),
         focus: () => formControlFocusValidate("name"),
         blur: () => formControlBlurValidate("name")
     });
 
     // Validate the email input
     $("#email").on({
-        input: emailValidate,
+        input: () => emailValidate("email"),
         focus: () => formControlFocusValidate("email"),
         blur: () => formControlBlurValidate("email")
     });
 
     // Validate the subject input
     $("#subject").on({
-        input: subjectValidate,
+        input: () => subjectValidate("subject"),
         focus: () => formControlFocusValidate("subject"),
         blur: () => formControlBlurValidate("subject")
     });
@@ -141,58 +141,6 @@ function validateAndSubmitContactForm()
             });
         }
     });
-}
-
-function nameValidate() 
-{
-    const curName = $("#name").val();
-
-    if (curName.trim().length == 0)
-    {
-        $("#name").removeClass("is-valid");
-        $("#name").addClass("is-invalid");
-        $(".invalid-tooltip.name").text("Name cannot be empty");
-    }
-
-    else if (!nameRegex.test(curName.trim()))
-    {
-        $("#name").removeClass("is-valid");
-        $("#name").addClass("is-invalid");
-        $(".invalid-tooltip.name").text("Name cannot have numbers or special symbols");
-    }
-
-    else
-    {
-        $("#name").removeClass("is-invalid");
-        $(".invalid-tooltip.name").text("");
-        $("#name").addClass("is-valid");
-    }
-}
-
-function emailValidate()
-{
-    const curEmail = $("#email").val();
-
-    if (curEmail.trim().length == 0)
-    {
-        $("#email").removeClass("is-valid");
-        $("#email").addClass("is-invalid");
-        $(".invalid-tooltip.email").text("Email cannot be empty");
-    }
-
-    else if (!emailRegex.test(curEmail.trim()))
-    {
-        $("#email").removeClass("is-valid");
-        $("#email").addClass("is-invalid");
-        $(".invalid-tooltip.email").text("Invalid Email");
-    }
-
-    else
-    {
-        $("#email").removeClass("is-invalid");
-        $(".invalid-tooltip.email").text("");
-        $("#email").addClass("is-valid");
-    }
 }
 
 function subjectValidate()

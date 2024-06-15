@@ -1,79 +1,79 @@
 /** Code used throughout all scripts */
-function usernameValidate()
+function usernameValidate(username_id)
 {
-    const curUserName = $("#username").val();
+    const curUserName = $(`#${username_id}`).val();
 
     if (curUserName.trim().length == 0)
     {
-        $("#username").removeClass("is-valid");
-        $("#username").addClass("is-invalid");
-        $(".invalid-tooltip.username").text("Username cannot be empty");
+        $(`#${username_id}`).removeClass("is-valid");
+        $(`#${username_id}`).addClass("is-invalid");
+        $(`.invalid-tooltip.${username_id}`).text("Username cannot be empty");
     }
 
     else if (!userNameRegex.test(curUserName.trim()))
     {
-        $("#username").removeClass("is-valid");
-        $("#username").addClass("is-invalid");
-        $(".invalid-tooltip.username").text("Username cannot have special symbols");
+        $(`#${username_id}`).removeClass("is-valid");
+        $(`#${username_id}`).addClass("is-invalid");
+        $(`.invalid-tooltip.${username_id}`).text("Username cannot have special symbols");
     }
 
     else
     {
-        $("#username").removeClass("is-invalid");
-        $(".invalid-tooltip.username").text("");
-        $("#username").addClass("is-valid");
+        $(`#${username_id}`).removeClass("is-invalid");
+        $(`.invalid-tooltip.${username_id}`).text("");
+        $(`#${username_id}`).addClass("is-valid");
     }
 }
 
-function nameValidate() 
+function nameValidate(name_id) 
 {
-    const curName = $("#name").val();
+    const curName = $(`#${name_id}`).val();
 
     if (curName.trim().length == 0)
     {
-        $("#name").removeClass("is-valid");
-        $("#name").addClass("is-invalid");
-        $(".invalid-tooltip.name").text("Name cannot be empty");
+        $(`#${name_id}`).removeClass("is-valid");
+        $(`#${name_id}`).addClass("is-invalid");
+        $(`.invalid-tooltip.${name_id}`).text("Name cannot be empty");
     }
 
     else if (!nameRegex.test(curName.trim()))
     {
-        $("#name").removeClass("is-valid");
-        $("#name").addClass("is-invalid");
-        $(".invalid-tooltip.name").text("Name cannot have numbers or special symbols");
+        $(`#${name_id}`).removeClass("is-valid");
+        $(`#${name_id}`).addClass("is-invalid");
+        $(`.invalid-tooltip.${name_id}`).text("Name cannot have numbers or special symbols");
     }
 
     else
     {
-        $("#name").removeClass("is-invalid");
-        $(".invalid-tooltip.name").text("");
-        $("#name").addClass("is-valid");
+        $(`#${name_id}`).removeClass("is-invalid");
+        $(`.invalid-tooltip.${name_id}`).text("");
+        $(`#${name_id}`).addClass("is-valid");
     }
 }
 
-function emailValidate()
+function emailValidate(email_id)
 {
-    const curEmail = $("#email").val();
+    const curEmail = $(`#${email_id}`).val();
 
     if (curEmail.trim().length == 0)
     {
-        $("#email").removeClass("is-valid");
-        $("#email").addClass("is-invalid");
-        $(".invalid-tooltip.email").text("Email cannot be empty");
+        $(`#${email_id}`).removeClass("is-valid");
+        $(`#${email_id}`).addClass("is-invalid");
+        $(`.invalid-tooltip.${email_id}`).text("Email cannot be empty");
     }
 
     else if (!emailRegex.test(curEmail.trim()))
     {
-        $("#email").removeClass("is-valid");
-        $("#email").addClass("is-invalid");
-        $(".invalid-tooltip.email").text("Invalid Email");
+        $(`#${email_id}`).removeClass("is-valid");
+        $(`#${email_id}`).addClass("is-invalid");
+        $(`.invalid-tooltip.${email_id}`).text("Invalid Email");
     }
 
     else
     {
-        $("#email").removeClass("is-invalid");
-        $(".invalid-tooltip.email").text("");
-        $("#email").addClass("is-valid");
+        $(`#${email_id}`).removeClass("is-invalid");
+        $(`.invalid-tooltip.${email_id}`).text("");
+        $(`#${email_id}`).addClass("is-valid");
     }
 }
 
@@ -158,25 +158,40 @@ function formControlBlurValidate(form_control_id)
     $(`.invalid-tooltip.${form_control_id}`).fadeOut();
 }
 
-function displayFormErrorAlert(alert_container_id ,error_msg)
+function displayFormErrorAlert(alert_container_id ,error_msg, doAppend = true)
 {
     // Create Error Alert
     const eAlert = $(errorAlert(error_msg));
 
     // Append the alert to the container
-    $(`#${alert_container_id}`).append(eAlert);
+    if (doAppend)
+    {
+        $(`#${alert_container_id}`).append(eAlert);   
+    }
 
+    else
+    {
+        $(`#${alert_container_id}`).prepend(eAlert);   
+    }
     // Fade in the alert in 150 mls
     setTimeout(() => eAlert.addClass("show"), 150);
 }
 
-function displayFormSuccessAlert(alert_container_id, success_msg)
+function displayFormSuccessAlert(alert_container_id, success_msg, doAppend = true)
 {
     // Create Success Alert
     const sAlert = $(successAlert(success_msg));
 
     // Append the alert to the container
-    $(`#${alert_container_id}`).append(sAlert);
+    if (doAppend)
+    {
+        $(`#${alert_container_id}`).append(sAlert);   
+    }
+
+    else
+    {
+        $(`#${alert_container_id}`).prepend(sAlert);   
+    }
 
     // Fade in the alert in 150 mls
     setTimeout(() => sAlert.addClass("show"), 150);
@@ -251,6 +266,14 @@ function getDayOfWeek(i)
         case 6:
             return "Saturday";
     }
+}
+
+function smoothlyScrollToTop(container_selector)
+{
+    // Using jQuery's animate() method to add smooth page scroll
+    $('html, body').animate({
+        scrollTop: $(container_selector).offset().top
+    }, 800);
 }
 
 function decodeBase64TextFile(encodedTextFile, fileName)

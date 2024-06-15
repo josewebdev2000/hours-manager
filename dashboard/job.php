@@ -29,7 +29,7 @@
         <?php require_once "templates/dashboard-preloader.php"; ?>
 
         <!--INCLUDE CODE TO SHOW/EDIT EACH JOB PROFILE PAGE INSIDE THE content-wrapper -->
-        <div class="content-wrapper">
+        <div class="content-wrapper" id="job-page-content-wrapper">
             <?php // If action is not set as get param, show action error ?>
             <?php if (!isset($_GET["action"]) || !in_array(strtolower($_GET["action"]), $allowed_actions)): ?>
                 <section class="content-header">
@@ -205,10 +205,6 @@
                                             <div class="form-group">
                                                 <label for="job-description">Job Description</label>
                                                 <textarea class="form-control" name="job-description" id="job-description" rows="4"></textarea>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="job-start-date">Job Start Date</label>
-                                                <input type="date" class="form-control" name="job-start-date" id="job-start-date">
                                             </div>
                                         </div>
                                     </div>

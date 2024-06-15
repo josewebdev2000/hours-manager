@@ -22,7 +22,7 @@ function validateAndSubmitLoginForm()
 {
     // Validate the email input
     $("#email").on({
-        input: emailValidate,
+        input: () => emailValidate("email"),
         focus: () => formControlFocusValidate("email"),
         blur: () => formControlBlurValidate("email")
     });

@@ -73,11 +73,15 @@ $websiteUrl = getWebsiteUrl();
                 echo "<script src='$websiteUrl/assets/js/login.js'></script>";
                 break;
             }
+        }
 
-            case "dashboard/job.php":
+        // Grab the $_GET parameter action if set
+        if (isset($_GET["action"]))
+        {
+            // If the parameter is add, associate it to dashboard/job.php
+            if ($_GET["action"] == "add" && $currentPage == "dashboard/job.php")
             {
-                echo "<script src='$websiteUrl/assets/js/job.js'></script>";
-                break;
+                echo "<script src='$websiteUrl/assets/js/job/job-add.js'></script>";
             }
         }
     ?>

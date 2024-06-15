@@ -24,14 +24,14 @@ function validateAndSubmitRegisterForm()
 {
         // Validate the name input
         $("#name").on({
-            input: nameValidate,
+            input: () => nameValidate("name"),
             focus: () => formControlFocusValidate("name"),
             blur: () => formControlBlurValidate("name")
         });
     
         // Validate the email input
         $("#email").on({
-            input: emailValidate,
+            input: () => emailValidate("email"),
             focus: () => formControlFocusValidate("email"),
             blur: () => formControlBlurValidate("email")
         });
