@@ -298,6 +298,7 @@
                                 </div>
                             </div>
                         </div>
+                        <input id="user_id" type="hidden" value="<?=$_SESSION["id"]?>">
                         <div class="row">
                             <div class="col">
                                 <div class="btn-group w-100" role="group">

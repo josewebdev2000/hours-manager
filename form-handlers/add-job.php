@@ -7,7 +7,10 @@ error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
 require_once __DIR__ . "/../helpers/index.php";
-require_once __DIR__ . "/../db/user-db-funcs.php";
+require_once __DIR__ . "/../db/employer-db-funcs.php";
+require_once __DIR__ . "/../db/job-db-funcs.php";
+require_once __DIR__ . "/../db/pay-rate-db-funcs.php";
+require_once __DIR__ . "/../db/pay-roll-db-funcs.php";
 
 // Import other funcs
 require_once __DIR__ . "/../utils/constants.php";
@@ -62,7 +65,68 @@ if (is_post_request())
 
     // Now that everything is valid, add data to the DB
 
-    // First add employer
+    // First add employer the employer
+    $employerData = insertNewEmployer(
+        $job_data["user_id"],
+        $employerValAssoc["employerName"],
+        $employerValAssoc["employerEmail"],
+        $employerValAssoc["employerPhoneNumber"]
+    );
+
+    // In case there was an error, return it
+    if (array_key_exists("error", $employerData))
+    {
+        return send_json_error_response($employerData, 500);
+    }
+
+    // Otherwise, create a new job
+    // Grab employer id first
+    $employerId = $employerData["id"];
+
+    $jobData = insertNewJob(
+        $job_data["user_id"],
+        $employerId,
+        $jobValAssoc["title"]
+    );
+
+    if (array_key_exists("error", $jobData))
+    {
+        return send_json_error_response($jobData, 500);
+    }
+
+    // Grab the job id
+    $jobId = $jobData["id"];
+
+    // Now that we have the user and job, insert the pay rate
+    $payRateData = insertNewPayRate(
+        $job_data["user_id"],
+        $jobId,
+        $payRateValAssoc["rateType"],
+        $payRateValAssoc["rateAmount"],
+        $payRateValAssoc["effectiveDate"]
+    );
+
+    if (array_key_exists("error", $payRateData))
+    {
+        return send_json_error_response($payRateData, 500);
+    }
+
+    // Now insert the pay roll
+    $payRollData = insertNewPayRoll(
+        $job_data["user_id"],
+        $jobId,
+    );
+
+    if (array_key_exists("error", $payRollData))
+    {
+        return send_json_error_response($payRollData, 500);
+    }
+
+    // Now insert as many working days as there are
+    foreach ($workShiftValAssoc as $workShift)
+    {
+        //$workShiftData = 
+    }
 
 }
 

@@ -368,6 +368,9 @@ function loginUser($email, $password)
         ];
     }
 
+    // Close the statement
+    $stmt->close();
+
     // Return user data in case password was correct
     return [
         "id" => $user["id"],

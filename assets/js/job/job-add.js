@@ -208,6 +208,9 @@ function sendAddNewJobAJAXRequestToBackend()
         e.preventDefault();
 
         // Prepare data to be sent to the user
+        // Grab User Id
+        const user_id = $("#user_id").val();
+
         // Get employer data in an obj
         const employerData = {
             employerName: $("#employer-name").val(),
@@ -264,6 +267,7 @@ function sendAddNewJobAJAXRequestToBackend()
 
         // Prepare JSON payload to send
         const data = JSON.stringify({
+            "user_id": user_id,
             "employer": employerData,
             "job": jobData,
             "pay_rate": payRateData,
