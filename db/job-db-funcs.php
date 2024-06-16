@@ -195,7 +195,7 @@ function insertNewJob($userId, $employerData, $jobData, $payRateData, $payRollDa
             // Dynamically change values of placeholders according to what is the workingDay
             $day = $workingDayData["day"];
             $startingHour = $workingDayData["startingHour"];
-            $endingHour = $workingData["endingHour"];
+            $endingHour = $workingDayData["endingHour"];
 
             // If inserting the record failed, throw an exception
             if (!$workShiftStmt->execute())

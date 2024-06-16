@@ -309,7 +309,6 @@
                         </div>
                     </div>
                 </section>
-            <>
             <?php // Show Edit Page for a Job?>
             <?php elseif ($_GET["action"] == "edit"): ?>
                 <section class="content-header">
