@@ -231,8 +231,6 @@ function insertNewJob($userId, $employerData, $jobData, $payRateData, $payRollDa
         // Grab error message
         $error_msg = $e->getMessage();
 
-        var_dump($error_msg);
-
         // Json Decode
         $decoded_message = json_decode($e->getMessage());
 
