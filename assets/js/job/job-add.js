@@ -286,7 +286,9 @@ function sendAddNewJobAJAXRequestToBackend()
             },
             success: function(response) {
                 // Show Success Alert When New Job Could Be Added
-                displayFormSuccessAlert("job-page-content-wrapper", "New Job Could Be Successfully Added", false);
+                const message = response["message"];
+
+                displayFormSuccessAlert("job-page-content-wrapper", message, false);
             },
             error: function(xhr) {
                 // Show Error Alert When New Job Could Not Be Added
