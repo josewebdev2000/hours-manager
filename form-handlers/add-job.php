@@ -7,10 +7,7 @@ error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
 require_once __DIR__ . "/../helpers/index.php";
-require_once __DIR__ . "/../db/employer-db-funcs.php";
 require_once __DIR__ . "/../db/job-db-funcs.php";
-require_once __DIR__ . "/../db/pay-rate-db-funcs.php";
-require_once __DIR__ . "/../db/pay-roll-db-funcs.php";
 
 // Import other funcs
 require_once __DIR__ . "/../utils/constants.php";
@@ -64,70 +61,36 @@ if (is_post_request())
     }
 
     // Now that everything is valid, add data to the DB
-
-    // First add employer the employer
-    $employerData = insertNewEmployer(
+    $addNewJobResponse = insertNewJob(
         $job_data["user_id"],
-        $employerValAssoc["employerName"],
-        $employerValAssoc["employerEmail"],
-        $employerValAssoc["employerPhoneNumber"]
+        $employerValAssoc,
+        $jobValAssoc,
+        $payRateValAssoc,
+        $payRollValAssoc,
+        $workShiftValAssoc
     );
 
-    // In case there was an error, return it
-    if (array_key_exists("error", $employerData))
+    // If error in adding new job, classify type of error
+    if (array_key_exists("error", $addNewJobResponse))
     {
-        return send_json_error_response($employerData, 500);
+        // Depending on error code, return 400 Client Error or 500 Internal Server Error
+        $error_code = NULL;
+
+        if ($addNewJobResponse["error_code"] == "preparation_error" || $addNewJobResponse["error_code"] == "excecution_error")
+        {
+            $error_code = 500;
+        }
+
+        else
+        {
+            $error_code = 400;
+        }
+
+        return send_json_error_response(["error" => $addNewJobResponse["error"]], $error_code);
     }
 
-    // Otherwise, create a new job
-    // Grab employer id first
-    $employerId = $employerData["id"];
-
-    $jobData = insertNewJob(
-        $job_data["user_id"],
-        $employerId,
-        $jobValAssoc["title"]
-    );
-
-    if (array_key_exists("error", $jobData))
-    {
-        return send_json_error_response($jobData, 500);
-    }
-
-    // Grab the job id
-    $jobId = $jobData["id"];
-
-    // Now that we have the user and job, insert the pay rate
-    $payRateData = insertNewPayRate(
-        $job_data["user_id"],
-        $jobId,
-        $payRateValAssoc["rateType"],
-        $payRateValAssoc["rateAmount"],
-        $payRateValAssoc["effectiveDate"]
-    );
-
-    if (array_key_exists("error", $payRateData))
-    {
-        return send_json_error_response($payRateData, 500);
-    }
-
-    // Now insert the pay roll
-    $payRollData = insertNewPayRoll(
-        $job_data["user_id"],
-        $jobId,
-    );
-
-    if (array_key_exists("error", $payRollData))
-    {
-        return send_json_error_response($payRollData, 500);
-    }
-
-    // Now insert as many working days as there are
-    foreach ($workShiftValAssoc as $workShift)
-    {
-        //$workShiftData = 
-    }
-
+    // By this point the transaction was successful, so return success message
+    return send_json_response($addNewJobResponse);
 }
 
 ?>
