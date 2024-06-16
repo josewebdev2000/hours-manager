@@ -249,4 +249,140 @@ function insertNewJob($userId, $employerData, $jobData, $payRateData, $payRollDa
     return $finalMsgAssoc;
 }
 
+function getAllJobsOfUserForJobsPage($user_id)
+{
+    /** Extract All Jobs From The DB */
+    global $conn;
+
+    // Prepare a SQL statement to grab all jobs
+
+    $sql = "SELECT 
+    j.role AS job_role,
+    j.id AS job_id, 
+    p.rate_amount AS pay_rate_amount, 
+    p.rate_type AS pay_rate_type,
+    GROUP_CONCAT(DISTINCT wd.day ORDER BY FIELD(wd.day, 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday')) AS working_days, 
+    pr.payment_day AS payroll_day
+    FROM 
+    jobs j
+    INNER JOIN 
+    payrates p ON j.id = p.job_id AND j.user_id = p.user_id
+    LEFT JOIN 
+    workingdays wd ON j.id = wd.job_id AND j.user_id = wd.user_id
+    INNER JOIN 
+    payrolls pr ON j.id = pr.job_id AND j.user_id = pr.user_id
+    WHERE 
+    j.user_id = ?
+    GROUP BY 
+    j.id
+    ORDER BY 
+    j.title";
+
+    // Make a prepared SQL statement
+    $stmt = $conn->prepare($sql);
+
+    // If statement could not be prepared return an early error assoc
+    if (!$stmt)
+    {
+        return [
+            "error" => "Could not prepare to get jobs data",
+            "error_code" => "preparation_error"
+        ];
+    }
+
+    // Bind the user_id parameter as an integer
+    $stmt->bind_param("i", $user_id);
+
+    // Execute the statement
+    // If there is an error, return early
+    if (!$stmt->execute())
+    {
+        return [
+            "error" => "Could not try to get jobs",
+            "error_code" => "excecution_error"
+        ];
+    }
+
+    // Grab the result
+    $result = $stmt->get_result();
+
+    // If the result has no rows, then return jobs not found error
+    if ($result->num_rows == 0)
+    {
+        return [
+            "error" => "Could not find any jobs",
+            "error_code" => "jobs_not_found_error"
+        ];
+    }
+
+    // If there were jobs found, grab them
+    $jobs = [];
+
+    // Loop through all jobs and add them to the jobs array
+    while ($job = $result->fetch_assoc())
+    {
+        $jobs[$job["job_id"]] = $job;
+    }
+
+    // Close the statement
+    $stmt->close();
+
+    // Return jobs array
+    return $jobs;
+}
+
+function getJobOfUserById($user_id, $job_id)
+{
+    /** Extract A Job For The DB */
+    global $conn;
+
+    // Prepare SQL statement to grab a job by its id
+    $sql = "SELECT * FROM jobs WHERE user_id = ? AND id = ?";
+
+    // Make a prepared SQL statement
+    $stmt = $conn->prepare($sql);
+
+    // If the statement could not be prepared, return an error
+    if (!$stmt)
+    {
+        return [
+            "error" => "Could not prepare to get job by its id",
+            "error_code" => "preparation_error"
+        ];
+    }
+
+    // Bind user_id and job_id parameters
+    $stmt->bind_param("ii", $user_id, $job_id);
+
+    // Execute the statement
+    // If there was an error, return an error assoc
+    if (!$stmt->execute())
+    {
+        return [
+            "error" => "Could not try to get job by its id",
+            "error_code" => "excecution_error"
+        ];
+    }
+
+    // Grab the result
+    $result = $stmt->get_result();
+
+    // If the result does not have one row, return not found
+    if ($result->num_rows != 1)
+    {
+        return [
+            "error" => "Could not find job by its id",
+            "error_code" => "job_not_found_error"
+        ];
+    }
+
+    // If the job was found, return it as a PHP assoc
+    $job = $result->fetch_assoc();
+
+    // Close the statement
+    $stmt->close();
+
+    return $job;
+}
+
 ?>

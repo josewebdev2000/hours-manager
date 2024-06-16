@@ -66,4 +66,34 @@ function validate_password($password)
     }
 }
 
+function formatRateAmountByType($rate_amount, $rate_type)
+{
+    $rate_rep = "";
+
+    switch (strtolower($rate_type))
+    {
+        case "hourly":    
+            $rate_rep = "$" . $rate_amount . "/hr";
+            break;
+        
+        case "daily":
+            $rate_rep = "$" . $rate_amount . "/day";
+            break;
+        
+        case "weekly":
+            $rate_rep = "$" . $rate_amount . "/week";
+            break;
+        
+        case "biweekly":
+            $rate_rep = "$" . $rate_amount . "/two weeks";
+            break;
+        
+        case "monthly":
+            $rate_rep = "$" . $rate_amount . "/month";
+            break;
+    }
+
+    return $rate_rep;
+}
+
 ?>

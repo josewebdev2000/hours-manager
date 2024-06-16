@@ -1,6 +1,10 @@
 <?php require_once "../templates/session-starter.php"; ?>
 <?php require_once "templates/dashboard-header.php"; ?>
 <?php require_once "../templates/header.php"; ?>
+<?php require_once "../db/job-db-funcs.php";
+// Grab all the jobs of this user
+$jobs = getAllJobsOfUserForJobsPage($user["id"]);
+?>
 <!--HTML CODE GOES HERE-->
 <div class="wrapper">
     <!--IMPORT MAIN HEADER CODE-->
@@ -18,7 +22,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Jobs Profile Page</h1>
+                        <h1>Jobs</h1>
                     </div>
                 </div>
             </div>
@@ -30,129 +34,36 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Jobs</h3>
+                                <h3 class="card-title"><b><?=$user["name"]?></b> Jobs</h3>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body table-responsive">
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th style="width: 10px">#</th>
-                                            <th>Job Name</th>
-                                            <th>Rate</th>
+                                            <input type="hidden" id="user-id" value="<?=$user["id"]?>">
+                                            <th>Job Role</th>
+                                            <th>Pay Rate</th>
                                             <th>Working Days</th>
                                             <th>Pay Roll Day</th>
                                             <th style="width: 140px">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>#</td>
-                                            <td>USER EXAMPLE</td>
-                                            <td>$16.50/hr</td>
-                                            <td>Friday, Saturday, Sunday, Monday</td>
-                                            <td>Friday</td>
-                                            <td>
-                                                <a href="#" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
-                                                <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
-                                                <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>#</td>
-                                            <td>USER EXAMPLE</td>
-                                            <td>$20.00/hr</td>
-                                            <td>Tuesday, Wednesday, Thursday</td>
-                                            <td>Friday</td>
-                                            <td>
-                                                <a href="#" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
-                                                <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
-                                                <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>#</td>
-                                            <td>USER EXAMPLE</td>
-                                            <td>$18.75/hr</td>
-                                            <td>Monday, Tuesday, Wednesday</td>
-                                            <td>Friday</td>
-                                            <td>
-                                                <a href="#" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
-                                                <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
-                                                <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td>USER EXAMPLE</td>
-                                            <td>$19.00/hr</td>
-                                            <td>Thursday, Friday, Saturday</td>
-                                            <td>Friday</td>
-                                            <td>
-                                                <a href="#" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
-                                                <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
-                                                <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td>USER EXAMPLE</td>
-                                            <td>$15.00/hr</td>
-                                            <td>Monday, Wednesday, Friday</td>
-                                            <td>Friday</td>
-                                            <td>
-                                                <a href="#" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
-                                                <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
-                                                <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>6</td>
-                                            <td>USER EXAMPLE</td>
-                                            <td>$21.50/hr</td>
-                                            <td>Tuesday, Thursday, Saturday</td>
-                                            <td>Friday</td>
-                                            <td>
-                                                <a href="#" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
-                                                <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
-                                                <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>7</td>
-                                            <td>USER EXAMPLE</td>
-                                            <td>$22.00/hr</td>
-                                            <td>Friday, Saturday, Sunday, Monday</td>
-                                            <td>Friday</td>
-                                            <td>
-                                                <a href="#" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
-                                                <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
-                                                <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>8</td>
-                                            <td>USER EXAMPLE</td>
-                                            <td>$18.00/hr</td>
-                                            <td>Wednesday, Thursday, Friday</td>
-                                            <td>Friday</td>
-                                            <td>
-                                                <a href="#" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
-                                                <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
-                                                <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>9</td>
-                                            <td>USER EXAMPLE</td>
-                                            <td>$20.00/hr</td>
-                                            <td>Monday, Wednesday, Friday</td>
-                                            <td>Friday</td>
-                                            <td>
-                                                <a href="#" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
-                                                <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
-                                                <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
-                                            </td>
-                                        </tr>
+                                        <?php // Loop through each job in the DB?>
+                                        <?php foreach($jobs as $job): ?>
+                                            <?php $job_id = $job["job_id"]; ?>
+                                            <tr>
+                                                <td><?=$job["job_role"];?></td>
+                                                <td><?=formatRateAmountByType($job["pay_rate_amount"], $job["pay_rate_type"]);?></td>
+                                                <td><?php echo (isset($job["working_days"])) ? $job["working_days"] : "No Schedule Specified"?></td>
+                                                <td><?=$job["payroll_day"];?></td>
+                                                <td class="job-actions" role="group">
+                                                    <a href="<?=$websiteUrl;?>dashboard/job.php?action=view&id=<?=$job_id;?>" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
+                                                    <a href="<?=$websiteUrl;?>dashboard/job.php?action=edit&id=<?=$job_id;?>" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
+                                                    <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach;?>
                                     </tbody>
                                 </table>
                             </div>

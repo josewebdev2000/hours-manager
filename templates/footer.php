@@ -73,6 +73,12 @@ $websiteUrl = getWebsiteUrl();
                 echo "<script src='$websiteUrl/assets/js/login.js'></script>";
                 break;
             }
+
+            case "dashboard/jobs.php":
+            {
+                echo "<script src='$websiteUrl/assets/js/jobs.js'></script>";
+                break;
+            }
         }
 
         // Grab the $_GET parameter action if set
