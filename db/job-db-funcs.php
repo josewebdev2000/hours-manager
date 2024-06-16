@@ -257,8 +257,10 @@ function getAllJobsOfUserForJobsPage($user_id)
     // Prepare a SQL statement to grab all jobs
 
     $sql = "SELECT 
+    j.title AS job_title,
     j.role AS job_role,
     j.id AS job_id, 
+    e.name AS employer_name,
     p.rate_amount AS pay_rate_amount, 
     p.rate_type AS pay_rate_type,
     GROUP_CONCAT(DISTINCT wd.day ORDER BY FIELD(wd.day, 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday')) AS working_days, 
@@ -271,6 +273,8 @@ function getAllJobsOfUserForJobsPage($user_id)
     workingdays wd ON j.id = wd.job_id AND j.user_id = wd.user_id
     INNER JOIN 
     payrolls pr ON j.id = pr.job_id AND j.user_id = pr.user_id
+    INNER JOIN
+    employers e ON e.id = j.employer_id AND e.user_id = j.user_id
     WHERE 
     j.user_id = ?
     GROUP BY 

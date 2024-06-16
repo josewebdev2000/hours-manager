@@ -41,7 +41,9 @@ $jobs = getAllJobsOfUserForJobsPage($user["id"]);
                                     <thead>
                                         <tr>
                                             <input type="hidden" id="user-id" value="<?=$user["id"]?>">
+                                            <th>Job Title</th>
                                             <th>Job Role</th>
+                                            <th>Employer Name</th>
                                             <th>Pay Rate</th>
                                             <th>Working Days</th>
                                             <th>Pay Roll Day</th>
@@ -53,7 +55,9 @@ $jobs = getAllJobsOfUserForJobsPage($user["id"]);
                                         <?php foreach($jobs as $job): ?>
                                             <?php $job_id = $job["job_id"]; ?>
                                             <tr>
+                                                <td><?=$job["job_title"];?></td>
                                                 <td><?=$job["job_role"];?></td>
+                                                <td><?=$job["employer_name"];?></td>
                                                 <td><?=formatRateAmountByType($job["pay_rate_amount"], $job["pay_rate_type"]);?></td>
                                                 <td><?php echo (isset($job["working_days"])) ? $job["working_days"] : "No Schedule Specified"?></td>
                                                 <td><?=$job["payroll_day"];?></td>
