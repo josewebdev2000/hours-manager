@@ -2,7 +2,8 @@
 <?php require_once "templates/dashboard-header.php"; ?>
 <?php require_once "../templates/header.php"; ?>
 
-<?php
+<?php require_once "../db/job-db-funcs.php";
+require_once "../db/working-day-db-funcs.php";
 /*  Job Page Infrastructure
     
     This file will need to use GET parameter to conditionally render what is required-->
@@ -31,6 +32,7 @@
         <!--INCLUDE CODE TO SHOW/EDIT EACH JOB PROFILE PAGE INSIDE THE content-wrapper -->
         <div class="content-wrapper" id="job-page-content-wrapper">
             <?php // If action is not set as get param, show action error ?>
+            <input id="user_id" type="hidden" value="<?=$_SESSION["id"]?>">
             <?php if (!isset($_GET["action"]) || !in_array(strtolower($_GET["action"]), $allowed_actions)): ?>
                 <section class="content-header">
                     <div class="container-fluid">
@@ -298,7 +300,6 @@
                                 </div>
                             </div>
                         </div>
-                        <input id="user_id" type="hidden" value="<?=$_SESSION["id"]?>">
                         <div class="row">
                             <div class="col">
                                 <div class="btn-group w-100" role="group">
@@ -318,15 +319,231 @@
                 <section class="content">
 
                 </section>
+
+                <?php // Try to grab data about the job?>
+                <?php $job = getJobOfUserById($_SESSION["id"], $_GET["id"]); ?>
             
             <?php // Show View Page for a Job?>
             <?php elseif ($_GET["action"] == "view"):?>
-                <section class="content-header">
-                    <h1>View Job Page</h1>
-                    <p>Ronny, Code View Job Page Here</p>
-                </section>
-                <section class="content">
-
+                <input type="hidden" id="job_id" value="<?=$_GET["id"];?>">
+                <?php // Try to grab data about the job?>
+                <?php $job = getJobOfUserById($_SESSION["id"], $_GET["id"]); ?>
+                <?php if(array_key_exists("error", $job)): ?>
+                    <section class="content-header">
+                        <div class="container-fluid">
+                            <div class="row mb-2">
+                                <div class="col-sm-6">
+                                    <h1 class="text-warning">Job Not Found Error</h1>
+                                </div>
+                                <div class="col-sm-6">
+                                    <ol class="breadcrumb float-sm-right">
+                                        <li class="breadcrumb-item"><a href="<?=$websiteUrl?>dashboard/">Dashboard</a></li>
+                                        <li class="breadcrumb-item active">Job</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="content">
+                        <div class="error-page">
+                            <div class="headline text-warning">404</div>
+                            <div class="error-content">
+                                <h3 class="mb-4">
+                                    <i class="fas fa-exclamation-triangle text-warning"></i>
+                                    Not Found
+                                </h3>
+                                <h4>Job Not Found</h4>
+                                <p>The requested job could not be found</p>
+                            </div>
+                        </div>
+                    </section>
+                <?php else:?>
+                    <section class="content-header">
+                        <div class="container-fluid">
+                            <div class="row mb-2">
+                                <div class="col-sm-6">
+                                    <h1>View Job Details</h1>
+                                </div>
+                                <div class="col-sm-6">
+                                    <ol class="breadcrumb float-sm-right">
+                                        <li class="breadcrumb-item"><a href="<?=$websiteUrl?>dashboard/">Dashboard</a></li>
+                                        <li class="breadcrumb-item active">Job</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="content">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card card-maroon">
+                                        <div class="card-header">
+                                            <h2 class="card-title fsize-150">
+                                                <i class="fas fa-user-tie mr-sm-3"></i>
+                                                <span>Employer</span>
+                                            </h2>
+                                            <div class="card-tools">
+                                                <button class="btn btn-tool" type="button" data-card-widget="collapse" title="Collapse">
+                                                    <i class="fas fa-minus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label>Employer Name</label>
+                                                <input type="text" id="view-employer-name" class="form-control" value="<?=$job["employer_name"];?>" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Employer Email</label>
+                                                <input type="email" class="form-control" value="<?php echo (isset($job["employer_email"])) ? $job["employer_email"] : "Employer Email Not Specified" ?>" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Employer Phone Number</label>
+                                                <input type="tel" class="form-control" value="<?php echo (isset($job["employer_phone_number"])) ? $job["employer_phone_number"] : "Employer Phone Number Not Specified" ?>" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card card-success">
+                                        <div class="card-header">
+                                            <h2 class="card-title fsize-150">
+                                                <i class="fas fa-dollar-sign mr-sm-3"></i>
+                                                <span>Pay Rate</span>
+                                            </h2>
+                                            <div class="card-tools">
+                                                <button class="btn btn-tool" type="button" data-card-widget="collapse" title="Collapse">
+                                                    <i class="fas fa-minus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label for="rate-type">Rate Type</label>
+                                                <input type="text" class="form-control" value="<?=ucfirst($job["pay_rate_type"]);?>" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Rate Amount</label>
+                                                <input type="text" class="form-control" value="$<?=$job["pay_rate_amount"]?>" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="effective-rate">Effective Date</label>
+                                                <input type="date" class="form-control" value="<?=$job["effective_date"]?>" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                        <div class="card card-pink">
+                                            <div class="card-header">
+                                                <h2 class="card-title fsize-150">
+                                                    <i class="fas fa-suitcase mr-sm-3"></i>
+                                                    <span>Job</span>
+                                                </h2>
+                                                <div class="card-tools">
+                                                    <button class="btn btn-tool" type="button" data-card-widget="collapse" title="Collapse">
+                                                        <i class="fas fa-minus"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="form-group">
+                                                    <label>Job Title</label>
+                                                    <input type="text" class="form-control" value="<?=$job["job_title"];?>" readonly>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Job Role</label>
+                                                    <input type="text" id="view-job-role" class="form-control" value="<?=$job["job_role"];?>" readonly>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Job Address</label>
+                                                    <input type="text" class="form-control" value="<?php echo (isset($job["job_address"])) ? $job["job_address"] : "Job Address Not Specified" ?>" readonly>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Job Description</label>
+                                                    <textarea class="form-control" value="<?php echo (isset($job["job_description"])) ? $job["job_description"] : "Job Description Not Specified" ?>" rows="4" readonly>
+                                                        <?php echo (isset($job["job_description"])) ? $job["job_description"] : "Job Description Not Specified" ?>
+                                                    </textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card card-purple">
+                                        <div class="card-header">
+                                            <h2 class="card-title fsize-150">
+                                                <i class="fas fa-money-bill mr-sm-3"></i>
+                                                <span>Pay Roll</span>
+                                            </h2>
+                                            <div class="card-tools">
+                                                <button class="btn btn-tool" type="button" data-card-widget="collapse" title="Collapse">
+                                                    <i class="fas fa-minus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label>Starting Day</label>
+                                                <input type="text" class="form-control" value="<?=$job["starting_day"];?>" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Ending Day</label>
+                                                <input type="text" class="form-control" value="<?=$job["ending_day"];?>" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Payment Day</label>
+                                                <input type="text" class="form-control"  value="<?=$job["payroll_day"];?>" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Predicted Total Hours</label>
+                                                <input type="text" class="form-control" value="<?=$job["total_hours"];?> hours" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Predicted Total Payment</label>
+                                                <input type="text" class="form-control" value="$<?=$job["total_pay"]?>" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Tips</label>
+                                                <input type="text" class="form-control" value="$<?=$job["tip"];?>" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-md-6">
+                                    <div class="card card-indigo">
+                                        <div class="card-header">
+                                            <h2 class="card-title fsize-150">
+                                                <i class="fas fa-calendar-alt mr-sm-3"></i>
+                                                <span>Schedule</span>
+                                            </h2>
+                                            <div class="card-tools">
+                                                <button class="btn btn-tool" type="button" data-card-widget="collapse" title="Collapse">
+                                                    <i class="fas fa-minus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label for="working-days">Working Days</label>
+                                                <div id="view-schedule-calendar" class="text-center">
+                                                    <div id="working-days-not-found" class="d-none text-center">
+                                                        <h4>No Working Schedule</h4>
+                                                        <p>No working schedule was specified for this job</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                <?php endif; ?>
                 </section>
             <?php endif; ?>
         </div>

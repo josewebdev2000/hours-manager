@@ -95,5 +95,4 @@ function formatRateAmountByType($rate_amount, $rate_type)
 
     return $rate_rep;
 }
-
 ?>

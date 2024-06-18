@@ -341,7 +341,40 @@ function getJobOfUserById($user_id, $job_id)
     global $conn;
 
     // Prepare SQL statement to grab a job by its id
-    $sql = "SELECT * FROM jobs WHERE user_id = ? AND id = ?";
+    $sql = "SELECT 
+    j.title AS job_title,
+    j.role AS job_role,
+    j.id AS job_id, 
+    j.address AS job_address,
+    j.description AS job_description,
+    e.name AS employer_name,
+    e.email AS employer_email,
+    e.phone_number AS employer_phone_number,
+    p.rate_amount AS pay_rate_amount, 
+    p.rate_type AS pay_rate_type,
+    p.effective_date AS effective_date,
+    pr.payment_day AS payroll_day,
+    pr.pay_period_start AS starting_day,
+    pr.pay_period_end AS ending_day,
+    pr.total_hours AS total_hours,
+    pr.total_payment AS total_pay,
+    pr.tips AS tip
+    FROM 
+    jobs j
+    INNER JOIN 
+    payrates p ON j.id = p.job_id AND j.user_id = p.user_id
+    INNER JOIN 
+    payrolls pr ON j.id = pr.job_id AND j.user_id = pr.user_id
+    INNER JOIN
+    employers e ON e.id = j.employer_id AND e.user_id = j.user_id
+    WHERE 
+    j.user_id = ?
+    AND
+    j.id = ?
+    GROUP BY 
+    j.id
+    ORDER BY 
+    j.title";
 
     // Make a prepared SQL statement
     $stmt = $conn->prepare($sql);

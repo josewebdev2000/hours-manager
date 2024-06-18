@@ -1,6 +1,6 @@
 "use strict";
 
-/** JS Script for job.php page */
+/** JS Script for adding a job to job.php page */
 function mainJob()
 {
     // Clear Session Storage 
