@@ -77,6 +77,9 @@ $jobs = getAllJobsOfUserForJobsPage($user["id"]);
                                                 </div>
                                             </tr>
                                         <?php endif; ?>
+                                        <tr>
+                                            <a class="btn btn-block btn-purple btn-lg text-white" href="<?=$websiteUrl?>dashboard/job.php?action=add">Add New Job</a>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
