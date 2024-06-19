@@ -279,7 +279,7 @@ require_once "../db/working-day-db-funcs.php";
                         </div>
                         <div class="row d-flex justify-content-center">
                             <div class="col-md-6">
-                                <div class="card card-indigo">
+                                <div class="card card-indigo d-none">
                                     <div class="card-header">
                                         <h2 class="card-title fsize-150">
                                             <i class="fas fa-calendar-alt mr-sm-3"></i>
@@ -515,7 +515,7 @@ require_once "../db/working-day-db-funcs.php";
                             </div>
                             <div class="row d-flex justify-content-center">
                                 <div class="col-md-6">
-                                    <div class="card card-indigo">
+                                    <div class="card card-indigo d-none">
                                         <div class="card-header">
                                             <h2 class="card-title fsize-150">
                                                 <i class="fas fa-calendar-alt mr-sm-3"></i>

@@ -4,13 +4,13 @@
 function mainJob()
 {
     // Clear Session Storage 
-    sessionStorage.clear();
+    //sessionStorage.clear();
 
     // Initialize Phone Mask for Phone Number Input
     initializePhoneMask();
 
     // Initialize Schedule Calendar
-    initializeScheduleCalendar();
+    //initializeScheduleCalendar();
 
     // Execute Operations To Cancel A New Job
     cancelNewJob();
@@ -28,7 +28,7 @@ function initializePhoneMask()
 function cancelNewJob()
 {
     $("button#add-job-cancel-btn").on("click",  function () {
-        sessionStorage.clear();
+        // sessionStorage.clear();
         
         const referrer = document.referrer;
 
@@ -41,6 +41,7 @@ function cancelNewJob()
     });
 }
 
+/*
 function initializeScheduleCalendar()
 {
     const scheduleCalendarElement = $("#schedule-calendar");
@@ -157,6 +158,7 @@ function parseAppointmentData(event)
     // Add the data to sessionStorage as with the key appointment.subject + appointment-id
     sessionStorage.setItem(`Work Shift: ${appointmentParsedData.subject}: ${appointmentParsedData.id}`, jsonifiedAppointmentData);
 }
+*/
 
 function validateAddJobData()
 {
@@ -191,12 +193,14 @@ function emptyAddJobFormFields()
     $("#total-pay").val("");
     $("#tip-amount").val("");
 
+    /*
     // Find a way to delete appointments from jqxScheduler
     const appointments = $("#schedule-calendar").jqxScheduler("getAppointments");
 
     appointments.forEach(appointment => {
         $("#schedule-calendar").jqxScheduler("deleteAppointment", appointment.jqxAppointment.id);
     });
+    */
 }
 
 function sendAddNewJobAJAXRequestToBackend()
@@ -243,6 +247,7 @@ function sendAddNewJobAJAXRequestToBackend()
             tip: $("#tip-amount").val()
         };
 
+        /*
         // Get work shifts data
         const workShifts = [];
 
@@ -264,6 +269,7 @@ function sendAddNewJobAJAXRequestToBackend()
 
             }
         }
+        */
 
         // Prepare JSON payload to send
         const data = JSON.stringify({
@@ -272,7 +278,6 @@ function sendAddNewJobAJAXRequestToBackend()
             "job": jobData,
             "pay_rate": payRateData,
             "pay_roll": payRollData,
-            "work_shifts": workShifts
         });
 
         // Run validation code once it is developed
@@ -304,7 +309,7 @@ function sendAddNewJobAJAXRequestToBackend()
                 displayFormErrorAlert("job-page-content-wrapper", errorMsg, false);
             },
             complete: function() {
-                sessionStorage.clear();
+                //sessionStorage.clear();
                 emptyAddJobFormFields();
             }
         });
