@@ -52,22 +52,31 @@ $jobs = getAllJobsOfUserForJobsPage($user["id"]);
                                     </thead>
                                     <tbody>
                                         <?php // Loop through each job in the DB?>
-                                        <?php foreach($jobs as $job): ?>
-                                            <?php $job_id = $job["job_id"]; ?>
+                                        <?php if (!array_key_exists("error", $jobs)):?>
+                                            <?php foreach($jobs as $job): ?>
+                                                <?php $job_id = $job["job_id"]; ?>
+                                                <tr>
+                                                    <td><?=$job["job_title"];?></td>
+                                                    <td><?=$job["job_role"];?></td>
+                                                    <td><?=$job["employer_name"];?></td>
+                                                    <td><?=formatRateAmountByType($job["pay_rate_amount"], $job["pay_rate_type"]);?></td>
+                                                    <td><?php echo (isset($job["working_days"])) ? $job["working_days"] : "No Schedule Specified"?></td>
+                                                    <td><?=$job["payroll_day"];?></td>
+                                                    <td class="job-actions" role="group">
+                                                        <a href="<?=$websiteUrl;?>dashboard/job.php?action=view&id=<?=$job_id;?>" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
+                                                        <a href="<?=$websiteUrl;?>dashboard/job.php?action=edit&id=<?=$job_id;?>" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
+                                                        <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach;?>
+                                        <?php else:?>
                                             <tr>
-                                                <td><?=$job["job_title"];?></td>
-                                                <td><?=$job["job_role"];?></td>
-                                                <td><?=$job["employer_name"];?></td>
-                                                <td><?=formatRateAmountByType($job["pay_rate_amount"], $job["pay_rate_type"]);?></td>
-                                                <td><?php echo (isset($job["working_days"])) ? $job["working_days"] : "No Schedule Specified"?></td>
-                                                <td><?=$job["payroll_day"];?></td>
-                                                <td class="job-actions" role="group">
-                                                    <a href="<?=$websiteUrl;?>dashboard/job.php?action=view&id=<?=$job_id;?>" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
-                                                    <a href="<?=$websiteUrl;?>dashboard/job.php?action=edit&id=<?=$job_id;?>" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
-                                                    <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
-                                                </td>
+                                                <div class="text-center">
+                                                    <h4 class="display-5">No Jobs</h4>
+                                                    <p class="h5">You have not added any jobs yet</p>
+                                                </div>
                                             </tr>
-                                        <?php endforeach;?>
+                                        <?php endif; ?>
                                     </tbody>
                                 </table>
                             </div>
