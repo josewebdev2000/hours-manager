@@ -312,20 +312,265 @@ require_once "../db/working-day-db-funcs.php";
                 </section>
             <?php // Show Edit Page for a Job?>
             <?php elseif ($_GET["action"] == "edit"): ?>
-                <section class="content-header">
-                    <h1>Edit Job Page</h1>
-                    <p>Ronny, Code Edit Job Page Here</p>
-                </section>
-                <section class="content">
-
-                </section>
-
+                <input type="hidden" id="edit_job_id" value="<?=$_GET["id"];?>">
                 <?php // Try to grab data about the job?>
                 <?php $job = getJobOfUserById($_SESSION["id"], $_GET["id"]); ?>
-            
+                <?php if(array_key_exists("error", $job)): ?>
+                    <section class="content-header">
+                        <div class="container-fluid">
+                            <div class="row mb-2">
+                                <div class="col-sm-6">
+                                    <h1 class="text-warning">Job Not Found Error</h1>
+                                </div>
+                                <div class="col-sm-6">
+                                    <ol class="breadcrumb float-sm-right">
+                                        <li class="breadcrumb-item"><a href="<?=$websiteUrl?>dashboard/">Dashboard</a></li>
+                                        <li class="breadcrumb-item active">Job</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="content">
+                        <div class="error-page">
+                            <div class="headline text-warning">404</div>
+                            <div class="error-content">
+                                <h3 class="mb-4">
+                                    <i class="fas fa-exclamation-triangle text-warning"></i>
+                                    Not Found
+                                </h3>
+                                <h4>Job Not Found</h4>
+                                <p>The requested job could not be found</p>
+                            </div>
+                        </div>
+                    </section>
+                <?php else:?>
+                    <section class="content-header">
+                        <div class="container-fluid">
+                            <div class="row mb-2">
+                                <div class="col-sm-6">
+                                    <h1>Edit Job Details</h1>
+                                </div>
+                                <div class="col-sm-6">
+                                    <ol class="breadcrumb float-sm-right">
+                                        <li class="breadcrumb-item"><a href="<?=$websiteUrl?>dashboard/">Dashboard</a></li>
+                                        <li class="breadcrumb-item active">Job</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="content">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card card-maroon">
+                                        <div class="card-header">
+                                            <h2 class="card-title fsize-150">
+                                                <i class="fas fa-user-tie mr-sm-3"></i>
+                                                <span>Employer</span>
+                                            </h2>
+                                            <div class="card-tools">
+                                                <button class="btn btn-tool" type="button" data-card-widget="collapse" title="Collapse">
+                                                    <i class="fas fa-minus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label for="edit-employer-name">Employer Name</label>
+                                                <input type="text" id="edit-employer-name" class="form-control" value="<?=$job["employer_name"];?>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="edit-employer-email">Employer Email</label>
+                                                <input type="email" class="form-control" value="<?php echo (isset($job["employer_email"])) ? $job["employer_email"] : "" ?>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="edit-employer-phone-number">Employer Phone Number</label>
+                                                <input type="tel" id="edit-employer-phone-number" class="form-control" value="<?php echo (isset($job["employer_phone_number"])) ? $job["employer_phone_number"] : "" ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card card-success">
+                                        <div class="card-header">
+                                            <h2 class="card-title fsize-150">
+                                                <i class="fas fa-dollar-sign mr-sm-3"></i>
+                                                <span>Pay Rate</span>
+                                            </h2>
+                                            <div class="card-tools">
+                                                <button class="btn btn-tool" type="button" data-card-widget="collapse" title="Collapse">
+                                                    <i class="fas fa-minus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label for="edit-rate-type">Rate Type</label>
+                                                <select class="form-select" id="edit-rate-type">
+                                                    <option value="hourly" <?php echo ($job["pay_rate_type"] == "hourly") ? "selected" : "" ?>>Hourly</option>
+                                                    <option value="daily" <?php echo ($job["pay_rate_type"] == "daily") ? "selected" : "" ?>>Daily</option>
+                                                    <option value="weekly" <?php echo ($job["pay_rate_type"] == "weekly") ? "selected" : "" ?>>Weekly</option>
+                                                    <option value="monthly" <?php echo ($job["pay_rate_type"] == "monthly") ? "selected" : "" ?>>Monthly</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="edit-rate-amount">Rate Amount</label>
+                                                <input type="number" id="edit-rate-amount" class="form-control" value="<?=$job["pay_rate_amount"]?>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="edit-effective-rate">Effective Date</label>
+                                                <input type="date" id="edit-effective-date" class="form-control" value="<?=$job["effective_date"]?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                        <div class="card card-pink">
+                                            <div class="card-header">
+                                                <h2 class="card-title fsize-150">
+                                                    <i class="fas fa-suitcase mr-sm-3"></i>
+                                                    <span>Job</span>
+                                                </h2>
+                                                <div class="card-tools">
+                                                    <button class="btn btn-tool" type="button" data-card-widget="collapse" title="Collapse">
+                                                        <i class="fas fa-minus"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="form-group">
+                                                    <label for="edit-job-title">Job Title</label>
+                                                    <input type="text" id="edit-job-title" class="form-control" value="<?=$job["job_title"];?>">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label id="edit-job-role">Job Role</label>
+                                                    <input type="text" id="edit-job-role" class="form-control" value="<?=$job["job_role"];?>">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label id="edit-job-address">Job Address</label>
+                                                    <input type="text" id="edit-job-address" class="form-control" value="<?php echo (isset($job["job_address"])) ? $job["job_address"] : "" ?>">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="edit-job-description">Job Description</label>
+                                                    <textarea class="form-control" id="edit-job-description" rows="4">
+                                                        <?php echo (isset($job["job_description"])) ? $job["job_description"] : "" ?>
+                                                    </textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card card-purple">
+                                        <div class="card-header">
+                                            <h2 class="card-title fsize-150">
+                                                <i class="fas fa-money-bill mr-sm-3"></i>
+                                                <span>Pay Roll</span>
+                                            </h2>
+                                            <div class="card-tools">
+                                                <button class="btn btn-tool" type="button" data-card-widget="collapse" title="Collapse">
+                                                    <i class="fas fa-minus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label for="edit-starting-day">Starting Day</label>
+                                                <select class="form-select" id="edit-starting-day">
+                                                    <option value="Monday" <?php echo (ucfirst($job["starting_day"]) == "Monday") ? "selected" : "" ?>>Monday</option>
+                                                    <option value="Tuesday" <?php echo (ucfirst($job["starting_day"]) == "Tuesday") ? "selected" : "" ?>>Tuesday</option>
+                                                    <option value="Wednesday" <?php echo (ucfirst($job["starting_day"]) == "Wednesday") ? "selected" : "" ?>>Wednesday</option>
+                                                    <option value="Thursday" <?php echo (ucfirst($job["starting_day"]) == "Thursday") ? "selected" : "" ?>>Thursday</option>
+                                                    <option value="Friday" <?php echo (ucfirst($job["starting_day"]) == "Friday") ? "selected" : "" ?>>Friday</option>
+                                                    <option value="Saturday" <?php echo (ucfirst($job["starting_day"]) == "Saturday") ? "selected" : "" ?>>Saturday</option>
+                                                    <option value="Sunday" <?php echo (ucfirst($job["starting_day"]) == "Sunday") ? "selected" : "" ?>>Sunday</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="edit-ending-day">Ending Day</label>
+                                                <select class="form-select" id="edit-ending-day">
+                                                    <option value="Monday" <?php echo (ucfirst($job["ending_day"]) == "Monday") ? "selected" : "" ?>>Monday</option>
+                                                    <option value="Tuesday" <?php echo (ucfirst($job["ending_day"]) == "Tuesday") ? "selected" : "" ?>>Tuesday</option>
+                                                    <option value="Wednesday" <?php echo (ucfirst($job["ending_day"]) == "Wednesday") ? "selected" : "" ?>>Wednesday</option>
+                                                    <option value="Thursday" <?php echo (ucfirst($job["ending_day"]) == "Thursday") ? "selected" : "" ?>>Thursday</option>
+                                                    <option value="Friday" <?php echo (ucfirst($job["ending_day"]) == "Friday") ? "selected" : "" ?>>Friday</option>
+                                                    <option value="Saturday" <?php echo (ucfirst($job["ending_day"]) == "Saturday") ? "selected" : "" ?>>Saturday</option>
+                                                    <option value="Sunday" <?php echo (ucfirst($job["ending_day"]) == "Sunday") ? "selected" : "" ?>>Sunday</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="edit-payment-day">Payment Day</label>
+                                                <select class="form-select" id="edit-payment-day">
+                                                    <option value="Monday" <?php echo (ucfirst($job["payroll_day"]) == "Monday") ? "selected" : "" ?>>Monday</option>
+                                                    <option value="Tuesday" <?php echo (ucfirst($job["payroll_day"]) == "Tuesday") ? "selected" : "" ?>>Tuesday</option>
+                                                    <option value="Wednesday" <?php echo (ucfirst($job["payroll_day"]) == "Wednesday") ? "selected" : "" ?>>Wednesday</option>
+                                                    <option value="Thursday" <?php echo (ucfirst($job["payroll_day"]) == "Thursday") ? "selected" : "" ?>>Thursday</option>
+                                                    <option value="Friday" <?php echo (ucfirst($job["payroll_day"]) == "Friday") ? "selected" : "" ?>>Friday</option>
+                                                    <option value="Saturday" <?php echo (ucfirst($job["payroll_day"]) == "Saturday") ? "selected" : "" ?>>Saturday</option>
+                                                    <option value="Sunday" <?php echo (ucfirst($job["payroll_day"]) == "Sunday") ? "selected" : "" ?>>Sunday</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="edit-total-hours">Predicted Total Hours</label>
+                                                <input type="number" id="edit-total-hours" class="form-control" value="<?=$job["total_hours"];?>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="edit-total-pay">Predicted Total Payment</label>
+                                                <input type="number" id="edit-total-pay" class="form-control" value="<?=$job["total_pay"]?>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="edit-tips">Tips</label>
+                                                <input type="number" id="edit-tips" class="form-control" value="<?=$job["tip"];?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-md-6">
+                                    <div class="card card-indigo d-none">
+                                        <div class="card-header">
+                                            <h2 class="card-title fsize-150">
+                                                <i class="fas fa-calendar-alt mr-sm-3"></i>
+                                                <span>Schedule</span>
+                                            </h2>
+                                            <div class="card-tools">
+                                                <button class="btn btn-tool" type="button" data-card-widget="collapse" title="Collapse">
+                                                    <i class="fas fa-minus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label for="working-days">Working Days</label>
+                                                <div id="view-schedule-calendar" class="text-center">
+                                                    <div id="working-days-not-found" class="d-none text-center">
+                                                        <h4>No Working Schedule</h4>
+                                                        <p>No working schedule was specified for this job</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                        <div class="btn-group w-100" role="group">
+                                            <button id="edit-job-cancel-btn" class="btn btn-danger btn-lg">Cancel</button>
+                                            <button id="edit-job-new-btn" class="btn btn-info btn-lg text-white">Edit Job</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </section>
+                <?php endif; ?>
             <?php // Show View Page for a Job?>
             <?php elseif ($_GET["action"] == "view"):?>
-                <input type="hidden" id="job_id" value="<?=$_GET["id"];?>">
+                <input type="hidden" id="view_job_id" value="<?=$_GET["id"];?>">
                 <?php // Try to grab data about the job?>
                 <?php $job = getJobOfUserById($_SESSION["id"], $_GET["id"]); ?>
                 <?php if(array_key_exists("error", $job)): ?>
@@ -544,7 +789,6 @@ require_once "../db/working-day-db-funcs.php";
                         </div>
                     </section>
                 <?php endif; ?>
-                </section>
             <?php endif; ?>
         </div>
     </div>
