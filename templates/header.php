@@ -69,16 +69,7 @@
     <!--Plugin Scripts-->
     <script src="<?=$websiteUrl?>assets/plugins/bootstrap-5/js/bootstrap.bundle.min.js"></script>
     <script src="<?=$websiteUrl?>assets/plugins/jquery/jquery.min.js"></script>
-
     
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-    <!-- jQuery, Popper.js, and Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-
     <!--Conditionally Load JS Scripts depending on the page we are-->
     <?php
         // Dynamically Load Scripts for each page

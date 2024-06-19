@@ -23,7 +23,7 @@
                 </div>
             </div>
         </section>
-<!--NOTE: For the column I wasnt sure what to do so I placed both # and numbers for now -->
+        <!--NOTE: For the column I wasnt sure what to do so I placed both # and numbers for now -->
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -52,8 +52,8 @@
                                             <td>Friday, Saturday, Sunday, Monday</td>
                                             <td>Friday</td>
                                             <td>
-                                                <a href="#" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
-                                                <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
+                                                <a href="job.php?action=view&id=2" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
+                                                <a href="job.php?action=edit&id=2" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
                                                 <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
                                             </td>
                                         </tr>
@@ -64,8 +64,8 @@
                                             <td>Tuesday, Wednesday, Thursday</td>
                                             <td>Friday</td>
                                             <td>
-                                                <a href="#" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
-                                                <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
+                                                <a href="job.php?action=view&id=2" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
+                                                <a href="job.php?action=edit&id=2" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
                                                 <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
                                             </td>
                                         </tr>
@@ -76,20 +76,20 @@
                                             <td>Monday, Tuesday, Wednesday</td>
                                             <td>Friday</td>
                                             <td>
-                                                <a href="#" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
-                                                <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
+                                                <a href="job.php?action=view&id=2" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
+                                                <a href="job.php?action=edit&id=2" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
                                                 <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td></td>
+                                            <td>#</td>
                                             <td>USER EXAMPLE</td>
                                             <td>$19.00/hr</td>
                                             <td>Thursday, Friday, Saturday</td>
                                             <td>Friday</td>
                                             <td>
-                                                <a href="#" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
-                                                <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
+                                                <a href="job.php?action=view&id=2" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
+                                                <a href="job.php?action=edit&id=2" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
                                                 <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
                                             </td>
                                         </tr>
@@ -100,8 +100,8 @@
                                             <td>Monday, Wednesday, Friday</td>
                                             <td>Friday</td>
                                             <td>
-                                                <a href="#" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
-                                                <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
+                                                <a href="job.php?action=view&id=2" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
+                                                <a href="job.php?action=edit&id=2" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
                                                 <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
                                             </td>
                                         </tr>
@@ -112,8 +112,8 @@
                                             <td>Tuesday, Thursday, Saturday</td>
                                             <td>Friday</td>
                                             <td>
-                                                <a href="#" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
-                                                <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
+                                                <a href="job.php?action=view&id=2" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
+                                                <a href="job.php?action=edit&id=2" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
                                                 <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
                                             </td>
                                         </tr>
@@ -124,8 +124,8 @@
                                             <td>Friday, Saturday, Sunday, Monday</td>
                                             <td>Friday</td>
                                             <td>
-                                                <a href="#" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
-                                                <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
+                                                <a href="job.php?action=view&id=2" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
+                                                <a href="job.php?action=edit&id=2" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
                                                 <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
                                             </td>
                                         </tr>
@@ -136,8 +136,8 @@
                                             <td>Wednesday, Thursday, Friday</td>
                                             <td>Friday</td>
                                             <td>
-                                                <a href="#" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
-                                                <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
+                                                <a href="job.php?action=view&id=2" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
+                                                <a href="job.php?action=edit&id=2" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
                                                 <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
                                             </td>
                                         </tr>
@@ -148,8 +148,8 @@
                                             <td>Monday, Wednesday, Friday</td>
                                             <td>Friday</td>
                                             <td>
-                                                <a href="#" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
-                                                <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
+                                                <a href="job.php?action=view&id=2" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
+                                                <a href="job.php?action=edit&id=2" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
                                                 <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
                                             </td>
                                         </tr>

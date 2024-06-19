@@ -314,70 +314,148 @@
             <?php elseif ($_GET["action"] == "edit"): ?>
                 <section class="content-header">
                     <h1>Edit Job Page</h1>
-                    <p>Ronny, Code Edit Job Page Here</p>
                 </section>
                 <section class="container-fluid">
                     <form>
-                        <section class="row justify-content-center">
-                            <section class="col-md-8">
-                                <section class="card">
-                                    <section class="card-header">
-                                        <h3>General</h3>
-                                    </section>
-                                    <section class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-header bg-pink text-white">
+                                        <h3 class="card-title">Employer</h3>
+                                    </div>
+                                    <div class="card-body bg-white">
                                         <div class="form-group">
-                                            <label for="jobName">Job Name</label>
-                                            <input type="text" class="form-control" id="jobName" name="jobName">
+                                            <label for="employerName">Employer Name</label>
+                                            <input type="text" class="form-control" id="employerName" name="employerName">
                                         </div>
                                         <div class="form-group">
-                                            <label for="ratePerHour">Rate per Hour</label>
-                                            <input type="text" class="form-control" id="ratePerHour" name="ratePerHour">
+                                            <label for="employerEmail">Employer Email</label>
+                                            <input type="email" class="form-control" id="employerEmail" name="employerEmail">
                                         </div>
                                         <div class="form-group">
-                                            <label>Working Days</label>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="monday" name="workingDays[]" value="Monday">
-                                                <label class="form-check-label" for="monday">Monday</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="tuesday" name="workingDays[]" value="Tuesday">
-                                                <label class="form-check-label" for="tuesday">Tuesday</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="wednesday" name="workingDays[]" value="Wednesday">
-                                                <label class="form-check-label" for="wednesday">Wednesday</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="thursday" name="workingDays[]" value="Thursday">
-                                                <label class="form-check-label" for="thursday">Thursday</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="friday" name="workingDays[]" value="Friday">
-                                                <label class="form-check-label" for="friday">Friday</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="saturday" name="workingDays[]" value="Saturday">
-                                                <label class="form-check-label" for="saturday">Saturday</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="sunday" name="workingDays[]" value="Sunday">
-                                                <label class="form-check-label" for="sunday">Sunday</label>
-                                            </div>
+                                            <label for="employerPhone">Employer Phone Number</label>
+                                            <input type="tel" class="form-control" id="employerPhone" name="employerPhone">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-header bg-green text-white">
+                                        <h3 class="card-title">Pay Rate</h3>
+                                    </div>
+                                    <div class="card-body bg-white">
+                                        <div class="form-group">
+                                            <label for="rateType">Rate Type</label>
+                                            <select class="form-control" id="rateType" name="rateType">
+                                                <option value="hourly">Hourly</option>
+                                                <option value="daily">Daily</option>
+                                                <option value="weekly">Weekly</option>
+                                                <option value="monthly">Monthly</option>
+                                            </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="payRollDay">Pay Roll Day</label>
-                                            <input type="text" class="form-control" id="payRollDay" name="payRollDay">
+                                            <label for="rateAmount">Rate Amount</label>
+                                            <input type="text" class="form-control" id="rateAmount" name="rateAmount">
                                         </div>
-                                    </section>
-                                    <section class="card-footer text-right">
-                                        <button type="submit" class="btn btn-primary">Save Changes</button>
-                                        <button type="button" class="btn btn-secondary">Cancel</button>
-                                    </section>
-                                </section>
-                            </section>
-                        </section>
+                                        <div class="form-group">
+                                            <label for="effectiveDate">Effective Date</label>
+                                            <input type="date" class="form-control" id="effectiveDate" name="effectiveDate">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-header bg-pink text-white">
+                                        <h3 class="card-title">Job</h3>
+                                    </div>
+                                    <div class="card-body bg-white">
+                                        <div class="form-group">
+                                            <label for="jobTitle">Job Title</label>
+                                            <input type="text" class="form-control" id="jobTitle" name="jobTitle">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="jobRole">Job Role</label>
+                                            <input type="text" class="form-control" id="jobRole" name="jobRole">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="jobAddress">Job Address</label>
+                                            <input type="text" class="form-control" id="jobAddress" name="jobAddress">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="jobDescription">Job Description</label>
+                                            <textarea class="form-control" id="jobDescription" name="jobDescription"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-header bg-purple text-white">
+                                        <h3 class="card-title">Pay Roll</h3>
+                                    </div>
+                                    <div class="card-body bg-white">
+                                        <div class="form-group">
+                                            <label for="startingDay">Starting Day</label>
+                                            <select class="form-control" id="startingDay" name="startingDay">
+                                                <option value="Monday">Monday</option>
+                                                <option value="Tuesday">Tuesday</option>
+                                                <option value="Wednesday">Wednesday</option>
+                                                <option value="Thursday">Thursday</option>
+                                                <option value="Friday">Friday</option>
+                                                <option value="Saturday">Saturday</option>
+                                                <option value="Sunday">Sunday</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="endingDay">Ending Day</label>
+                                            <select class="form-control" id="endingDay" name="endingDay">
+                                                <option value="Monday">Monday</option>
+                                                <option value="Tuesday">Tuesday</option>
+                                                <option value="Wednesday">Wednesday</option>
+                                                <option value="Thursday">Thursday</option>
+                                                <option value="Friday">Friday</option>
+                                                <option value="Saturday">Saturday</option>
+                                                <option value="Sunday">Sunday</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="paymentDay">Payment Day</label>
+                                            <select class="form-control" id="paymentDay" name="paymentDay">
+                                                <option value="Monday">Monday</option>
+                                                <option value="Tuesday">Tuesday</option>
+                                                <option value="Wednesday">Wednesday</option>
+                                                <option value="Thursday">Thursday</option>
+                                                <option value="Friday">Friday</option>
+                                                <option value="Saturday">Saturday</option>
+                                                <option value="Sunday">Sunday</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="predictedHours">Predicted Total Hours</label>
+                                            <input type="text" class="form-control" id="predictedHours" name="predictedHours">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="predictedPayment">Predicted Total Payment</label>
+                                            <input type="text" class="form-control" id="predictedPayment" name="predictedPayment">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="tips">Tips</label>
+                                            <input type="text" class="form-control" id="tips" name="tips">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                            <button type="button" class="btn btn-secondary">Cancel</button>
+                        </div>
                     </form>
                 </section>
+
+
                 <section class="content">
 
                 </section>
@@ -386,52 +464,134 @@
                 <?php elseif ($_GET["action"] == "view"): ?>
                     <section class="content-header">
                         <h1>View Job Page</h1>
-                        <p>Ronny, Code View Job Page Here</p>
                     </section>
                     <section class="container-fluid">
                         <?php
                         $job = [
-                            'jobName' => 'Developer',
-                            'ratePerHour' => '50',
-                            'workingDays' => ['Monday', 'Wednesday', 'Friday'],
-                            'payRollDay' => 'Friday',
+                            'employerName' => 'Company XYZ',
+                            'employerEmail' => 'employer@companyxyz.com',
+                            'employerPhone' => '+1 (123) 456-7890',
+                            'rateType' => 'Hourly',
+                            'rateAmount' => '50',
+                            'effectiveDate' => '2023-01-01',
+                            'jobTitle' => 'Developer',
+                            'jobRole' => 'Full Stack Developer',
+                            'jobAddress' => '123 Main St, City, Country',
+                            'jobDescription' => 'Develop and maintain web applications.',
+                            'startingDay' => 'Monday',
+                            'endingDay' => 'Friday',
+                            'paymentDay' => 'Friday',
+                            'predictedHours' => '40',
+                            'predictedPayment' => '2000',
+                            'tips' => '200'
                         ];
                         ?>
-                        <section class="row justify-content-center">
-                            <section class="col-md-8">
-                                <section class="card">
-                                    <section class="card-header">
-                                        <h3>Job Details</h3>
-                                    </section>
-                                    <section class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-header bg-pink text-white">
+                                        <h3 class="card-title">Employer</h3>
+                                    </div>
+                                    <div class="card-body bg-white">
                                         <div class="form-group">
-                                            <label for="jobName">Job Name</label>
-                                            <p id="jobName"><?php echo htmlspecialchars($job['jobName']); ?></p>
+                                            <label for="employerName">Employer Name</label>
+                                            <p id="employerName"><?php echo htmlspecialchars($job['employerName']); ?></p>
                                         </div>
                                         <div class="form-group">
-                                            <label for="ratePerHour">Rate per Hour</label>
-                                            <p id="ratePerHour"><?php echo htmlspecialchars($job['ratePerHour']); ?></p>
+                                            <label for="employerEmail">Employer Email</label>
+                                            <p id="employerEmail"><?php echo htmlspecialchars($job['employerEmail']); ?></p>
                                         </div>
                                         <div class="form-group">
-                                            <label>Working Days</label>
-                                            <ul>
-                                                <?php foreach ($job['workingDays'] as $day): ?>
-                                                    <li><?php echo htmlspecialchars($day); ?></li>
-                                                <?php endforeach; ?>
-                                            </ul>
+                                            <label for="employerPhone">Employer Phone Number</label>
+                                            <p id="employerPhone"><?php echo htmlspecialchars($job['employerPhone']); ?></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-header bg-green text-white">
+                                        <h3 class="card-title">Pay Rate</h3>
+                                    </div>
+                                    <div class="card-body bg-white">
+                                        <div class="form-group">
+                                            <label for="rateType">Rate Type</label>
+                                            <p id="rateType"><?php echo htmlspecialchars($job['rateType']); ?></p>
                                         </div>
                                         <div class="form-group">
-                                            <label for="payRollDay">Pay Roll Day</label>
-                                            <p id="payRollDay"><?php echo htmlspecialchars($job['payRollDay']); ?></p>
+                                            <label for="rateAmount">Rate Amount</label>
+                                            <p id="rateAmount"><?php echo htmlspecialchars($job['rateAmount']); ?></p>
                                         </div>
-                                    </section>
-                                    <section class="card-footer">
-                                        <a href="your_edit_page_url" class="btn btn-primary">Edit</a>
-                                        <a href="your_list_page_url" class="btn btn-secondary">Back to List</a>
-                                    </section>
-                                </section>
-                            </section>
-                        </section>
+                                        <div class="form-group">
+                                            <label for="effectiveDate">Effective Date</label>
+                                            <p id="effectiveDate"><?php echo htmlspecialchars($job['effectiveDate']); ?></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-header bg-pink text-white">
+                                        <h3 class="card-title">Job</h3>
+                                    </div>
+                                    <div class="card-body bg-white">
+                                        <div class="form-group">
+                                            <label for="jobTitle">Job Title</label>
+                                            <p id="jobTitle"><?php echo htmlspecialchars($job['jobTitle']); ?></p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="jobRole">Job Role</label>
+                                            <p id="jobRole"><?php echo htmlspecialchars($job['jobRole']); ?></p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="jobAddress">Job Address</label>
+                                            <p id="jobAddress"><?php echo htmlspecialchars($job['jobAddress']); ?></p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="jobDescription">Job Description</label>
+                                            <p id="jobDescription"><?php echo htmlspecialchars($job['jobDescription']); ?></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-header bg-purple text-white">
+                                        <h3 class="card-title">Pay Roll</h3>
+                                    </div>
+                                    <div class="card-body bg-white">
+                                        <div class="form-group">
+                                            <label for="startingDay">Starting Day</label>
+                                            <p id="startingDay"><?php echo htmlspecialchars($job['startingDay']); ?></p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="endingDay">Ending Day</label>
+                                            <p id="endingDay"><?php echo htmlspecialchars($job['endingDay']); ?></p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="paymentDay">Payment Day</label>
+                                            <p id="paymentDay"><?php echo htmlspecialchars($job['paymentDay']); ?></p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="predictedHours">Predicted Total Hours</label>
+                                            <p id="predictedHours"><?php echo htmlspecialchars($job['predictedHours']); ?></p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="predictedPayment">Predicted Total Payment</label>
+                                            <p id="predictedPayment"><?php echo htmlspecialchars($job['predictedPayment']); ?></p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="tips">Tips</label>
+                                            <p id="tips"><?php echo htmlspecialchars($job['tips']); ?></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <a href="job.php?action=edit&id=2" class="btn btn-primary">Edit</a>
+                            <a href="jobs.php" class="btn btn-secondary">Back to List</a>
+                        </div>
                     </section>
 
                 <section class="content">
