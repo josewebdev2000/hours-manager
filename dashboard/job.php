@@ -325,16 +325,16 @@
                                     </div>
                                     <div class="card-body bg-white">
                                         <div class="form-group">
-                                            <label for="employerName">Employer Name</label>
-                                            <input type="text" class="form-control" id="employerName" name="employerName">
+                                            <label for="editEmployerName">Employer Name</label>
+                                            <input type="text" class="form-control" id="editEmployerName" name="employerName">
                                         </div>
                                         <div class="form-group">
-                                            <label for="employerEmail">Employer Email</label>
-                                            <input type="email" class="form-control" id="employerEmail" name="employerEmail">
+                                            <label for="editEmployerEmail">Employer Email</label>
+                                            <input type="email" class="form-control" id="editEmployerEmail" name="employerEmail">
                                         </div>
                                         <div class="form-group">
-                                            <label for="employerPhone">Employer Phone Number</label>
-                                            <input type="tel" class="form-control" id="employerPhone" name="employerPhone">
+                                            <label for="editEmployerPhone">Employer Phone Number</label>
+                                            <input type="tel" class="form-control" id="editEmployerPhone" name="employerPhone">
                                         </div>
                                     </div>
                                 </div>
@@ -346,8 +346,8 @@
                                     </div>
                                     <div class="card-body bg-white">
                                         <div class="form-group">
-                                            <label for="rateType">Rate Type</label>
-                                            <select class="form-control" id="rateType" name="rateType">
+                                            <label for="editRateType">Rate Type</label>
+                                            <select class="form-control" id="editRateType" name="rateType">
                                                 <option value="hourly">Hourly</option>
                                                 <option value="daily">Daily</option>
                                                 <option value="weekly">Weekly</option>
@@ -355,12 +355,12 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="rateAmount">Rate Amount</label>
-                                            <input type="text" class="form-control" id="rateAmount" name="rateAmount">
+                                            <label for="editRateAmount">Rate Amount</label>
+                                            <input type="text" class="form-control" id="editRateAmount" name="rateAmount">
                                         </div>
                                         <div class="form-group">
-                                            <label for="effectiveDate">Effective Date</label>
-                                            <input type="date" class="form-control" id="effectiveDate" name="effectiveDate">
+                                            <label for="editEffectiveDate">Effective Date</label>
+                                            <input type="date" class="form-control" id="editEffectiveDate" name="effectiveDate">
                                         </div>
                                     </div>
                                 </div>
@@ -372,20 +372,20 @@
                                     </div>
                                     <div class="card-body bg-white">
                                         <div class="form-group">
-                                            <label for="jobTitle">Job Title</label>
-                                            <input type="text" class="form-control" id="jobTitle" name="jobTitle">
+                                            <label for="editJobTitle">Job Title</label>
+                                            <input type="text" class="form-control" id="editJobTitle" name="jobTitle">
                                         </div>
                                         <div class="form-group">
-                                            <label for="jobRole">Job Role</label>
-                                            <input type="text" class="form-control" id="jobRole" name="jobRole">
+                                            <label for="editJobRole">Job Role</label>
+                                            <input type="text" class="form-control" id="editJobRole" name="jobRole">
                                         </div>
                                         <div class="form-group">
-                                            <label for="jobAddress">Job Address</label>
-                                            <input type="text" class="form-control" id="jobAddress" name="jobAddress">
+                                            <label for="editJobAddress">Job Address</label>
+                                            <input type="text" class="form-control" id="editJobAddress" name="jobAddress">
                                         </div>
                                         <div class="form-group">
-                                            <label for="jobDescription">Job Description</label>
-                                            <textarea class="form-control" id="jobDescription" name="jobDescription"></textarea>
+                                            <label for="editJobDescription">Job Description</label>
+                                            <textarea class="form-control" id="editJobDescription" name="jobDescription"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -397,8 +397,8 @@
                                     </div>
                                     <div class="card-body bg-white">
                                         <div class="form-group">
-                                            <label for="startingDay">Starting Day</label>
-                                            <select class="form-control" id="startingDay" name="startingDay">
+                                            <label for="editStartingDay">Starting Day</label>
+                                            <select class="form-control" id="editStartingDay" name="startingDay">
                                                 <option value="Monday">Monday</option>
                                                 <option value="Tuesday">Tuesday</option>
                                                 <option value="Wednesday">Wednesday</option>
@@ -409,8 +409,8 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="endingDay">Ending Day</label>
-                                            <select class="form-control" id="endingDay" name="endingDay">
+                                            <label for="editEndingDay">Ending Day</label>
+                                            <select class="form-control" id="editEndingDay" name="endingDay">
                                                 <option value="Monday">Monday</option>
                                                 <option value="Tuesday">Tuesday</option>
                                                 <option value="Wednesday">Wednesday</option>
@@ -421,8 +421,8 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="paymentDay">Payment Day</label>
-                                            <select class="form-control" id="paymentDay" name="paymentDay">
+                                            <label for="editPaymentDay">Payment Day</label>
+                                            <select class="form-control" id="editPaymentDay" name="paymentDay">
                                                 <option value="Monday">Monday</option>
                                                 <option value="Tuesday">Tuesday</option>
                                                 <option value="Wednesday">Wednesday</option>
@@ -433,16 +433,16 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="predictedHours">Predicted Total Hours</label>
-                                            <input type="text" class="form-control" id="predictedHours" name="predictedHours">
+                                            <label for="editPredictedHours">Predicted Total Hours</label>
+                                            <input type="text" class="form-control" id="editPredictedHours" name="predictedHours">
                                         </div>
                                         <div class="form-group">
-                                            <label for="predictedPayment">Predicted Total Payment</label>
-                                            <input type="text" class="form-control" id="predictedPayment" name="predictedPayment">
+                                            <label for="editPredictedPayment">Predicted Total Payment</label>
+                                            <input type="text" class="form-control" id="editPredictedPayment" name="predictedPayment">
                                         </div>
                                         <div class="form-group">
-                                            <label for="tips">Tips</label>
-                                            <input type="text" class="form-control" id="tips" name="tips">
+                                            <label for="editTips">Tips</label>
+                                            <input type="text" class="form-control" id="editTips" name="tips">
                                         </div>
                                     </div>
                                 </div>
@@ -454,7 +454,6 @@
                         </div>
                     </form>
                 </section>
-
 
                 <section class="content">
 

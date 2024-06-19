@@ -156,6 +156,9 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <div class="card-footer">
+                                <a href="job.php?action=add" class="btn btn-success"><i class="fas fa-plus"></i> Add New Job</a>
+                            </div>
                         </div>
                     </div>
                 </div>
