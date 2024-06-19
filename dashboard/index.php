@@ -24,7 +24,7 @@
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <a href="jobs.php" class="card-link">
+                    <a href="#" class="card-link">
                         <div class="card text-white h-100">
                             <div class="card-body d-flex flex-column justify-content-center align-items-center">
                                 <h2 class="card-title">Closest Pay Date</h2>
@@ -34,7 +34,7 @@
                     </a>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <a href="jobs.php" class="card-link">
+                    <a href="#" class="card-link">
                         <div class="card text-white h-100">
                             <div class="card-body d-flex flex-column justify-content-center align-items-center">
                                 <h2 class="card-title">Jobs registered</h2>
@@ -44,7 +44,7 @@
                     </a>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <a href="jobs.php" class="card-link">
+                    <a href="#" class="card-link">
                         <div class="card text-white h-100">
                             <div class="card-body d-flex flex-column justify-content-center align-items-center">
                                 <h2 class="card-title">Earnings</h2>
@@ -54,7 +54,7 @@
                     </a>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <a href="jobs.php" class="card-link">
+                    <a href="#" class="card-link">
                         <div class="card text-white h-100">
                             <div class="card-body d-flex flex-column justify-content-center align-items-center">
                                 <h2 class="card-title">Hours worked</h2>
@@ -64,6 +64,16 @@
                     </a>
                 </div>
             </div>
+            <div class="col mb-3">
+                <a href="<?=$websiteUrl?>dashboard/job.php?action=add" class="card-link">
+                    <div class="card text-white h-100">
+                        <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                            <h2 class="card-title">Add New Job</h2>
+                            <p class="card-text">Click here to add a new job</p>
+                        </div>
+                    </div>
+                </a>
+        </div>
             <div class="chart">
                 <canvas id="hoursChart"></canvas>
             </div>
