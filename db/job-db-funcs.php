@@ -220,7 +220,7 @@ function insertNewJob($userId, $employerData, $jobData, $payRateData, $payRollDa
         $conn->commit();
 
         // Prepare success message
-        $finalMsgAssoc["message"] = "New $jobRole Job could be addedd successfully";
+        $finalMsgAssoc["message"] = "New ($jobRole - $employerName) Job could be addedd successfully";
     }
 
     catch (Exception $e)
@@ -247,6 +247,254 @@ function insertNewJob($userId, $employerData, $jobData, $payRateData, $payRollDa
     }
     
     return $finalMsgAssoc;
+}
+
+function editJob($employerId, $jobId, $employerData, $jobData, $payRateData, $payRollData)
+{
+    /** Edit all data associated to a job at once in a transaction */
+    global $conn;
+
+    // Create final message assoc
+    $finalMsgAssoc = [];
+
+    // Need to update employer, job, pay rate, pay roll, and schedule entries alltogether
+    // Prepare SQL Code used to update all entries
+    $edit_employer_sql = "UPDATE employers SET name = ?, email = ?, phone_number = ? WHERE id = ?";
+    $edit_job_sql = "UPDATE jobs SET title = ?, role = ?, address = ?, description = ? WHERE id = ?";
+    $edit_payrate_sql = "UPDATE payrates SET rate_type = ?, rate_amount = ?, effective_date = ? WHERE job_id = ?";
+    $edit_payroll_sql = "UPDATE payrolls SET pay_period_start = ?, pay_period_end = ?, total_hours = ?, total_payment = ?, tips = ?, payment_day = ? WHERE job_id = ?";
+
+    // Begin a DB Transaction
+    $conn->begin_transaction();
+
+    // Try/catch block for transaction
+    try
+    {
+        // Try to update employer data first
+        $employerName = $employerData["employerName"];
+        $employerEmail = (strlen($employerData["employerEmail"]) > 0) ? $employerData["employerEmail"] : NULL;
+        $employerPhoneNumber = (strlen($employerData["employerPhoneNumber"]) > 0) ? $employerData["employerPhoneNumber"] : NULL;
+
+        // Create employer statement
+        $editEmployerStmt = $conn->prepare($edit_employer_sql);
+
+        if (!$editEmployerStmt)
+        {
+            // JSON encode exception error message
+            $employerPreparationErrorAssoc = [
+                'error' => 'Could not prepare to edit employer', 
+                'error_code' => 'preparation_error'
+            ];
+
+            throw new Exception(json_encode($employerPreparationErrorAssoc));
+        }
+
+        // Bind parameters for employer
+        $editEmployerStmt->bind_param("sssi", $employerName, $employerEmail, $employerPhoneNumber, $employerId);
+
+        // If there is an error updating the employer, throw an exception
+        if (!$editEmployerStmt->execute())
+        {
+            // JSON encode exception error messages
+            $employerExcecutionErrorAssoc = [
+                'error' => 'Could not try to update a new employer',
+                'error_code' => 'excecution_error'
+            ];
+
+            throw new Exception(json_encode($employerExcecutionErrorAssoc));
+        }
+
+        // Get data to update job
+        $jobTitle = $jobData["jobTitle"];
+        $jobRole = $jobData["jobRole"];
+        $jobAddress = (strlen($jobData["jobAddress"]) > 0) ? $jobData["jobAddress"] : NULL;
+        $jobDescription = (strlen($jobData["jobDescription"]) > 0) ? $jobData["jobDescription"] : NULL;
+
+        // Create job statement
+        $editJobStmt = $conn->prepare($edit_job_sql);
+
+        if (!$editJobStmt)
+        {
+            // JSON encode error messages
+            $jobPreparationErrorAssoc = [
+                'error' => 'Could not prepare to update job',
+                'error_code' => 'preparation_error'
+            ];
+
+            throw new Exception(json_encode($jobPreparationErrorAssoc));
+        }
+
+        // Bind parameters for job
+        $editJobStmt->bind_param("ssssi", $jobTitle, $jobRole, $jobAddress, $jobDescription, $jobId);
+
+        // If there is an error updating job, throw it
+        if (!$editJobStmt->execute())
+        {
+             // JSON encode error messages
+             $jobExcecutionErrorAssoc = [
+                'error' => 'Could not try to update job',
+                'error_code' => 'excecution_error'
+            ];
+
+            throw new Exception(json_encode($jobExcecutionErrorAssoc));
+        }
+
+        // Get payrate data
+        $rateType = $payRateData["rateType"];
+        $rateAmount = $payRateData["rateAmount"];
+        $effectiveDate = $payRateData["effectiveDate"];
+
+        // Create edit pay rate statement
+        $editPayRateStmt = $conn->prepare($edit_payrate_sql);
+
+        if (!$editPayRateStmt)
+        {
+            $payRatePreparationErrorAssoc = [
+                'error' => 'Could not prepare to update pay rate',
+                'error_code' => 'preparation_error'
+            ];
+
+            throw new Exception(json_encode($payRatePreparationErrorAssoc));
+        }
+
+        // Bind parameters for pay rate
+        $editPayRateStmt->bind_param("sisi", $rateType, $rateAmount, $effectiveDate, $jobId);
+
+        // If pay rate couldn't be inserted, throw an error
+        if (!$editPayRateStmt->execute())
+        {
+            $payRateExcecutionErrorAssoc = [
+                'error' => 'Could not try to insert a new pay rate',
+                'error_code' => 'excecution_error'
+            ];
+
+            throw new Exception(json_encode($payRateExcecutionErrorAssoc));
+        }
+
+        // Get data to update pay roll
+        $startingDay = $payRollData["startingDay"];
+        $endingDay = $payRollData["endingDay"];
+        $paymentDay = $payRollData["paymentDay"];
+        $totalHours = $payRollData["totalHours"];
+        $totalPay = $payRollData["totalPay"];
+        $tip = (is_numeric($payRollData["tip"])) ? $payRollData["tip"] : NULL;
+
+        // Create pay roll statement
+        $editPayRollStmt = $conn->prepare($edit_payroll_sql);
+
+        if (!$editPayRollStmt)
+        {
+            $payRollPreparationErrorAssoc = [
+                'error' => 'Could not prepare to insert a new pay roll',
+                'error_code' => 'preparation_error'
+            ];
+
+            throw new Exception(json_encode($payRollPreparationErrorAssoc));
+        }
+
+        // Bind parameters for pay roll
+        $editPayRollStmt->bind_param("ssiiisi", $startingDay, $endingDay, $totalHours, $totalPay, $tip, $paymentDay, $jobId);
+
+        if (!$editPayRollStmt->execute())
+        {
+            $payRollExcecutionErrorAssoc = [
+                'error' => 'Could not try to insert a new pay roll',
+                'error_code' => 'excecution_error'
+            ];
+
+            throw new Exception(json_encode($payRollExcecutionErrorAssoc));
+        }
+
+
+
+        // Close statements
+        $editEmployerStmt->close();
+        $editJobStmt->close();
+        $editPayRateStmt->close();
+        $editPayRollStmt->close();
+
+        // Confirm all updates to the DB
+        $conn->commit();
+
+        // Prepare success message
+        $finalMsgAssoc["message"] = "($jobRole - $employerName) job could be successfully updated";
+    }
+
+    catch (Exception $e)
+    {
+        // If one update fail, remove all others
+        $conn->rollback();
+
+        // Grab error message
+        $error_msg = $e->getMessage();
+
+        // JSON Decode
+        $decoded_msg = json_decode($e->getMessage());
+
+        // If it is null, then make assoc yourself
+        if ($decoded_message == NULL)
+        {
+            $finalMsgAssoc["error"] = $error_msg;
+        }
+
+        else
+        {
+            $finalMsgAssoc["error"] = $decoded_msg;
+        }
+    }
+
+    return $finalMsgAssoc;
+}
+
+function getEmployerIdOfJobId($job_id)
+{
+    // Return the employer Id associated to a job
+    global $conn;
+
+    // Prepare SQL statement to grab employer id
+    $sql = "SELECT employer_id FROM jobs WHERE id = ?";
+
+    // Make a prepared SQL statement
+    $stmt = $conn->prepare($sql);
+
+    // If statement could not be prepared return an early error assoc
+    if (!$stmt)
+    {
+        return [
+            "error" => "Could not prepare to get employer ID",
+            "error_code" => "preparation_error"
+        ];
+    }
+
+    // Bind the user_id parameter as an integer
+    $stmt->bind_param("i", $job_id);
+
+    // Execute the statement
+    // If there is an error, return early
+    if (!$stmt->execute())
+    {
+        return [
+            "error" => "Could not try to get employer ID",
+            "error_code" => "excecution_error"
+        ];
+    }
+
+    // Grab the result
+    $result = $stmt->get_result();
+
+    // If the result has no rows, then return jobs not found error
+    if ($result->num_rows != 1)
+    {
+        return [
+            "error" => "Could not find employer ID",
+            "error_code" => "jobs_not_found_error"
+        ];
+    }
+
+    $employer_id = $result->fetch_assoc()["employer_id"];
+
+    return $employer_id;
+
 }
 
 function getAllJobsOfUserForJobsPage($user_id)

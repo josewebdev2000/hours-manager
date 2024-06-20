@@ -25,6 +25,12 @@ function usernameValidate(username_id)
     }
 }
 
+function initializePhoneMask()
+{
+    const phoneInputSelectorSlug = "input[type='tel'";
+    (new phoneMask()).init(phoneInputSelectorSlug);
+}
+
 function nameValidate(name_id) 
 {
     const curName = $(`#${name_id}`).val();
@@ -74,6 +80,18 @@ function emailValidate(email_id)
         $(`#${email_id}`).removeClass("is-invalid");
         $(`.invalid-tooltip.${email_id}`).text("");
         $(`#${email_id}`).addClass("is-valid");
+    }
+}
+
+function redirectToDashboard()
+{
+    const referrer = document.referrer;
+
+    if (referrer) {
+        window.location.href = referrer;
+    } else {
+        // If there is no referrer, you can redirect to a default page
+        window.location.href = `${websiteURL}dashboard/index.php`;
     }
 }
 

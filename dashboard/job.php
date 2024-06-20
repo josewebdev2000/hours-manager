@@ -346,6 +346,7 @@ require_once "../db/working-day-db-funcs.php";
                     </section>
                 <?php else:?>
                     <section class="content-header">
+                        <input type="hidden" id="edit_employer_id" value="<?=getEmployerIdOfJobId($_GET["id"]); ?>">
                         <div class="container-fluid">
                             <div class="row mb-2">
                                 <div class="col-sm-6">
@@ -383,11 +384,11 @@ require_once "../db/working-day-db-funcs.php";
                                             </div>
                                             <div class="form-group">
                                                 <label for="edit-employer-email">Employer Email</label>
-                                                <input type="email" class="form-control" value="<?php echo (isset($job["employer_email"])) ? $job["employer_email"] : "" ?>">
+                                                <input type="email" class="form-control" id="edit-employer-email" value="<?php echo (isset($job["employer_email"])) ? $job["employer_email"] : "" ?>">
                                             </div>
                                             <div class="form-group">
                                                 <label for="edit-employer-phone-number">Employer Phone Number</label>
-                                                <input type="tel" id="edit-employer-phone-number" class="form-control" value="<?php echo (isset($job["employer_phone_number"])) ? $job["employer_phone_number"] : "" ?>">
+                                                <input type="tel" id="edit-employer-phone-number" class="form-control" value="<?php echo (isset($job["employer_phone_number"])) ? $job["employer_phone_number"] : "" ?>" mask="+1 (___) ___ - ____" placeholder="+1 (___) ___ - ____">
                                             </div>
                                         </div>
                                     </div>
@@ -447,11 +448,11 @@ require_once "../db/working-day-db-funcs.php";
                                                     <input type="text" id="edit-job-title" class="form-control" value="<?=$job["job_title"];?>">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label id="edit-job-role">Job Role</label>
+                                                    <label for="edit-job-role">Job Role</label>
                                                     <input type="text" id="edit-job-role" class="form-control" value="<?=$job["job_role"];?>">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label id="edit-job-address">Job Address</label>
+                                                    <label for="edit-job-address">Job Address</label>
                                                     <input type="text" id="edit-job-address" class="form-control" value="<?php echo (isset($job["job_address"])) ? $job["job_address"] : "" ?>">
                                                 </div>
                                                 <div class="form-group">
@@ -480,37 +481,37 @@ require_once "../db/working-day-db-funcs.php";
                                             <div class="form-group">
                                                 <label for="edit-starting-day">Starting Day</label>
                                                 <select class="form-select" id="edit-starting-day">
-                                                    <option value="Monday" <?php echo (ucfirst($job["starting_day"]) == "Monday") ? "selected" : "" ?>>Monday</option>
-                                                    <option value="Tuesday" <?php echo (ucfirst($job["starting_day"]) == "Tuesday") ? "selected" : "" ?>>Tuesday</option>
-                                                    <option value="Wednesday" <?php echo (ucfirst($job["starting_day"]) == "Wednesday") ? "selected" : "" ?>>Wednesday</option>
-                                                    <option value="Thursday" <?php echo (ucfirst($job["starting_day"]) == "Thursday") ? "selected" : "" ?>>Thursday</option>
-                                                    <option value="Friday" <?php echo (ucfirst($job["starting_day"]) == "Friday") ? "selected" : "" ?>>Friday</option>
-                                                    <option value="Saturday" <?php echo (ucfirst($job["starting_day"]) == "Saturday") ? "selected" : "" ?>>Saturday</option>
-                                                    <option value="Sunday" <?php echo (ucfirst($job["starting_day"]) == "Sunday") ? "selected" : "" ?>>Sunday</option>
+                                                    <option value="monday" <?php echo (ucfirst($job["starting_day"]) == "Monday") ? "selected" : "" ?>>Monday</option>
+                                                    <option value="tuesday" <?php echo (ucfirst($job["starting_day"]) == "Tuesday") ? "selected" : "" ?>>Tuesday</option>
+                                                    <option value="wednesday" <?php echo (ucfirst($job["starting_day"]) == "Wednesday") ? "selected" : "" ?>>Wednesday</option>
+                                                    <option value="thursday" <?php echo (ucfirst($job["starting_day"]) == "Thursday") ? "selected" : "" ?>>Thursday</option>
+                                                    <option value="friday" <?php echo (ucfirst($job["starting_day"]) == "Friday") ? "selected" : "" ?>>Friday</option>
+                                                    <option value="saturday" <?php echo (ucfirst($job["starting_day"]) == "Saturday") ? "selected" : "" ?>>Saturday</option>
+                                                    <option value="sunday" <?php echo (ucfirst($job["starting_day"]) == "Sunday") ? "selected" : "" ?>>Sunday</option>
                                                 </select>
                                             </div>
                                             <div class="form-group">
                                                 <label for="edit-ending-day">Ending Day</label>
                                                 <select class="form-select" id="edit-ending-day">
-                                                    <option value="Monday" <?php echo (ucfirst($job["ending_day"]) == "Monday") ? "selected" : "" ?>>Monday</option>
-                                                    <option value="Tuesday" <?php echo (ucfirst($job["ending_day"]) == "Tuesday") ? "selected" : "" ?>>Tuesday</option>
-                                                    <option value="Wednesday" <?php echo (ucfirst($job["ending_day"]) == "Wednesday") ? "selected" : "" ?>>Wednesday</option>
-                                                    <option value="Thursday" <?php echo (ucfirst($job["ending_day"]) == "Thursday") ? "selected" : "" ?>>Thursday</option>
-                                                    <option value="Friday" <?php echo (ucfirst($job["ending_day"]) == "Friday") ? "selected" : "" ?>>Friday</option>
-                                                    <option value="Saturday" <?php echo (ucfirst($job["ending_day"]) == "Saturday") ? "selected" : "" ?>>Saturday</option>
-                                                    <option value="Sunday" <?php echo (ucfirst($job["ending_day"]) == "Sunday") ? "selected" : "" ?>>Sunday</option>
+                                                    <option value="monday" <?php echo (ucfirst($job["ending_day"]) == "Monday") ? "selected" : "" ?>>Monday</option>
+                                                    <option value="tuesday" <?php echo (ucfirst($job["ending_day"]) == "Tuesday") ? "selected" : "" ?>>Tuesday</option>
+                                                    <option value="wednesday" <?php echo (ucfirst($job["ending_day"]) == "Wednesday") ? "selected" : "" ?>>Wednesday</option>
+                                                    <option value="thursday" <?php echo (ucfirst($job["ending_day"]) == "Thursday") ? "selected" : "" ?>>Thursday</option>
+                                                    <option value="friday" <?php echo (ucfirst($job["ending_day"]) == "Friday") ? "selected" : "" ?>>Friday</option>
+                                                    <option value="saturday" <?php echo (ucfirst($job["ending_day"]) == "Saturday") ? "selected" : "" ?>>Saturday</option>
+                                                    <option value="sunday" <?php echo (ucfirst($job["ending_day"]) == "Sunday") ? "selected" : "" ?>>Sunday</option>
                                                 </select>
                                             </div>
                                             <div class="form-group">
                                                 <label for="edit-payment-day">Payment Day</label>
                                                 <select class="form-select" id="edit-payment-day">
-                                                    <option value="Monday" <?php echo (ucfirst($job["payroll_day"]) == "Monday") ? "selected" : "" ?>>Monday</option>
-                                                    <option value="Tuesday" <?php echo (ucfirst($job["payroll_day"]) == "Tuesday") ? "selected" : "" ?>>Tuesday</option>
-                                                    <option value="Wednesday" <?php echo (ucfirst($job["payroll_day"]) == "Wednesday") ? "selected" : "" ?>>Wednesday</option>
-                                                    <option value="Thursday" <?php echo (ucfirst($job["payroll_day"]) == "Thursday") ? "selected" : "" ?>>Thursday</option>
-                                                    <option value="Friday" <?php echo (ucfirst($job["payroll_day"]) == "Friday") ? "selected" : "" ?>>Friday</option>
-                                                    <option value="Saturday" <?php echo (ucfirst($job["payroll_day"]) == "Saturday") ? "selected" : "" ?>>Saturday</option>
-                                                    <option value="Sunday" <?php echo (ucfirst($job["payroll_day"]) == "Sunday") ? "selected" : "" ?>>Sunday</option>
+                                                    <option value="monday" <?php echo (ucfirst($job["payroll_day"]) == "Monday") ? "selected" : "" ?>>Monday</option>
+                                                    <option value="tuesday" <?php echo (ucfirst($job["payroll_day"]) == "Tuesday") ? "selected" : "" ?>>Tuesday</option>
+                                                    <option value="wednesday" <?php echo (ucfirst($job["payroll_day"]) == "Wednesday") ? "selected" : "" ?>>Wednesday</option>
+                                                    <option value="thursday" <?php echo (ucfirst($job["payroll_day"]) == "Thursday") ? "selected" : "" ?>>Thursday</option>
+                                                    <option value="friday" <?php echo (ucfirst($job["payroll_day"]) == "Friday") ? "selected" : "" ?>>Friday</option>
+                                                    <option value="saturday" <?php echo (ucfirst($job["payroll_day"]) == "Saturday") ? "selected" : "" ?>>Saturday</option>
+                                                    <option value="sunday" <?php echo (ucfirst($job["payroll_day"]) == "Sunday") ? "selected" : "" ?>>Sunday</option>
                                                 </select>
                                             </div>
                                             <div class="form-group">
@@ -561,7 +562,7 @@ require_once "../db/working-day-db-funcs.php";
                                 <div class="col">
                                         <div class="btn-group w-100" role="group">
                                             <button id="edit-job-cancel-btn" class="btn btn-danger btn-lg">Cancel</button>
-                                            <button id="edit-job-new-btn" class="btn btn-info btn-lg text-white">Edit Job</button>
+                                            <button id="edit-job-btn" class="btn btn-info btn-lg text-white">Edit Job</button>
                                         </div>
                                     </div>
                                 </div>

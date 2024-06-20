@@ -94,6 +94,11 @@ $websiteUrl = getWebsiteUrl();
             {
                 echo "<script src='$websiteUrl/assets/js/job/job-view.js'></script>";
             }
+
+            if ($_GET["action"] == "edit" && $currentPage == "dashboard/job.php")
+            {
+                echo "<script src='$websiteUrl/assets/js/job/job-edit.js'></script>";
+            }
         }
     ?>
 </body>

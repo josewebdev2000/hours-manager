@@ -19,26 +19,9 @@ function mainJob()
     sendAddNewJobAJAXRequestToBackend();
 }
 
-function initializePhoneMask()
-{
-    const phoneInputSelectorSlug = "input[type='tel'";
-    (new phoneMask()).init(phoneInputSelectorSlug);
-}
-
 function cancelNewJob()
 {
-    $("button#add-job-cancel-btn").on("click",  function () {
-        // sessionStorage.clear();
-        
-        const referrer = document.referrer;
-
-        if (referrer) {
-            window.location.href = referrer;
-        } else {
-            // If there is no referrer, you can redirect to a default page
-            window.location.href = `${websiteURL}dashboard/index.php`;
-        }
-    });
+    $("button#add-job-cancel-btn").on("click", redirectToDashboard);
 }
 
 /*
@@ -278,6 +261,7 @@ function sendAddNewJobAJAXRequestToBackend()
             "job": jobData,
             "pay_rate": payRateData,
             "pay_roll": payRollData,
+            "work_shifts": []
         });
 
         // Run validation code once it is developed
