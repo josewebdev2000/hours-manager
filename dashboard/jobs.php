@@ -55,6 +55,7 @@ $jobs = getAllJobsOfUserForJobsPage($user["id"]);
                                         <?php if (!array_key_exists("error", $jobs)):?>
                                             <?php foreach($jobs as $job): ?>
                                                 <?php $job_id = $job["job_id"]; ?>
+                                                <?php $employer_id =  $job["employer_id"];?>
                                                 <tr>
                                                     <td><?=$job["job_title"];?></td>
                                                     <td><?=$job["job_role"];?></td>
@@ -65,8 +66,30 @@ $jobs = getAllJobsOfUserForJobsPage($user["id"]);
                                                     <td class="job-actions" role="group">
                                                         <a href="<?=$websiteUrl;?>dashboard/job.php?action=view&id=<?=$job_id;?>" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
                                                         <a href="<?=$websiteUrl;?>dashboard/job.php?action=edit&id=<?=$job_id;?>" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
-                                                        <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
+                                                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete-modal-<?=$job_id?>"><i class="fas fa-trash"></i> Delete</button>
                                                     </td>
+                                                </tr>
+                                                <tr>
+                                                    <!-- Delete Job Modal -->
+                                                    <div class="modal fade" id="delete-modal-<?=$job_id?>" tabindex="-1" role="dialog" aria-labelledby="deleteJobModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="deleteJobModalLabel">Delete (<?=$job["job_role"]?> - <?=$job["employer_name"]?>) Job</h5>
+                                                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    Are you sure you want to delete this job?
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                                    <button type="button" class="btn btn-danger delete-job-btn" id="btn-modal-delete-job-<?=$employer_id;?>-<?=$job_id?>">Delete</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </tr>
                                             <?php endforeach;?>
                                         <?php else:?>

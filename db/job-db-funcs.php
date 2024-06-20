@@ -446,6 +446,66 @@ function editJob($employerId, $jobId, $employerData, $jobData, $payRateData, $pa
     return $finalMsgAssoc;
 }
 
+function deleteJob($jobId, $employerId)
+{
+    // Execute Operations in Bulk to Delete a Job
+    global $conn;
+
+    // Create final message assoc
+    $finalMsgAssoc = [];
+
+    // Prepare SQL queries to execute to delete all related job data
+    $delete_payroll_sql = "DELETE FROM payrolls WHERE job_id = ?";
+    $delete_payrate_sql = "DELETE FROM payrates WHERE job_id = ?";
+    $delete_job_sql = "DELETE FROM jobs WHERE id = ?";
+    $delete_employer_sql = "DELETE FROM employers WHERE id = ?";
+
+    // Start out a transaction
+    $conn->begin_transaction();
+
+    // Start out transaction try/catch block
+    try
+    {
+        // Make a statement to delete the payroll
+        $deletePayRollStmt = $conn->prepare($delete_payroll_sql);
+
+        // If that failed, throw a preparation error
+        if (!$deletePayRollStmt)
+        {
+            $payRollPreparationErrorAssoc = [
+                'error' => 'Could not prepare to delete pay roll data',
+                'error_code' => 'preparation_error'
+            ];
+
+            throw new Exception(json_encode($payRollPreparationErrorAssoc));
+        }
+
+        // Bind the job_id parameter to the pay roll delete statement
+        $deletePayRollStmt->bind_param("i", $jobId);
+
+        // If execution failed, throw excecution error
+        if (!$deletePayRollStmt->execute())
+        {
+            $payRollExcecutionErrorAssoc = [
+                'error' => 'Could not try to delete pay roll data',
+                'error_code' => 'preparation_error'
+            ];
+
+            throw new Exception(json_encode($payRollExcecutionErrorAssoc));
+        }
+
+        // Now make a statement to delete pay rate data
+        $deletePayRateStmt = $conn->prepare($delete_payrate_sql);
+
+        
+    }
+
+    catch (Exception $e)
+    {
+
+    }
+}
+
 function getEmployerIdOfJobId($job_id)
 {
     // Return the employer Id associated to a job
@@ -509,6 +569,7 @@ function getAllJobsOfUserForJobsPage($user_id)
     j.role AS job_role,
     j.id AS job_id, 
     e.name AS employer_name,
+    e.id AS employer_id,
     p.rate_amount AS pay_rate_amount, 
     p.rate_type AS pay_rate_type,
     GROUP_CONCAT(DISTINCT wd.day ORDER BY FIELD(wd.day, 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday')) AS working_days, 
@@ -595,6 +656,7 @@ function getJobOfUserById($user_id, $job_id)
     j.id AS job_id, 
     j.address AS job_address,
     j.description AS job_description,
+    e.id AS employer_id,
     e.name AS employer_name,
     e.email AS employer_email,
     e.phone_number AS employer_phone_number,

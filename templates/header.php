@@ -68,6 +68,7 @@
 
     <!--Plugin Scripts-->
     <script src="<?=$websiteUrl?>assets/plugins/bootstrap-5/js/bootstrap.bundle.min.js"></script>
+    <script src="<?=$websiteUrl?>assets/plugins/bootstrap-5/js/bootstrap.min.js"></script>
     <script src="<?=$websiteUrl?>assets/plugins/jquery/jquery.min.js"></script>
 
     <!--Conditionally Load JS Scripts depending on the page we are-->
