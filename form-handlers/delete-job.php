@@ -36,6 +36,16 @@ if (is_post_request())
     // Grab the Employer Id
     $employerId = $job_data["employer_id"];
 
+    // Run DB operation to delete job data
+    $deleteJobRes = deleteJob($jobId, $employerId);
+
+    if (array_key_exists("error", $deleteJobRes))
+    {
+        return send_json_error_response($deleteJobRes, 400);
+    }
+
+    return send_json_response($deleteJobRes);
+
 }
 
 ?>

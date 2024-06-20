@@ -497,13 +497,124 @@ function deleteJob($jobId, $employerId)
         // Now make a statement to delete pay rate data
         $deletePayRateStmt = $conn->prepare($delete_payrate_sql);
 
-        
+        // If preparing the statement failed, throw an error
+        if (!$deletePayRateStmt)
+        {
+            $payRatePreparationErrorAssoc = [
+                'error' => 'Could not prepare to delete pay rate data',
+                'error_code' => 'preparation_error'
+            ];
+
+            throw new Exception(json_encode($payRatePreparationErrorAssoc));
+        }
+
+        // Bind Job ID parameter to Statement
+        $deletePayRateStmt->bind_param("i", $jobId);
+
+        // If there is an error in excecution, throw it
+        if (!$deletePayRateStmt->execute())
+        {
+            $payRateExcecutionErrorAssoc = [
+                'error' => 'Could not try to delete pay rate data',
+                'error_code' => 'preparation_error'
+            ];
+
+            throw new Exception(json_encode($payRateExcecutionErrorAssoc));
+        }
+
+        // Make Statement to delete job
+        $deleteJobStmt = $conn->prepare($delete_job_sql);
+
+        // If couldn't prepare throw an error
+        if (!$deleteJobStmt)
+        {
+            $jobPreparationErrorAssoc = [
+                'error' => 'Could not prepare to delete job data',
+                'error_code' => 'preparation_error'
+            ];
+
+            throw new Exception(json_encode($jobPreparationErrorAssoc));
+        }
+
+        // Bind ID Parameter
+        $deleteJobStmt->bind_param("i", $jobId);
+
+        // If couldn't execute that statement, throw an error
+        if (!$deleteJobStmt->execute())
+        {
+            $jobExcecutionErrorAssoc = [
+                'error' => 'Could not try to delete job data',
+                'error_code' => 'preparation_error'
+            ];
+
+            throw new Exception(json_encode($jobExcecutionErrorAssoc));
+        }
+
+        // Make statement to delete employer
+        $deleteEmployerStmt = $conn->prepare($delete_employer_sql);
+
+        // If couldn't prepare, throw an error
+        if (!$deleteEmployerStmt)
+        {
+            $employerPreparationErrorAssoc = [
+                'error' => 'Could not prepare to delete employer data',
+                'error_code' => 'preparation_error'
+            ];
+
+            throw new Exception(json_encode($employerPreparationErrorAssoc));
+        }
+
+        // Bind employer ID parameter
+        $deleteEmployerStmt->bind_param("i", $employerId);
+
+        // If couldn't execute statement, throw an error
+        if (!$deleteEmployerStmt->execute())
+        {
+            $employerExcecutionErrorAssoc = [
+                'error' => 'Could not try to delete employer data',
+                'error_code' => 'preparation_error'
+            ];
+
+            throw new Exception(json_encode($employerExcecutionErrorAssoc));
+        }
+
+        // Close statements
+        $deletePayRollStmt->close();
+        $deletePayRateStmt->close();
+        $deleteJobStmt->close();
+        $deleteEmployerStmt->close();
+
+        // Confirm all deletions
+        $conn->commit();
+
+        // Provide success message
+        $finalMsgAssoc["message"] = "Job Could Be Successfully Deleted";
     }
 
     catch (Exception $e)
     {
+        // If one update fail, remove all others
+        $conn->rollback();
 
+        // Grab error message
+        $error_msg = $e->getMessage();
+
+        // JSON Decode
+        $decoded_msg = json_decode($e->getMessage());
+
+        // If it is null, then make assoc yourself
+        if ($decoded_message == NULL)
+        {
+            $finalMsgAssoc["error"] = $error_msg;
+        }
+
+        else
+        {
+            $finalMsgAssoc["error"] = $decoded_msg;
+        }
     }
+
+    return $finalMsgAssoc;
 }
 
 function getEmployerIdOfJobId($job_id)

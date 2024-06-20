@@ -6,9 +6,27 @@ function mainJobs()
 {
     // Make all elements with class job-actions responsive with btn-group and btn-group-vertical
     new ResponsiveElement(".job-actions", 576, "btn-group", "btn-group-vertical");
+
+    // Show Delete Success Feedback Just In Case
+    showDeleteSuccessFeedback();
     
     // Prepare AJAX request to delete a job
     sendDeleteJobAJAXRequestToBackend();
+}
+
+function showDeleteSuccessFeedback()
+{
+    const successResponse = sessionStorage.getItem("successDeleteResponse");
+
+    if (successResponse)
+    {
+        const msg = JSON.parse(successResponse)["message"];
+
+        smoothlyScrollToTop(".content-wrapper");
+        displayFormSuccessAlert("job-page-content-wrapper", msg, false);
+        
+        sessionStorage.removeItem("successDeleteResponse");
+    }
 }
 
 function getJobIdOutOfDeleteBtnId(btn_id)
@@ -60,10 +78,20 @@ function sendDeleteJobAJAXRequestToBackend()
                 $(`#${deleteBtnId} .modal-body`).html(`<div class='text-center'>${loadingSpinner()}</div>`);
             },
             success: function(response) {
+                sessionStorage.setItem("successDeleteResponse", JSON.stringify(response));
 
+                location.reload();
             },
             error: function(xhr) {
 
+                let errorMsg = "Job Coult Not Be Deleted";
+
+                if (xhr.responseJSON["error"])
+                {
+                    errorMsg = xhr.responseJSON["error"];
+                }
+    
+                displayFormErrorAlert(`delete-modal-footer-${job_id}`, errorMsg, false);   
             },
             complete: function() {
                 $(`#${deleteBtnId} .modal-body`).html(modalBodyOriginalHTMLContent);
