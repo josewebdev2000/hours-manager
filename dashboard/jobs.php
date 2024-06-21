@@ -17,7 +17,7 @@ $jobs = getAllJobsOfUserForJobsPage($user["id"]);
     <?php require_once "templates/dashboard-preloader.php"; ?>
 
     <!--INCLUDE CODE FOR THE JOBS PROFILE PAGE INSIDE THE content-wrapper -->
-    <div class="content-wrapper">
+    <div class="content-wrapper" id="jobs-page-content-wrapper">
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
@@ -85,7 +85,7 @@ $jobs = getAllJobsOfUserForJobsPage($user["id"]);
                                                                 </div>
                                                                 <div class="modal-footer" id="delete-modal-footer-<?=$job_id?>">
                                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                                    <button type="button" class="btn btn-danger delete-job-btn" id="btn-modal-delete-job-<?=$employer_id;?>-<?=$job_id?>">Delete</button>
+                                                                    <button type="button" class="btn btn-danger delete-job-btn" id="btn-modal-delete-job-<?=$employer_id?>-<?=$job_id?>">Delete</button>
                                                                 </div>
                                                             </div>
                                                         </div>

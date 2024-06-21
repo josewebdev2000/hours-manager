@@ -45,7 +45,6 @@ if (is_post_request())
     }
 
     return send_json_response($deleteJobRes);
-
 }
 
 ?>

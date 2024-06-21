@@ -23,7 +23,7 @@ function showDeleteSuccessFeedback()
         const msg = JSON.parse(successResponse)["message"];
 
         smoothlyScrollToTop(".content-wrapper");
-        displayFormSuccessAlert("job-page-content-wrapper", msg, false);
+        displayFormSuccessAlert("jobs-page-content-wrapper", msg, false);
         
         sessionStorage.removeItem("successDeleteResponse");
     }
