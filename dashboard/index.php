@@ -2,6 +2,21 @@
 <?php require_once "templates/dashboard-header.php"; ?>
 <?php require_once "../templates/header.php"; ?>
 
+<?php require_once "../db/job-db-funcs.php"; 
+
+// Grab data required for summary cards
+
+// Grab num of registered jobs
+$num_jobs_assoc = getNumRegisteredJobs($_SESSION["id"]);
+$num_jobs = NULL;
+
+if (!array_key_exists("error", $num_jobs_assoc))
+{
+    $num_jobs = $num_jobs_assoc["num_jobs"];
+}
+
+?>
+
 <!--HTML CODE GOES HERE-->
 <div class="wrapper">
     <!--IMPORT MAIN HEADER CODE-->
@@ -38,7 +53,7 @@
                         <div class="card text-white h-100">
                             <div class="card-body d-flex flex-column justify-content-center align-items-center">
                                 <h2 class="card-title">Jobs registered</h2>
-                                <p class="card-text">2</p>
+                                <p class="card-text"><?php echo (isset($num_jobs)) ? $num_jobs : 0?></p>
                             </div>
                         </div>
                     </a>

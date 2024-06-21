@@ -843,4 +843,57 @@ function getJobOfUserById($user_id, $job_id)
     return $job;
 }
 
+function getNumRegisteredJobs($userId)
+{
+    /** Grab all info required for the summary cards */
+    global $conn;
+
+    // Form SQL String to grab all summary card data
+    $num_registered_jobs_sql = "SELECT COUNT(*) AS num_jobs FROM jobs WHERE user_id = ?";
+
+    // Make a statement for this
+    $numRegisteredJobsStmt = $conn->prepare($num_registered_jobs_sql);
+
+    // If couldn't prepare, throw error
+    if (!$numRegisteredJobsStmt)
+    {
+        return [
+            "error" => "Could not prepare to get number of jobs",
+            "error_code" => "preparation_error"
+        ];
+    }
+
+    // Bind user_id parameter
+    $numRegisteredJobsStmt->bind_param("i", $userId);
+
+    // If there is a failure executing the statement, return an error too
+    if (!$numRegisteredJobsStmt->execute())
+    {
+        return [
+            "error" => "Could not try to get number of jobs",
+            "error_code" => "excecution_error"
+        ];
+    }
+
+    // Grab the result
+    $result = $numRegisteredJobsStmt->get_result();
+
+    // If the result does not have one row, return not found
+    if ($result->num_rows == 0)
+    {
+        return [
+            "error" => "Could not find number of jobs",
+            "error_code" => "num_of_jobs_not_found_error"
+        ];
+    }
+
+    // Get the number as a PHP assoc
+    $num_jobs_assoc = $result->fetch_assoc();
+
+    // Close the statement
+    $numRegisteredJobsStmt->close();
+
+    return $num_jobs_assoc;
+}
+
 ?>
