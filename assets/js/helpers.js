@@ -31,6 +31,23 @@ function initializePhoneMask()
     (new phoneMask()).init(phoneInputSelectorSlug);
 }
 
+function requiredFieldValidate(field_id)
+{
+    const fieldVal = $(`#${field_id}`).val();
+
+    if (fieldVal.trim().length == 0)
+    {
+        $(`#${field_id}`).removeClass("is-valid");
+        $(`#${field_id}`).addClass("is-invalid");
+    }
+
+    else
+    {
+        $(`#${field_id}`).removeClass("is-invalid");
+        $(`#${field_id}`).addClass("is-valid");
+    }
+}
+
 function nameValidate(name_id) 
 {
     const curName = $(`#${name_id}`).val();

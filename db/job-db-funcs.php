@@ -18,7 +18,6 @@ function insertNewJob($userId, $employerData, $jobData, $payRateData, $payRollDa
     $job_sql = "INSERT INTO jobs (user_id, employer_id, title, role, address, description) VALUES (?, ?, ?, ?, ?, ?)";
     $payrate_sql = "INSERT INTO payrates (user_id, job_id, rate_type, rate_amount, effective_date) VALUES (?, ?, ?, ?, ?)";
     $payroll_sql = "INSERT INTO payrolls (user_id, job_id, pay_period_start, pay_period_end, payment_day, total_hours, total_payment, tips) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-    $workingday_sql = "INSERT INTO workingdays (user_id, job_id, day, start_time, end_time) VALUES (?, ?, ?, ?, ?)";
 
     // Begin a DB Transaction
     $conn->begin_transaction();
@@ -168,53 +167,11 @@ function insertNewJob($userId, $employerData, $jobData, $payRateData, $payRollDa
             throw new Exception(json_encode($payRollExcecutionErrorAssoc));
         }
 
-        // Create statement to insert work days
-        $workShiftStmt = $conn->prepare($workingday_sql);
-
-        if (!$workShiftStmt)
-        {
-            $workingDayPreparationErrorAssoc = [
-                'error' => 'Could not prepare to insert a new working day',
-                'error_code' => 'preparation_error'
-            ];
-
-            throw new Exception(json_encode($workingDayPreparationErrorAssoc));
-        }
-
-        // Have placeholders for working days data
-        $day = "";
-        $startingHour = "";
-        $endingHour = "";
-
-        // Bind parameters for working day stmt
-        $workShiftStmt->bind_param("iisss", $userId, $jobId, $day, $startingHour, $endingHour);
-
-        // Insert each record in the workShiftsData
-        foreach ($workShiftsData as $workingDayData)
-        {
-            // Dynamically change values of placeholders according to what is the workingDay
-            $day = $workingDayData["day"];
-            $startingHour = $workingDayData["startingHour"];
-            $endingHour = $workingDayData["endingHour"];
-
-            // If inserting the record failed, throw an exception
-            if (!$workShiftStmt->execute())
-            {
-                $workingDayExcecutionErrorAssoc = [
-                    'error' => 'Could not try to insert new working day',
-                    'error_code' => 'excecution_error'
-                ];
-
-                throw new Exception(json_encode($workingDayExcecutionErrorAssoc));
-            }
-        }
-        
         // Close all statements by this point
         $employerStmt->close();
         $jobStmt->close();
         $payRateStmt->close();
         $payRollStmt->close();
-        $workShiftStmt->close();
 
         // Confirm all insertions into the DB
         $conn->commit();
@@ -683,14 +640,11 @@ function getAllJobsOfUserForJobsPage($user_id)
     e.id AS employer_id,
     p.rate_amount AS pay_rate_amount, 
     p.rate_type AS pay_rate_type,
-    GROUP_CONCAT(DISTINCT wd.day ORDER BY FIELD(wd.day, 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday')) AS working_days, 
     pr.payment_day AS payroll_day
     FROM 
     jobs j
     INNER JOIN 
     payrates p ON j.id = p.job_id AND j.user_id = p.user_id
-    LEFT JOIN 
-    workingdays wd ON j.id = wd.job_id AND j.user_id = wd.user_id
     INNER JOIN 
     payrolls pr ON j.id = pr.job_id AND j.user_id = pr.user_id
     INNER JOIN

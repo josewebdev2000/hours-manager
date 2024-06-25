@@ -3,17 +3,14 @@
 /** JS Script for adding a job to job.php page */
 function mainJob()
 {
-    // Clear Session Storage 
-    //sessionStorage.clear();
-
     // Initialize Phone Mask for Phone Number Input
     initializePhoneMask();
 
-    // Initialize Schedule Calendar
-    //initializeScheduleCalendar();
-
     // Execute Operations To Cancel A New Job
     cancelNewJob();
+
+    // Validate Add Job Data
+    validateAddJobData();
 
     // Send AJAX Request To Backend
     sendAddNewJobAJAXRequestToBackend();
@@ -24,128 +21,53 @@ function cancelNewJob()
     $("button#add-job-cancel-btn").on("click", redirectToDashboard);
 }
 
-/*
-function initializeScheduleCalendar()
-{
-    const scheduleCalendarElement = $("#schedule-calendar");
-
-    scheduleCalendarElement.jqxScheduler({
-        width: "100%",
-        height: 600,
-        source: [],
-        view: "weekView",
-        views: ["dayView", "weekView"],
-        appointmentDataFields: {
-            from: "start",
-            to: "end"
-        },
-        resources: {
-            colorScheme: "scheme05",
-            dataField: "calendar"
-        },
-        views: [
-            { type: 'dayView', showWeekends: true},
-            { type: 'weekView', showWeekends: true },
-        ],
-        editDialogDateTimeFormatString: "hh:mm tt",
-        ready: function () {
-
-            // Hide Toolbar Details
-            $(".jqx-scheduler-toolbar-details").remove();
-
-            // Hide Icon Calendar
-            $(".jqx-widget.jqx-datetimeinput.jqx-input.jqx-overflow-hidden.jqx-rc-all.jqx-reset.jqx-clear.jqx-widget-content").hide();
-        },
-
-    });
-
-    // Runs when an appointment dialog is opened
-    scheduleCalendarElement.on('editDialogCreate', function (event) { 
-        const args = event.args; 
-        const fields = args.fields; 
-
-        // Hide Subject Container
-        $(fields.subjectContainer[0]).remove();
-
-        // Remove Location Container
-        $(fields.locationContainer[0]).remove();
-
-        // Remove Time Zone Container
-        $(fields.timeZoneContainer[0]).remove();
-
-        // Remove Description Container
-        $(fields.descriptionContainer[0]).remove();
-
-        // Remove Status Container
-        $(fields.statusContainer[0]).remove();
-
-        // Remove Repeat Container
-        $(fields.repeatContainer[0]).remove();
-    });
-
-    // Runs when an appointment is created
-    scheduleCalendarElement.on("appointmentAdd", parseAppointmentData);
-
-    // Runs when an appointment is created
-    scheduleCalendarElement.on("appointmentChange", parseAppointmentData);
-
-    // Run when an appointment is deleted
-    scheduleCalendarElement.on("appointmentDelete", deleteAppointmentFromSessionStorage);
-}
-
-function deleteAppointmentFromSessionStorage(event)
-{
-    // Get Appointment Data
-    const args = event.args;
-    const appointment = args.appointment;
-    const appointmentData = appointment.jqxAppointment
-
-    // Grab session storage key data of appointmen
-
-    // Remove It From Session Storage
-    sessionStorage.removeItem(`Work Shift: ${appointmentData.subject}: ${appointmentData.id}`);
-}
-
-function parseAppointmentData(event)
-{
-    // Parse Appointment Data
-    const args = event.args;
-
-    // Grab appointment data
-    const appointment = args.appointment;
-
-    const appointmentData = appointment.jqxAppointment;
-
-    // Place Subject as 'Job Title - Employer Name'
-    appointmentData.subject = `${$("#job-role").val()} - ${$("#employer-name").val()}`;
-
-    // Grab JSON String of the data
-    const appointmentInitialJSONString = appointmentData.toJSON();
-
-    // Parse it into an JS Obj
-    const appointmentParsedData = JSON.parse(appointmentInitialJSONString);
-
-    // Format Time Appropiately
-    appointmentParsedData.from = formatTime(appointmentParsedData.from);
-    appointmentParsedData.to = formatTime(appointmentParsedData.to);
-
-    // Grab the day of the week
-    appointmentParsedData.day = getDayOfWeek(appointmentData.from.dayOfWeek());
-
-    // add the subject field into the appointmentParseData
-    appointmentParsedData.subject = appointmentData.subject;
-
-    // JSONify the parsed appointment data obj
-    const jsonifiedAppointmentData = JSON.stringify(appointmentParsedData);
-
-    // Add the data to sessionStorage as with the key appointment.subject + appointment-id
-    sessionStorage.setItem(`Work Shift: ${appointmentParsedData.subject}: ${appointmentParsedData.id}`, jsonifiedAppointmentData);
-}
-*/
-
 function validateAddJobData()
 {
-    /** RONNY WILL DEVELOP VALIDATION CODE */
+    // Validate Employer Section
+    $("#employer-name").on({
+        input: () => requiredFieldValidate("employer-name"),
+        focus: () => formControlFocusValidate("employer-name"),
+        blur: () => formControlBlurValidate("employer-name")
+    });
+
+    // Validate Job Section
+    $("#job-title").on({
+        input: () => requiredFieldValidate("job-title"),
+        focus: () => formControlFocusValidate("job-title"),
+        blur: () => formControlBlurValidate("job-title")
+    });
+
+    $("#job-role").on({
+        input: () => requiredFieldValidate("job-role"),
+        focus: () => formControlFocusValidate("job-role"),
+        blur: () => formControlBlurValidate("job-role")
+    });
+
+    // Validate Rate Type Section
+    $("#rate-amount").on({
+        input: () => requiredFieldValidate("rate-amount"),
+        focus: () => formControlFocusValidate("rate-amount"),
+        blur: () => formControlBlurValidate("rate-amount")
+    });
+
+    $("#effective-date").on({
+        input: () => requiredFieldValidate("effective-date"),
+        focus: () => formControlFocusValidate("effective-date"),
+        blur: () => formControlBlurValidate("effective-date")
+    });
+
+    // Validate Pay Roll Data
+    $("#total-hours").on({
+        input: () => requiredFieldValidate("total-hours"),
+        focus: () => formControlBlurValidate("total-hours"),
+        blur: () => formControlBlurValidate("total-hours")
+    });
+
+    $("#total-pay").on({
+        input: () => requiredFieldValidate("total-pay"),
+        focus: () => formControlFocusValidate("total-pay"),
+        blur: () => formControlBlurValidate("total-pay")
+    });
 }
 
 function emptyAddJobFormFields()
@@ -230,29 +152,40 @@ function sendAddNewJobAJAXRequestToBackend()
             tip: $("#tip-amount").val()
         };
 
-        /*
-        // Get work shifts data
-        const workShifts = [];
+        // Required Form Control Checks
+        const requiredFormControls = [
+            $("#employer-name"),
+            $("#job-title"),
+            $("#job-role"),
+            $("#rate-amount"),
+            $("#effective-date"),
+            $("#total-hours"),
+            $("#total-pay")
+        ]; 
 
-        for (let i = 0; i < sessionStorage.length; i++)
+        // Control whehter AJAX request should be made
+        var doAjax = false;
+
+        for (let requiredFormControl of requiredFormControls)
         {
-            const key = sessionStorage.key(i);
-
-            // Only Grab Keys that Start With Work Shift
-            if (key.startsWith("Work Shift:"))
+            if (requiredFormControl.hasClass("is-valid"))
             {
-                // Get Work Shift Data
-                const workShift = sessionStorage.getItem(key);
+                doAjax = true;
+            }
 
-                // Parse It Into a JS Obj
-                const workShiftData = JSON.parse(workShift);
-
-                // Add the Work Shift into the work shifts array
-                workShifts.push(workShiftData);
-
+            else
+            {
+                doAjax = false;
+                requiredFormControl.removeClass("is-valid");
+                requiredFormControl.addClass("is-invalid");
             }
         }
-        */
+
+        if (!doAjax)
+        {
+            displayFormErrorAlert("job-page-content-wrapper", "Add All Required Job Data", false);
+        }
+
 
         // Prepare JSON payload to send
         const data = JSON.stringify({
@@ -264,39 +197,40 @@ function sendAddNewJobAJAXRequestToBackend()
             "work_shifts": []
         });
 
-        // Run validation code once it is developed
-        $.ajax({
-            url: `${websiteURL}form-handlers/add-job.php`,
-            method: "POST",
-            contentType: "application/json",
-            data,
-            beforeSend: function() {
-                smoothlyScrollToTop(".content-wrapper");
-            },
-            success: function(response) {
-                // Show Success Alert When New Job Could Be Added
-                const message = response["message"];
+        if (doAjax)
+        {
+            // Run validation code once it is developed
+            $.ajax({
+                url: `${websiteURL}form-handlers/add-job.php`,
+                method: "POST",
+                contentType: "application/json",
+                data,
+                beforeSend: function() {
+                    smoothlyScrollToTop(".content-wrapper");
+                },
+                success: function(response) {
+                    // Show Success Alert When New Job Could Be Added
+                    const message = response["message"];
 
-                displayFormSuccessAlert("job-page-content-wrapper", message, false);
-            },
-            error: function(xhr) {
-                // Show Error Alert When New Job Could Not Be Added
+                    displayFormSuccessAlert("job-page-content-wrapper", message, false);
 
-                // Grab error message
-                let errorMsg = "New Job Could Not Be Added";
+                    emptyAddJobFormFields();
+                },
+                error: function(xhr) {
+                    // Show Error Alert When New Job Could Not Be Added
 
-                if (xhr.responseJSON["error"])
-                {
-                    errorMsg = xhr.responseJSON["error"];   
+                    // Grab error message
+                    let errorMsg = "New Job Could Not Be Added";
+
+                    if (xhr.responseJSON["error"])
+                    {
+                        errorMsg = xhr.responseJSON["error"];   
+                    }
+
+                    displayFormErrorAlert("job-page-content-wrapper", errorMsg, false);
                 }
-
-                displayFormErrorAlert("job-page-content-wrapper", errorMsg, false);
-            },
-            complete: function() {
-                //sessionStorage.clear();
-                emptyAddJobFormFields();
-            }
-        });
+            });   
+        }
     });
 }
 

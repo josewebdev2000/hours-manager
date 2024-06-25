@@ -126,9 +126,11 @@ require_once "../db/working-day-db-funcs.php";
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <div class="form-group">
+                                        <div class="form-group position-relative">
                                             <label for="employer-name">Employer Name</label>
                                             <input type="text" class="form-control" name="employer-name" id="employer-name">
+                                            <div class="valid-tooltip employer-name">Employer Name Looks Good</div>
+                                            <div class="invalid-tooltip employer-name">An Employer Name Is Required</div>
                                         </div>
                                         <div class="form-group">
                                             <label for="employer-email">Employer Email</label>
@@ -155,7 +157,7 @@ require_once "../db/working-day-db-funcs.php";
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <div class="form-group">
+                                        <div class="form-group position-relative">
                                             <label for="rate-type">Rate Type</label>
                                             <select name="rate-type" id="rate-type" class="form-select">
                                                 <option value="hourly">Hourly</option>
@@ -164,14 +166,20 @@ require_once "../db/working-day-db-funcs.php";
                                                 <option value="biweekly">Biweekly</option>
                                                 <option value="monthly">Monthly</option>
                                             </select>
+                                            <div class="valid-tooltip rate-type">Rate Type Looks Good</div>
+                                            <div class="invalid-tooltip rate-type">A Rate Type Must Be Chosen</div>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group position-relative">
                                             <label for="rate-amount">Rate Amount</label>
                                             <input type="number" class="form-control" name="rate-amount" id="rate-amount" min="1">
+                                            <div class="valid-tooltip rate-amount">Rate Amount Looks Good</div>
+                                            <div class="invalid-tooltip rate-amount">A Rate Amount Must Be Given</div>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="effective-rate">Effective Date</label>
+                                        <div class="form-group position-relative">
+                                            <label for="effective-date">Effective Date</label>
                                             <input type="date" class="form-control" name="effective-date" id="effective-date">
+                                            <div class="valid-tooltip effective-date">Effective Date Looks Good</div>
+                                            <div class="invalid-tooltip effective-date">A Valid Date Must Be Chosen</div>
                                         </div>
                                     </div>
                                 </div>
@@ -192,13 +200,17 @@ require_once "../db/working-day-db-funcs.php";
                                             </div>
                                         </div>
                                         <div class="card-body">
-                                            <div class="form-group">
+                                            <div class="form-group position-relative">
                                                 <label for="job-title">Job Title</label>
                                                 <input type="text" class="form-control" name="job-title" id="job-title">
+                                                <div class="valid-tooltip job-title">Job Title Looks Good</div>
+                                                <div class="invalid-tooltip job-title">Job Title Is A Required Field</div>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group position-relative">
                                                 <label for="job-role">Job Role</label>
                                                 <input type="text" class="form-control" name="job-role" id="job-role">
+                                                <div class="valid-tooltip job-role">Job Role Looks Good</div>
+                                                <div class="invalid-tooltip job-role">Job Role Is A Required Field</div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="job-address">Job Address</label>
@@ -225,7 +237,7 @@ require_once "../db/working-day-db-funcs.php";
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <div class="form-group">
+                                        <div class="form-group position-relative">
                                             <label for="pay-period-start">Starting Day</label>
                                             <select class="form-select" name="pay-period-start" id="pay-period-start">
                                                 <option value="monday">Monday</option>
@@ -236,8 +248,10 @@ require_once "../db/working-day-db-funcs.php";
                                                 <option value="saturday">Saturday</option>
                                                 <option value="sunday">Sunday</option>
                                             </select>
+                                            <div class="valid-tooltip pay-period-start">Starting Day Looks Good</div>
+                                            <div class="invalid-tooltip pay-period-start">Please Choose A Valid Day</div>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group position-relative">
                                             <label for="pay-period-end">Ending Day</label>
                                             <select class="form-select" name="pay-period-end" id="pay-period-end">
                                                 <option value="monday">Monday</option>
@@ -248,8 +262,10 @@ require_once "../db/working-day-db-funcs.php";
                                                 <option value="saturday">Saturday</option>
                                                 <option value="sunday">Sunday</option>
                                             </select>
+                                            <div class="valid-tooltip pay-period-end">Ending Day Looks Good</div>
+                                            <div class="invalid-tooltip pay-period-end">Please Choose A Valid Day</div>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group position-relative">
                                             <label for="payment-day">Payment Day</label>
                                             <select class="form-select" name="payment-day" id="payment-day">
                                                 <option value="monday">Monday</option>
@@ -260,41 +276,24 @@ require_once "../db/working-day-db-funcs.php";
                                                 <option value="saturday">Saturday</option>
                                                 <option value="sunday">Sunday</option>
                                             </select>
+                                            <div class="valid-tooltip payment-day">Payment Day Looks Good</div>
+                                            <div class="invalid-tooltip payment-day">Please Choose A Valid Day</div>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group position-relative">
                                             <label for="total-hours">Predicted Total Hours</label>
                                             <input type="number" class="form-control" name="total-hours" id="total-hours">
+                                            <div class="valid-tooltip total-hours">Predicted Total Hours Look Good</div>
+                                            <div class="invalid-tooltip total-hours">Predicted Total Hours Is A Valid Field</div>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group position-relative">
                                             <label for="total-pay">Predicted Total Payment</label>
                                             <input type="number" class="form-control" name="total-pay" id="total-pay">
+                                            <div class="valid-tooltip total-pay">Predicted Total Payment Looks Good</div>
+                                            <div class="invalid-tooltip total-hours">Predicted Total Payment Is A Valid Field</div>
                                         </div>
                                         <div class="form-group">
                                             <label for="tip-amount">Tips</label>
                                             <input type="number" class="form-control" name="tip-amount" id="tip-amount" min="0">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row d-flex justify-content-center">
-                            <div class="col-md-6">
-                                <div class="card card-indigo d-none">
-                                    <div class="card-header">
-                                        <h2 class="card-title fsize-150">
-                                            <i class="fas fa-calendar-alt mr-sm-3"></i>
-                                            <span>Schedule</span>
-                                        </h2>
-                                        <div class="card-tools">
-                                            <button class="btn btn-tool" type="button" data-card-widget="collapse" title="Collapse">
-                                                <i class="fas fa-minus"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="form-group">
-                                            <label for="working-days">Working Days</label>
-                                            <div id="schedule-calendar"></div>
                                         </div>
                                     </div>
                                 </div>
