@@ -179,6 +179,7 @@ function sendAddNewJobAJAXRequestToBackend()
 
         if (!doAjax)
         {
+            smoothlyScrollToTop(".content-wrapper");
             displayFormErrorAlert("job-page-content-wrapper", "Add All Required Job Data", false);
         }
 
@@ -201,11 +202,13 @@ function sendAddNewJobAJAXRequestToBackend()
                 method: "POST",
                 contentType: "application/json",
                 data,
+                beforeSend: function() {
+                    smoothlyScrollToTop(".content-wrapper");
+                },
                 success: function(response) {
                     // Show Success Alert When New Job Could Be Added
                     const message = response["message"];
 
-                    smoothlyScrollToTop(".content-wrapper");
                     displayFormSuccessAlert("job-page-content-wrapper", message, false);
                     emptyAddJobFormFields();
                 },
