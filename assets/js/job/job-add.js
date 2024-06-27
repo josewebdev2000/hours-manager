@@ -86,14 +86,10 @@ function emptyAddJobFormFields()
     $("#job-description").val("");
 
     // Empty all pay rate fields
-    $("#rate-type").val("Hourly");
     $("#rate-amount").val("");
     $("#effective-date").val("");
 
     // Empty all apy roll fields
-    $("#pay-period-start").val("Monday");
-    $("#pay-period-end").val("Monday");
-    $("#payment-day").val("Monday");
     $("#total-hours").val("");
     $("#total-pay").val("");
     $("#tip-amount").val("");
@@ -205,15 +201,12 @@ function sendAddNewJobAJAXRequestToBackend()
                 method: "POST",
                 contentType: "application/json",
                 data,
-                beforeSend: function() {
-                    smoothlyScrollToTop(".content-wrapper");
-                },
                 success: function(response) {
                     // Show Success Alert When New Job Could Be Added
                     const message = response["message"];
 
+                    smoothlyScrollToTop(".content-wrapper");
                     displayFormSuccessAlert("job-page-content-wrapper", message, false);
-
                     emptyAddJobFormFields();
                 },
                 error: function(xhr) {
