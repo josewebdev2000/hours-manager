@@ -172,8 +172,18 @@ function sendAddNewJobAJAXRequestToBackend()
             else
             {
                 doAjax = false;
-                requiredFormControl.removeClass("is-valid");
-                requiredFormControl.addClass("is-invalid");
+
+                if (requiredFormControl.val().length == 0)
+                {   
+                    requiredFormControl.removeClass("is-valid");
+                    requiredFormControl.addClass("is-invalid");   
+                }
+
+                else
+                {
+                    requiredFormControl.removeClass("is-invalid");
+                    requiredFormControl.addClass("is-valid");  
+                }
             }
         }
 

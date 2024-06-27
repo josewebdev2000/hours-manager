@@ -3,6 +3,9 @@
 /** JS Script for editing a job to job.php page */
 function mainEditJob()
 {
+    // Validate Edit Job Data
+    validateEditJobData();
+
     // Show Success Feedback in case there is any
     showEditSuccessFeedback();
 
@@ -33,6 +36,55 @@ function showEditSuccessFeedback()
     }
 }
 
+function validateEditJobData()
+{
+    // Validate Employer Section
+    $("#edit-employer-name").on({
+        input: () => requiredFieldValidate("edit-employer-name"),
+        focus: () => formControlFocusValidate("edit-employer-name"),
+        blur: () => formControlBlurValidate("edit-employer-name")
+    });
+
+    // Validate Job Section
+    $("#edit-job-title").on({
+        input: () => requiredFieldValidate("edit-job-title"),
+        focus: () => formControlFocusValidate("edit-job-title"),
+        blur: () => formControlBlurValidate("edit-job-title")
+    });
+
+    $("#edit-job-role").on({
+        input: () => requiredFieldValidate("edit-job-role"),
+        focus: () => formControlFocusValidate("edit-job-role"),
+        blur: () => formControlBlurValidate("edit-job-role")
+    });
+
+    // Validate Rate Type Section
+    $("#edit-rate-amount").on({
+        input: () => requiredFieldValidate("edit-rate-amount"),
+        focus: () => formControlFocusValidate("edit-rate-amount"),
+        blur: () => formControlBlurValidate("edit-rate-amount")
+    });
+
+    $("#edit-effective-date").on({
+        input: () => requiredFieldValidate("edit-effective-date"),
+        focus: () => formControlFocusValidate("edit-effective-date"),
+        blur: () => formControlBlurValidate("edit-effective-date")
+    });
+
+    // Validate Pay Roll Data
+    $("#edit-total-hours").on({
+        input: () => requiredFieldValidate("edit-total-hours"),
+        focus: () => formControlBlurValidate("edit-total-hours"),
+        blur: () => formControlBlurValidate("edit-total-hours")
+    });
+
+    $("#edit-total-pay").on({
+        input: () => requiredFieldValidate("edit-total-pay"),
+        focus: () => formControlFocusValidate("edit-total-pay"),
+        blur: () => formControlBlurValidate("edit-total-pay")
+    });  
+}
+
 function sendEditJobAJAXRequestToBackend()
 {
     // Add event listener to edit job btn to send AJAX request to backend
@@ -42,9 +94,6 @@ function sendEditJobAJAXRequestToBackend()
         e.preventDefault();
 
         // Prepare data to be sent to the user
-        // Grab user id
-        const user_id = $("#user_id").val();
-
         // Grab employer id
         const employer_id = $("#edit_employer_id").val();
 
@@ -94,45 +143,85 @@ function sendEditJobAJAXRequestToBackend()
             "work_shifts": []
         });
 
-        // Do an AJAX request
-        $.ajax({
-            url: `${websiteURL}form-handlers/edit-job.php`,
-            method: "POST",
-            contentType: "application/json",
-            data,
-            beforeSend: function() {
-                // Disable Edit Job Btn temporarily
-                $("#edit-job-btn").prop("disabled", true);
-            },
-            success: function (response)
+        // Control whether AJAX request should be made
+        var doAjax = false;
+
+        // Required Form Control Checks
+        const requiredFormControls = [
+            $("#edit-employer-name"),
+            $("#edit-job-title"),
+            $("#edit-job-role"),
+            $("#edit-rate-amount"),
+            $("#edit-effective-date"),
+            $("#edit-total-hours"),
+            $("#edit-total-pay")
+        ]; 
+
+        for (let requiredFormControl of requiredFormControls)
+        {
+            // Validate Each Required Field
+            requiredFieldValidate(requiredFormControl.attr("id"));
+
+            if (requiredFormControl.hasClass("is-valid"))
             {
-                // Set in Session Storage the JSONification of the response
-                sessionStorage.setItem("successResponse", JSON.stringify(response));
-
-                // Refresh this page in case of success
-                location.reload();
-            },
-            error: function (xhr)
-            {
-
-                // Smoothly scroll back to top
-                smoothlyScrollToTop(".content-wrapper");
-
-                // Show error alert
-                let errorMsg = "Job Coult Not Be Editted";
-
-                if (xhr.responseJSON["error"])
-                {
-                    errorMsg = xhr.responseJSON["error"];
-                }
-
-                displayFormErrorAlert("job-page-content-wrapper", errorMsg, false);                 
-            },
-            complete: function () {
-                // Enable the button back
-                $("#edit-job-btn").prop("disabled", false);
+                doAjax = true;
             }
-        });
+
+            else
+            {
+                doAjax = false;
+            }
+        }
+
+        if (!doAjax)
+        {
+            smoothlyScrollToTop(".content-wrapper");
+            displayFormErrorAlert("job-page-content-wrapper", "Add All Valid Required Job Data", false);
+
+        }
+
+        if (doAjax)
+        {
+            // Do an AJAX request
+            $.ajax({
+                url: `${websiteURL}form-handlers/edit-job.php`,
+                method: "POST",
+                contentType: "application/json",
+                data,
+                beforeSend: function() {
+                    // Disable Edit Job Btn temporarily
+                    $("#edit-job-btn").prop("disabled", true);
+                },
+                success: function (response)
+                {
+                    // Set in Session Storage the JSONification of the response
+                    sessionStorage.setItem("successResponse", JSON.stringify(response));
+
+                    // Refresh this page in case of success
+                    location.reload();
+                },
+                error: function (xhr)
+                {
+
+                    // Smoothly scroll back to top
+                    smoothlyScrollToTop(".content-wrapper");
+
+                    // Show error alert
+                    let errorMsg = "Job Coult Not Be Editted";
+
+                    if (xhr.responseJSON["error"])
+                    {
+                        errorMsg = xhr.responseJSON["error"];
+                    }
+
+                    displayFormErrorAlert("job-page-content-wrapper", errorMsg, false);                 
+                },
+                complete: function () {
+                    // Enable the button back
+                    $("#edit-job-btn").prop("disabled", false);
+                }
+            });   
+        }
     });
 }
 
