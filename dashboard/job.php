@@ -281,13 +281,13 @@ require_once "../db/working-day-db-funcs.php";
                                         </div>
                                         <div class="form-group position-relative">
                                             <label for="total-hours">Predicted Total Hours</label>
-                                            <input type="number" class="form-control" name="total-hours" id="total-hours">
+                                            <input type="number" class="form-control" name="total-hours" id="total-hours" min="1">
                                             <div class="valid-tooltip total-hours">Predicted Total Hours Look Good</div>
                                             <div class="invalid-tooltip total-hours">Predicted Total Hours Is A Valid Field</div>
                                         </div>
                                         <div class="form-group position-relative">
                                             <label for="total-pay">Predicted Total Payment</label>
-                                            <input type="number" class="form-control" name="total-pay" id="total-pay">
+                                            <input type="number" class="form-control" name="total-pay" id="total-pay" min="1">
                                             <div class="valid-tooltip total-pay">Predicted Total Payment Looks Good</div>
                                             <div class="invalid-tooltip total-hours">Predicted Total Payment Is A Valid Field</div>
                                         </div>
@@ -417,7 +417,7 @@ require_once "../db/working-day-db-funcs.php";
                                             </div>
                                             <div class="form-group">
                                                 <label for="edit-rate-amount">Rate Amount</label>
-                                                <input type="number" id="edit-rate-amount" class="form-control" value="<?=$job["pay_rate_amount"]?>">
+                                                <input type="number" id="edit-rate-amount" class="form-control" value="<?=$job["pay_rate_amount"]?>" min="1">
                                             </div>
                                             <div class="form-group">
                                                 <label for="edit-effective-rate">Effective Date</label>
@@ -515,15 +515,15 @@ require_once "../db/working-day-db-funcs.php";
                                             </div>
                                             <div class="form-group">
                                                 <label for="edit-total-hours">Predicted Total Hours</label>
-                                                <input type="number" id="edit-total-hours" class="form-control" value="<?=$job["total_hours"];?>">
+                                                <input type="number" id="edit-total-hours" class="form-control" value="<?=$job["total_hours"];?>" min="1">
                                             </div>
                                             <div class="form-group">
                                                 <label for="edit-total-pay">Predicted Total Payment</label>
-                                                <input type="number" id="edit-total-pay" class="form-control" value="<?=$job["total_pay"]?>">
+                                                <input type="number" id="edit-total-pay" class="form-control" value="<?=$job["total_pay"]?>" min="1">
                                             </div>
                                             <div class="form-group">
                                                 <label for="edit-tips">Tips</label>
-                                                <input type="number" id="edit-tips" class="form-control" value="<?=$job["tip"];?>">
+                                                <input type="number" id="edit-tips" class="form-control" value="<?=$job["tip"];?>" min="0">
                                             </div>
                                         </div>
                                     </div>
