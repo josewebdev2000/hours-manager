@@ -99,7 +99,7 @@ $jobs = getAllJobsOfUserForJobsPage($user["id"]);
                                                 <?php endforeach;?>
                                             <?php else:?>
                                                 <tr>
-                                                    <td class="w-100">
+                                                    <td colspan="7">
                                                         <div class="text-center">
                                                             <h4 class="display-5">No Jobs</h4>
                                                             <p class="h5">You have not added any jobs yet</p>
