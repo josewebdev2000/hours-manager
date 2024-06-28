@@ -34,7 +34,7 @@ $employers = [
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 200px; /* Adjust height as needed */
+    height: 200px;
 }
 </style>
 

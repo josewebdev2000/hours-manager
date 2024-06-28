@@ -4,9 +4,6 @@
 
 <?php require_once "../db/job-db-funcs.php"; 
 
-// Grab data required for summary cards
-
-// Grab num of registered jobs
 $num_jobs_assoc = getNumRegisteredJobs($_SESSION["id"]);
 $num_jobs = NULL;
 
@@ -15,7 +12,6 @@ if (!array_key_exists("error", $num_jobs_assoc))
     $num_jobs = $num_jobs_assoc["num_jobs"];
 }
 
-// Simulated data for demonstration. Replace this with actual database queries.
 $history = [
     ["Job Title" => "Job1", "Job Role" => "Web Designer", "Employer Name" => "Company A", "Start Time" => "8:55 AM", "End Time" => "1:44 PM", "Hours" => 4.81],
     ["Job Title" => "Job2", "Job Role" => "UX Designer", "Employer Name" => "Company B", "Start Time" => "5:24 PM", "End Time" => "8:10 PM", "Hours" => 2.76],

@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    // Chart.js code
     var ctx = document.getElementById('hoursChart').getContext('2d');
     var hoursChart = new Chart(ctx, {
         type: 'bar',

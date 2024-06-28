@@ -3,7 +3,6 @@
 <?php require_once "../templates/header.php"; ?>
 
 <?php
-// Simulated data for demonstration. Replace this with actual database queries.
 $jobId = $_GET['jobId'];
 $jobRoles = [
     1 => "Web Designer",
@@ -27,11 +26,9 @@ $employers = [
     8 => "Company H"
 ];
 
-// Example clock-in/clock-out history data
 $history = [
     ["Start Time" => "2024-06-01 09:00", "End Time" => "2024-06-01 17:00"],
     ["Start Time" => "2024-06-02 09:00", "End Time" => "2024-06-02 17:00"],
-    // Add more history data as needed
 ];
 ?>
 
