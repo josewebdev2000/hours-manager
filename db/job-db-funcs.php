@@ -709,6 +709,208 @@ function getAllJobsOfUserForJobsPage($user_id)
     return $jobs;
 }
 
+function getAllJobsOfUserForWorkShiftsPage($user_id)
+{
+    /** Extract All Jobs from the DB for Work Shift Management */
+    global $conn;
+
+    $sql = "SELECT 
+            j.id AS job_id,
+            j.title AS job_title, 
+            j.role AS job_role, 
+            e.name AS employer_name,
+            p.rate_type AS pay_rate_type,
+            p.rate_amount AS pay_rate_amount,
+            CASE
+                WHEN ws.end_time IS NOT NULL THEN 'clock-out'
+                ELSE 'clock-in'
+            END AS clock_state
+        FROM 
+            jobs j
+            INNER JOIN employers e ON j.employer_id = e.id AND j.user_id = e.user_id
+            INNER JOIN payrates p ON j.id = p.job_id AND j.user_id = p.user_id
+            LEFT JOIN (
+                SELECT 
+                    job_id,
+                    user_id,
+                    end_time
+                FROM 
+                    worksessions
+                WHERE 
+                    (user_id, job_id, id) IN (
+                        SELECT 
+                            user_id, 
+                            job_id, 
+                            MAX(id) 
+                        FROM 
+                            worksessions 
+                        GROUP BY 
+                            user_id, job_id
+                    )
+            ) ws ON j.id = ws.job_id AND j.user_id = ws.user_id
+        WHERE 
+            j.user_id = ?
+        GROUP BY 
+            j.id
+        ORDER BY 
+            j.title;";
+
+    // Make a prepared SQL statement
+    $stmt = $conn->prepare($sql);
+
+    // If it couldn't be prepared, return error
+    if (!$stmt)
+    {
+        return [
+            "error" => "Could not prepare to get jobs data",
+            "error_code" => "preparation_error"
+        ];
+    }
+
+    // Bind the user id parameter
+    $stmt->bind_param("i", $user_id);
+
+    // If statement could not be executed, return error
+    if (!$stmt->execute())
+    {
+        return [
+            "error" => "Could not try to get jobs",
+            "error_code" => "excecution_error"
+        ];
+    }
+
+    // Now grab the results
+    $result = $stmt->get_result();
+
+    // If the result has no rows, then return jobs not found error
+    if ($result->num_rows == 0)
+    {
+        return [
+            "error" => "Could not find any jobs",
+            "error_code" => "jobs_not_found_error"
+        ];
+    }
+
+    // If there were jobs found, grab them
+    $jobs = [];
+
+    // Loop through all jobs and add them to the jobs array
+    while ($job = $result->fetch_assoc())
+    {
+        $jobs[$job["job_id"]] = $job;
+    }
+
+    // Close the statement
+    $stmt->close();
+
+    // Return jobs array
+    return $jobs;
+}
+
+function getJobRecordsForHistoryPage($user_id, $job_id)
+{
+    /** Grab a Job to keep track of its work logs */
+    global $conn;
+
+    $sql = "SELECT 
+            j.id AS job_id,
+            j.title AS job_title, 
+            j.role AS job_role, 
+            e.name AS employer_name,
+            CASE
+                WHEN ws.id IS NULL THEN 0
+                ELSE ws.id
+            END AS worksession_id,
+            ws.start_time AS start_time,
+            ws.end_time AS end_time,
+            CASE
+                WHEN ws.end_time IS NOT NULL THEN 'clock-out'
+                ELSE 'clock-in'
+            END AS clock_state
+        FROM 
+            jobs j
+            INNER JOIN employers e ON j.employer_id = e.id AND j.user_id = e.user_id
+            INNER JOIN payrates p ON j.id = p.job_id AND j.user_id = p.user_id
+            LEFT JOIN (
+                SELECT 
+                    job_id,
+                    user_id,
+                    id,
+                    start_time,
+                    end_time
+                FROM 
+                    worksessions
+                WHERE 
+                    (user_id, job_id, id) IN (
+                        SELECT 
+                            user_id, 
+                            job_id, 
+                            MAX(id) 
+                        FROM 
+                            worksessions 
+                        GROUP BY 
+                            user_id, job_id
+                    )
+            ) ws ON j.id = ws.job_id AND j.user_id = ws.user_id
+        WHERE 
+            j.user_id = ? AND j.id = ?
+        GROUP BY 
+            j.id
+        ORDER BY 
+            j.title";
+
+    // Make a prepared SQL statement
+    $stmt = $conn->prepare($sql);
+
+    // If it couldn't be prepared, return error
+    if (!$stmt)
+    {
+        return [
+            "error" => "Could not prepare to get job data",
+            "error_code" => "preparation_error"
+        ];
+    }
+
+    // Bind the user id parameter
+    $stmt->bind_param("ii", $user_id, $job_id);
+
+    // If statement could not be executed, return error
+    if (!$stmt->execute())
+    {
+        return [
+            "error" => "Could not try to get job",
+            "error_code" => "excecution_error"
+        ];
+    }
+
+    // Now grab the results
+    $result = $stmt->get_result();
+
+    // If the result has no rows, then return jobs not found error
+    if ($result->num_rows == 0)
+    {
+        return [
+            "error" => "Could not find any job",
+            "error_code" => "job_not_found_error"
+        ];
+    }
+
+    // If there were jobs found, grab them
+    $jobs = [];
+
+    // Loop through all jobs and add them to the jobs array
+    while ($job = $result->fetch_assoc())
+    {
+        $jobs[$job["worksession_id"]] = $job;
+    }
+
+    // Close the statement
+    $stmt->close();
+
+    // Return jobs array
+    return $jobs;
+}
+
 function getJobOfUserById($user_id, $job_id)
 {
     /** Extract A Job For The DB */

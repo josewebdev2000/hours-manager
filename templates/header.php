@@ -63,6 +63,12 @@
                 echo "<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/jqwidgets/12.0.0/jqwidgets/styles/jqx.base.css'>";
                 break;
             }
+
+            case "dashboard/work-shifts.php":
+            {
+                echo "<link rel='stylesheet' href='$websiteUrl/assets/css/work-shifts.css'>\n";
+                break;
+            }
         }
     ?>
 

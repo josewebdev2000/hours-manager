@@ -30,10 +30,71 @@
     margin-bottom: 20px;
 }
 
-.table-responsive {
+.table-responsive 
+{
     margin-top: 20px;
 }
 
-.table th, .table td {
+.table th, .table td 
+{
     text-align: center;
+}
+
+.card-link 
+{
+    text-decoration: none;
+    color: inherit;
+}
+
+.card-link .card 
+{
+    cursor: pointer;
+    transition: transform 0.2s;
+    background: linear-gradient(135deg, #3f51b5 0%, #2196f3 100%);
+    border-radius: 15px;
+}
+
+.card-link .card:nth-child(odd) {
+    background: linear-gradient(135deg, #673ab7 0%, #9c27b0 100%);
+}
+
+.card-link .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-link .card:hover {
+    transform: scale(1.05);
+}
+
+.fc-center {
+    padding-left: 8%;
+}
+
+@media (max-width: 768px) {
+    .card {
+        width: 80%;
+        margin: auto;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .fc-toolbar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .fc-toolbar .fc-left,
+    .fc-toolbar .fc-right {
+        display: flex;
+        margin: 5px 0;
+    }
+
+    .fc-toolbar .fc-center h2 {
+        font-size: 1.5rem;
+    }
+
 }

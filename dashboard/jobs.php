@@ -49,7 +49,6 @@ $jobs = getAllJobsOfUserForJobsPage($user["id"]);
                                                 <th>Job Role</th>
                                                 <th>Employer Name</th>
                                                 <th>Pay Rate</th>
-                                                <th>Working Days</th>
                                                 <th>Pay Roll Day</th>
                                                 <th style="width: 140px">Action</th>
                                             </tr>
@@ -65,7 +64,6 @@ $jobs = getAllJobsOfUserForJobsPage($user["id"]);
                                                         <td><?=$job["job_role"];?></td>
                                                         <td><?=$job["employer_name"];?></td>
                                                         <td><?=formatRateAmountByType($job["pay_rate_amount"], $job["pay_rate_type"]);?></td>
-                                                        <td><?php echo (isset($job["working_days"])) ? $job["working_days"] : "No Schedule Specified"?></td>
                                                         <td><?=$job["payroll_day"];?></td>
                                                         <td class="job-actions" role="group">
                                                             <a href="<?=$websiteUrl;?>dashboard/job.php?action=view&id=<?=$job_id;?>" class="btn btn-info btn-sm"><i class="fas fa-eye"></i> View</a>
