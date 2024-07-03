@@ -20,17 +20,4 @@ $(document).ready(function() {
             }
         }
     });
-
-    $('#calendar').fullCalendar({
-        header: {
-            left: 'prev,next',
-            center: 'title',
-            right: 'month,agendaWeek,agendaDay'
-        },
-        defaultDate: moment().format('YYYY-MM-DD'),
-        navLinks: true,
-        editable: true,
-        eventLimit: true,
-        events: []
-    });
 });

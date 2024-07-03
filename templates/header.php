@@ -63,6 +63,12 @@
                 echo "<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/jqwidgets/12.0.0/jqwidgets/styles/jqx.base.css'>";
                 break;
             }
+
+            case "dashboard/work-shifts.php":
+            {
+                echo "<link rel='stylesheet' href='$websiteUrl/assets/css/work-shifts.css'>\n";
+                break;
+            }
         }
     ?>
 
@@ -111,6 +117,13 @@
                echo "<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.14/index.global.min.js'></script>\n";
                echo "<script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-2FX5PV9DNT');</script>\n";
                break;
+            }
+
+            case "dashboard/job-history.php":
+            {
+                echo "<script src='$websiteUrl/assets/js/history/clock-in.js'></script>";
+                echo "<script src='$websiteUrl/assets/js/history/clock-out.js'></script>";
+                break;
             }
         }
     ?>

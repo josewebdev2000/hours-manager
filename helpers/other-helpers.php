@@ -95,4 +95,24 @@ function formatRateAmountByType($rate_amount, $rate_type)
 
     return $rate_rep;
 }
+
+function getDateOutOfDateTimeStr($dateTimeStr)
+{
+    $dateTimeObj = new DateTime($dateTimeStr);
+
+    // Format the date as yyyy-mm-dd
+    $date = $dateTimeObj->format('Y-m-d');
+
+    return $date;
+}
+
+function getTimeOutOfDateTimeStr($dateTimeStr)
+{
+    $dateTimeObj = new DateTime($dateTimeStr);
+
+    // Format the time as hh-mm-ss
+    $time = $dateTimeObj->format('H:i:s');
+
+    return $time;
+}
 ?>

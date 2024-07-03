@@ -247,6 +247,15 @@ function validateWorkShiftData($workShiftsData)
     return $workShifts;
 }
 
+function isValidDateTime($dateTimeString)
+{
+    $format = 'Y-m-d H:i:s'; // MySQL DATETIME format
+    $dateTime = DateTime::createFromFormat($format, $dateTimeString);
+
+    // Check if the parsing succeeded and the resulting date matches the input
+    return $dateTime && $dateTime->format($format) === $dateTimeString;
+}
+
 function isValidDate($dateStr)
 {
     // Check a Date String that comes from the front-end

@@ -28,15 +28,15 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?=$websiteUrl?>dashboard/profile.php" class="nav-link">
-                        <i class="nav-icon fas fa-portrait"></i>
-                        <p>Profile</p>
+                    <a href="<?=$websiteUrl?>dashboard/work-shifts.php" class="nav-link">
+                        <i class="nav-icon fas fa-business-time"></i>
+                        <p>Work Shifts</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?=$websiteUrl?>dashboard/settings.php" class="nav-link">
-                        <i class="nav-icon fas fa-wrench"></i>
-                        <p>Settings</p>
+                    <a href="<?=$websiteUrl?>dashboard/profile.php" class="nav-link">
+                        <i class="nav-icon fas fa-portrait"></i>
+                        <p>Profile</p>
                     </a>
                 </li>
                 <li class="nav-header">DETAILS</li>
