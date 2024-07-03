@@ -414,6 +414,7 @@ function deleteJob($jobId, $employerId)
     // Prepare SQL queries to execute to delete all related job data
     $delete_payroll_sql = "DELETE FROM payrolls WHERE job_id = ?";
     $delete_payrate_sql = "DELETE FROM payrates WHERE job_id = ?";
+    $delete_worksessions_sql = "DELETE FROM worksessions WHERE job_id = ?";
     $delete_job_sql = "DELETE FROM jobs WHERE id = ?";
     $delete_employer_sql = "DELETE FROM employers WHERE id = ?";
 
@@ -479,6 +480,32 @@ function deleteJob($jobId, $employerId)
             throw new Exception(json_encode($payRateExcecutionErrorAssoc));
         }
 
+        // Make statement to delete work sessions
+        $deleteWorkSessionsStmt = $conn->prepare($delete_worksessions_sql);
+
+        if (!$deleteWorkSessionsStmt)
+        {
+            $workSessionsPreparationErrorAssoc = [
+                'error' => 'Could not prepare to delete work sessions data',
+                'error_code' => 'preparation_error'
+            ];
+
+            throw new Exception(json_encode($workSessionsPreparationErrorAssoc));
+        }
+
+        // Bind work session ID parameter
+        $deleteWorkSessionsStmt->bind_param("i", $jobId);
+
+        if (!$deleteWorkSessionsStmt->execute())
+        {
+            $workSessionsExcecutionErrorAssoc = [
+                'error' => 'Could not try to delete pay rate data',
+                'error_code' => 'preparation_error'
+            ];
+
+            throw new Exception(json_encode($workSessionsExcecutionErrorAssoc));
+        }
+
         // Make Statement to delete job
         $deleteJobStmt = $conn->prepare($delete_job_sql);
 
@@ -538,6 +565,7 @@ function deleteJob($jobId, $employerId)
         // Close statements
         $deletePayRollStmt->close();
         $deletePayRateStmt->close();
+        $deleteWorkSessionsStmt->close();
         $deleteJobStmt->close();
         $deleteEmployerStmt->close();
 
@@ -722,7 +750,7 @@ function getAllJobsOfUserForWorkShiftsPage($user_id)
             p.rate_type AS pay_rate_type,
             p.rate_amount AS pay_rate_amount,
             CASE
-                WHEN ws.end_time IS NOT NULL THEN 'clock-out'
+                WHEN ws.start_time IS NOT NULL AND ws.end_time IS NULL THEN 'clock-out'
                 ELSE 'clock-in'
             END AS clock_state
         FROM 
@@ -733,6 +761,7 @@ function getAllJobsOfUserForWorkShiftsPage($user_id)
                 SELECT 
                     job_id,
                     user_id,
+                    start_time,
                     end_time
                 FROM 
                     worksessions
@@ -753,7 +782,7 @@ function getAllJobsOfUserForWorkShiftsPage($user_id)
         GROUP BY 
             j.id
         ORDER BY 
-            j.title;";
+            j.title";
 
     // Make a prepared SQL statement
     $stmt = $conn->prepare($sql);
@@ -824,38 +853,16 @@ function getJobRecordsForHistoryPage($user_id, $job_id)
             ws.start_time AS start_time,
             ws.end_time AS end_time,
             CASE
-                WHEN ws.end_time IS NOT NULL THEN 'clock-out'
+                WHEN ws.start_time IS NOT NULL AND ws.end_time IS NULL THEN 'clock-out'
                 ELSE 'clock-in'
             END AS clock_state
         FROM 
             jobs j
             INNER JOIN employers e ON j.employer_id = e.id AND j.user_id = e.user_id
             INNER JOIN payrates p ON j.id = p.job_id AND j.user_id = p.user_id
-            LEFT JOIN (
-                SELECT 
-                    job_id,
-                    user_id,
-                    id,
-                    start_time,
-                    end_time
-                FROM 
-                    worksessions
-                WHERE 
-                    (user_id, job_id, id) IN (
-                        SELECT 
-                            user_id, 
-                            job_id, 
-                            MAX(id) 
-                        FROM 
-                            worksessions 
-                        GROUP BY 
-                            user_id, job_id
-                    )
-            ) ws ON j.id = ws.job_id AND j.user_id = ws.user_id
+            LEFT JOIN worksessions ws ON j.id = ws.job_id AND j.user_id = ws.user_id
         WHERE 
             j.user_id = ? AND j.id = ?
-        GROUP BY 
-            j.id
         ORDER BY 
             j.title";
 

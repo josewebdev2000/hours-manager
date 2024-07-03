@@ -7,10 +7,15 @@
 if (isset($_GET["id"]))
 {
     $jobs = getJobRecordsForHistoryPage($user["id"], $_GET["id"]);
-
     if (!array_key_exists("error", $jobs))
     {
-        $default_job = $jobs[0];
+        // Grab job keys
+        $job_keys = array_keys($jobs);
+
+        // Grab first key
+        $first_workession_id = reset($job_keys);
+
+        $default_job = $jobs[$first_workession_id];
     }
 }
 ?>
@@ -20,7 +25,8 @@ if (isset($_GET["id"]))
     <?php require_once "templates/dashboard-sidebar.php"; ?>
     <?php require_once "templates/dashboard-preloader.php"; ?>
 
-    <div class="content-wrapper">
+    <?php // Place user-id and job-id in hidden inputs ?>
+    <div class="content-wrapper" id="job-history-content-wrapper">
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
@@ -39,30 +45,37 @@ if (isset($_GET["id"]))
         <section class="content">
             <div class="container-fluid">
                 <?php if (is_valid_id_param($_GET["id"]) && isset($default_job["job_role"])): ?>
-                    <div class="table-responsive" style="margin-bottom: 73vh">
+                    <input type="hidden" id="user_id" value="<?=$user["id"]; ?>">
+                    <input type="hidden" id="job_id" value="<?=$_GET["id"]; ?>">
+                    <div class="table-responsive" style="margin-bottom: 670px">
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th>Job Title</th>
                                     <th>Job Role</th>
                                     <th>Employer Name</th>
+                                    <th>Start Date</th>
                                     <th>Start Time</th>
+                                    <th>End Date</th>
                                     <th>End Time</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <?php foreach ($jobs as $job): ?>
-                                        <?php $workSessionId = $job["worksession_id"]; ?>
-                                            <?php if (isset($default_job["start_time"])): ?>
+                                <?php foreach ($jobs as $job): ?>
+                                    <?php $workSessionId = $job["worksession_id"]; ?>
+                                        <input type="hidden" class="work-session-id-holder" id="<?=$workSessionId?>" value="<?=$workSessionId?>">
+                                        <?php if (isset($default_job["start_time"])): ?>
+                                            <tr>
                                                 <td><?=$job["job_title"]; ?></td>
                                                 <td><?=$job["job_role"];  ?></td>
                                                 <td><?=$job["employer_name"];  ?></td>
-                                                <td><?=$job["start_time"];  ?></td>
-                                                <td><?=$job["end_time"]; ?></td>
-                                            <?php endif; ?>
-                                    <?php endforeach;?>
-                                </tr>
+                                                <td><?=getDateOutOfDateTimeStr($job["start_time"]); ?></td>
+                                                <td><?=getTimeOutOfDateTimeStr($job["start_time"]); ?></td>
+                                                <td><?php echo (isset($job["end_time"])) ? getDateOutOfDateTimeStr($job["end_time"]) : "No End Date Specified"; ?></td>
+                                                <td><?php echo (isset($job["end_time"])) ? getTimeOutOfDateTimeStr($job["end_time"]) : "No End Time Specified"; ?></td>
+                                            </tr>
+                                        <?php endif; ?>
+                                <?php endforeach;?>
                             </tbody>
                         </table>
                     </div>

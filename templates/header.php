@@ -118,6 +118,13 @@
                echo "<script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-2FX5PV9DNT');</script>\n";
                break;
             }
+
+            case "dashboard/job-history.php":
+            {
+                echo "<script src='$websiteUrl/assets/js/history/clock-in.js'></script>";
+                echo "<script src='$websiteUrl/assets/js/history/clock-out.js'></script>";
+                break;
+            }
         }
     ?>
 </head>

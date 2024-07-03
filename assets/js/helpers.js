@@ -280,6 +280,26 @@ function getDayOfWeek(i)
     }
 }
 
+function getCurrentTime()
+{
+    const now = new Date();
+    
+    // Format date to YYYY-MM-DD
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const formattedDate = `${year}-${month}-${day}`;
+    
+    // Format time to HH:MM:SS
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    const formattedTime = `${hours}:${minutes}:${seconds}`;
+    
+    // Combine date and time in the format MySQL DATETIME expects
+    return `${formattedDate} ${formattedTime}`;
+}
+
 function smoothlyScrollToTop(container_selector)
 {
     // Using jQuery's animate() method to add smooth page scroll
