@@ -1,7 +1,6 @@
 <?php require_once "../templates/session-starter.php"; ?>
 <?php require_once "templates/dashboard-header.php"; ?>
 <?php require_once "../templates/header.php"; ?>
-
 <?php require_once "../db/job-db-funcs.php"; 
 
 $num_jobs_assoc = getNumRegisteredJobs($_SESSION["id"]);
@@ -13,14 +12,21 @@ if (!array_key_exists("error", $num_jobs_assoc))
 }
 
 $history = [
-    ["Job Title" => "Job1", "Job Role" => "Web Designer", "Employer Name" => "Company A", "Start Time" => "8:55 AM", "End Time" => "1:44 PM", "Hours" => 4.81],
-    ["Job Title" => "Job2", "Job Role" => "UX Designer", "Employer Name" => "Company B", "Start Time" => "5:24 PM", "End Time" => "8:10 PM", "Hours" => 2.76],
-    ["Job Title" => "Job3", "Job Role" => "Graphic Artist", "Employer Name" => "Company C", "Start Time" => "4:56 PM", "End Time" => "8:36 PM", "Hours" => 3.67],
-    ["Job Title" => "Job4", "Job Role" => "Coffee Lover", "Employer Name" => "Company D", "Start Time" => "8:56 AM", "End Time" => "2:15 PM", "Hours" => 5.32],
-    ["Job Title" => "Job5", "Job Role" => "Marketing Specialist", "Employer Name" => "Company E", "Start Time" => "8:59 AM", "End Time" => "12:57 PM", "Hours" => 3.96],
-    ["Job Title" => "Job6", "Job Role" => "Software Engineer", "Employer Name" => "Company F", "Start Time" => "4:57 PM", "End Time" => "9:27 PM", "Hours" => 4.51],
-    ["Job Title" => "Job7", "Job Role" => "Data Analyst", "Employer Name" => "Company G", "Start Time" => "8:57 AM", "End Time" => "1:29 PM", "Hours" => 4.54]
+    ["Job Title" => "Job1", "Job Role" => "Web Designer", "Employer Name" => "Company A", "Start Time" => "8:55 AM", "End Time" => "1:44 PM", "Hours" => 4.81, "Hourly Wage" => 25],
+    ["Job Title" => "Job2", "Job Role" => "UX Designer", "Employer Name" => "Company B", "Start Time" => "5:24 PM", "End Time" => "8:10 PM", "Hours" => 2.76, "Hourly Wage" => 30],
+    ["Job Title" => "Job3", "Job Role" => "Graphic Artist", "Employer Name" => "Company C", "Start Time" => "4:56 PM", "End Time" => "8:36 PM", "Hours" => 3.67, "Hourly Wage" => 28],
+    ["Job Title" => "Job4", "Job Role" => "Coffee Lover", "Employer Name" => "Company D", "Start Time" => "8:56 AM", "End Time" => "2:15 PM", "Hours" => 5.32, "Hourly Wage" => 15],
+    ["Job Title" => "Job5", "Job Role" => "Marketing Specialist", "Employer Name" => "Company E", "Start Time" => "8:59 AM", "End Time" => "12:57 PM", "Hours" => 3.96, "Hourly Wage" => 35],
+    ["Job Title" => "Job6", "Job Role" => "Software Engineer", "Employer Name" => "Company F", "Start Time" => "4:57 PM", "End Time" => "9:27 PM", "Hours" => 4.51, "Hourly Wage" => 40],
+    ["Job Title" => "Job7", "Job Role" => "Data Analyst", "Employer Name" => "Company G", "Start Time" => "8:57 AM", "End Time" => "1:29 PM", "Hours" => 4.54, "Hourly Wage" => 33]
 ];
+
+// Calculate total hours worked and total wages earned
+$total_hours_worked = array_sum(array_column($history, 'Hours'));
+$total_wages_earned = 0;
+foreach ($history as $entry) {
+    $total_wages_earned += $entry["Hours"] * $entry["Hourly Wage"];
+}
 ?>
 
 <div class="wrapper">
@@ -109,10 +115,13 @@ $history = [
                                 <th>Start Time</th>
                                 <th>End Time</th>
                                 <th>Estimated Hours Worked</th>
+                                <th>Weekly Wages</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($history as $entry) { ?>
+                            <?php foreach ($history as $entry) { 
+                                $weekly_wages = $entry["Hours"] * $entry["Hourly Wage"];
+                            ?>
                             <tr>
                                 <td><?php echo $entry["Job Title"]; ?></td>
                                 <td><?php echo $entry["Job Role"]; ?></td>
@@ -120,12 +129,17 @@ $history = [
                                 <td><?php echo $entry["Start Time"]; ?></td>
                                 <td><?php echo $entry["End Time"]; ?></td>
                                 <td><?php echo $entry["Hours"]; ?></td>
+                                <td><?php echo "$" . number_format($weekly_wages, 2); ?></td>
                             </tr>
                             <?php } ?>
                         </tbody>
                     </table>
                 </div>
-                <p class="text-right font-weight-bold">Total Hours Worked: <?php echo array_sum(array_column($history, 'Hours')); ?></p>
+                <p class="text-right font-weight-bold">Total Hours Worked: <?php echo $total_hours_worked; ?></p>
+                <p class="text-right font-weight-bold">Total Wages Earned: <?php echo "$" . number_format($total_wages_earned, 2); ?></p>
+                <div class="text-left mt-3">
+                    <a href="<?=$websiteUrl?>dashboard/calculation.php" class="btn btn-primary">Go to Calculation Page</a>
+                </div>
             </div>
         </div>
     </div>

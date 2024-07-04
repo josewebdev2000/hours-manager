@@ -305,6 +305,9 @@ require_once "../db/working-day-db-funcs.php";
                                     <button id="add-job-cancel-btn" class="btn btn-danger btn-lg">Cancel</button>
                                     <button id="add-job-new-btn" class="btn btn-success btn-lg">Add New Job</button>
                                 </div>
+                                <div class="text-left mt-3">
+                                    <a href="<?=$websiteUrl?>dashboard/jobs.php" class="btn btn-primary">Back to Jobs</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -563,6 +566,9 @@ require_once "../db/working-day-db-funcs.php";
                                             <button id="edit-job-cancel-btn" class="btn btn-danger btn-lg">Cancel</button>
                                             <button id="edit-job-btn" class="btn btn-info btn-lg text-white">Edit Job</button>
                                         </div>
+                                        <div class="text-left mt-3">
+                                            <a href="<?=$websiteUrl?>dashboard/jobs.php" class="btn btn-primary">Back to Jobs</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -784,6 +790,11 @@ require_once "../db/working-day-db-funcs.php";
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col text-left mt-3">
+                                    <a href="<?=$websiteUrl?>dashboard/jobs.php" class="btn btn-primary">Back to Jobs</a>
                                 </div>
                             </div>
                         </div>

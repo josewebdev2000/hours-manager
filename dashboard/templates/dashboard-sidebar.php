@@ -39,6 +39,12 @@
                         <p>Profile</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="<?=$websiteUrl?>dashboard/calculation.php" class="nav-link">
+                        <i class="nav-icon fas fa-calculator"></i>
+                        <p>Calculations</p>
+                    </a>
+                </li>
                 <li class="nav-header">DETAILS</li>
                 <li class="nav-item">
                     <a href="<?=$websiteUrl?>about.php" class="nav-link">
@@ -71,9 +77,9 @@
 </aside>
 <style>
     .main-sidebar {
-    left: 0;
-    height: 100%;
-    width: 250px; /* Adjust the width as needed */
-    background-color: #343a40; /* Ensure the background color matches your theme */
-}
+        left: 0;
+        height: 100%;
+        width: 250px; /* Adjust the width as needed */
+        background-color: #343a40; /* Ensure the background color matches your theme */
+    }
 </style>

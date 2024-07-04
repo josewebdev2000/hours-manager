@@ -1,0 +1,20 @@
+Week 6 - Calculation Update
+
+Update to index.php:
+added a Weekly Wages column 
+added a Total Wages Earned at the bottom of the table
+Added a Got to Calculation Page at the bottom left of the table
+
+CREATION OF CALCULATION.PHP:
+added column:   Job Title 
+                Job Role
+                Employer Name
+                Pay Rate
+                Hours Worked
+                Weekly Wages
+
+UPDATE TO SIDEBAR:
+added a sidebar button that takes you to Calculation.php
+
+UPDATE TO JOB.PHP:
+Added buttons to ADD, View, and Edit pages that will take you to jobs.php
