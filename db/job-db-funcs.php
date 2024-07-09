@@ -855,6 +855,8 @@ function getJobRecordsForDashboardPage($user_id)
             WHERE
                 j.user_id = ?
             AND
+                end_time IS NOT NULL
+            AND
                 YEAR(start_time) = YEAR(CURDATE()) 
             AND 
                 WEEK(start_time) = WEEK(CURDATE())
