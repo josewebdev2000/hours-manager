@@ -96,6 +96,26 @@ function formatRateAmountByType($rate_amount, $rate_type)
     return $rate_rep;
 }
 
+function getFirstDayOfTheCurrentWeek()
+{
+    $currentDate = date('Y-m-d');
+
+    // Calculate the starting date (Monday) of the current week
+    $startOfWeek = date('M-d', strtotime('last Monday', strtotime($currentDate)));
+
+    return $startOfWeek;
+}
+
+function getLastDayOfTheCurrentWeek()
+{
+    $currentDate = date('Y-m-d');
+
+    // Calculate the ending date (Sunday) of the current week
+    $endOfWeek = date('M-d', strtotime('next Sunday', strtotime($currentDate)));
+
+    return $endOfWeek;
+}
+
 function getDateOutOfDateTimeStr($dateTimeStr)
 {
     $dateTimeObj = new DateTime($dateTimeStr);
