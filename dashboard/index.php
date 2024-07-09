@@ -118,7 +118,7 @@ if (!array_key_exists("error", $num_jobs_assoc))
                                 <?php endforeach; ?>
                             <?php else:?>
                                 <tr>
-                                    <td colspan="6">
+                                    <td colspan="8">
                                         <div class="text-center">
                                             <h4 class="display-5">No Jobs Records</h4>
                                             <p class="h5">No records exist that track any hours worked yet</p>
