@@ -836,6 +836,83 @@ function getAllJobsOfUserForWorkShiftsPage($user_id)
     return $jobs;
 }
 
+function getJobRecordsForDashboardPage($user_id)
+{
+    /** Grab Job Data to Show In Dashboard Page */
+    global $conn;
+
+    $sql = "SELECT
+                j.title AS job_title,
+                j.role AS job_role,
+                e.name AS employer_name,
+                ws.id AS worksession_id,
+                ws.start_time AS start_time,
+                ws.end_time AS end_time,
+                ROUND(TIME_TO_SEC(ws.duration) / 3600, 3) AS hours_worked
+            FROM jobs j
+                INNER JOIN employers e ON j.user_id = e.user_id
+                INNER JOIN worksessions ws ON j.user_id = ws.user_id
+            WHERE
+                j.user_id = ?
+            AND
+                YEAR(start_time) = YEAR(CURDATE()) 
+            AND 
+                WEEK(start_time) = WEEK(CURDATE())
+            ORDER BY ws.start_time
+    ";
+
+    // Make a prepared SQL statement
+    $stmt = $conn->prepare($sql);
+
+    // If it couldn't be prepared, return error
+    if (!$stmt)
+    {
+        return [
+            "error" => "Could not prepare to get job data",
+            "error_code" => "preparation_error"
+        ];
+    }
+
+    // Bind the user id parameter
+    $stmt->bind_param("i", $user_id);
+
+    // If statement could not be executed, return error
+    if (!$stmt->execute())
+    {
+        return [
+            "error" => "Could not try to get job",
+            "error_code" => "excecution_error"
+        ];
+    }
+
+    // Now grab the results
+    $result = $stmt->get_result();
+
+    // If the result has no rows, then return jobs not found error
+    if ($result->num_rows == 0)
+    {
+        return [
+            "error" => "Could not find any job",
+            "error_code" => "job_not_found_error"
+        ];
+    }
+
+    // If there were jobs found, grab them
+    $jobs = [];
+
+    // Loop through all jobs and add them to the jobs array
+    while ($job = $result->fetch_assoc())
+    {
+        $jobs[$job["worksession_id"]] = $job;
+    }
+
+    // Close the statement
+    $stmt->close();
+
+    // Return jobs array
+    return $jobs;
+}
+
 function getJobRecordsForHistoryPage($user_id, $job_id)
 {
     /** Grab a Job to keep track of its work logs */
@@ -859,7 +936,6 @@ function getJobRecordsForHistoryPage($user_id, $job_id)
         FROM 
             jobs j
             INNER JOIN employers e ON j.employer_id = e.id AND j.user_id = e.user_id
-            INNER JOIN payrates p ON j.id = p.job_id AND j.user_id = p.user_id
             LEFT JOIN worksessions ws ON j.id = ws.job_id AND j.user_id = ws.user_id
         WHERE 
             j.user_id = ? AND j.id = ?

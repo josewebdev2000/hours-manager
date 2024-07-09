@@ -4,23 +4,15 @@
 
 <?php require_once "../db/job-db-funcs.php"; 
 
-$num_jobs_assoc = getNumRegisteredJobs($_SESSION["id"]);
+$num_jobs_assoc = getNumRegisteredJobs($user["id"]);
 $num_jobs = NULL;
+
+$jobs = getJobRecordsForDashboardPage($user["id"]);
 
 if (!array_key_exists("error", $num_jobs_assoc))
 {
     $num_jobs = $num_jobs_assoc["num_jobs"];
 }
-
-$history = [
-    ["Job Title" => "Job1", "Job Role" => "Web Designer", "Employer Name" => "Company A", "Start Time" => "8:55 AM", "End Time" => "1:44 PM", "Hours" => 4.81],
-    ["Job Title" => "Job2", "Job Role" => "UX Designer", "Employer Name" => "Company B", "Start Time" => "5:24 PM", "End Time" => "8:10 PM", "Hours" => 2.76],
-    ["Job Title" => "Job3", "Job Role" => "Graphic Artist", "Employer Name" => "Company C", "Start Time" => "4:56 PM", "End Time" => "8:36 PM", "Hours" => 3.67],
-    ["Job Title" => "Job4", "Job Role" => "Coffee Lover", "Employer Name" => "Company D", "Start Time" => "8:56 AM", "End Time" => "2:15 PM", "Hours" => 5.32],
-    ["Job Title" => "Job5", "Job Role" => "Marketing Specialist", "Employer Name" => "Company E", "Start Time" => "8:59 AM", "End Time" => "12:57 PM", "Hours" => 3.96],
-    ["Job Title" => "Job6", "Job Role" => "Software Engineer", "Employer Name" => "Company F", "Start Time" => "4:57 PM", "End Time" => "9:27 PM", "Hours" => 4.51],
-    ["Job Title" => "Job7", "Job Role" => "Data Analyst", "Employer Name" => "Company G", "Start Time" => "8:57 AM", "End Time" => "1:29 PM", "Hours" => 4.54]
-];
 ?>
 
 <div class="wrapper">
@@ -94,11 +86,8 @@ $history = [
                     </div>
                 </a>
             </div>
-            <div class="chart">
-                <canvas id="hoursChart"></canvas>
-            </div>
             <div class="history mt-4">
-                <h2>This Week's Clock-In/Clock-Out History</h2>
+                <h2><?=getFirstDayOfTheCurrentWeek();?>/<?=getLastDayOfTheCurrentWeek(); ?> Weekly Job Records</h2>
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped">
                         <thead class="thead-dark">
@@ -106,33 +95,44 @@ $history = [
                                 <th>Job Title</th>
                                 <th>Job Role</th>
                                 <th>Employer Name</th>
+                                <th>Start Date</th>
                                 <th>Start Time</th>
+                                <th>End Date</th>
                                 <th>End Time</th>
                                 <th>Estimated Hours Worked</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($history as $entry) { ?>
-                            <tr>
-                                <td><?php echo $entry["Job Title"]; ?></td>
-                                <td><?php echo $entry["Job Role"]; ?></td>
-                                <td><?php echo $entry["Employer Name"]; ?></td>
-                                <td><?php echo $entry["Start Time"]; ?></td>
-                                <td><?php echo $entry["End Time"]; ?></td>
-                                <td><?php echo $entry["Hours"]; ?></td>
-                            </tr>
-                            <?php } ?>
+                            <?php if (!array_key_exists("error", $jobs)): ?>
+                                <?php foreach ($jobs as $job): ?>
+                                <tr>
+                                    <td><?php echo $job["job_title"]; ?></td>
+                                    <td><?php echo $job["job_role"]; ?></td>
+                                    <td><?php echo $job["employer_name"]; ?></td>
+                                    <td><?php echo getDateOutOfDateTimeStr($job["start_time"]); ?></td>
+                                    <td><?php echo getTimeOutOfDateTimeStr($job["start_time"]); ?></td>
+                                    <td><?php echo getDateOutOfDateTimeStr($job["end_time"]); ?></td>
+                                    <td><?php echo getTimeOutOfDateTimeStr($job["end_time"]); ?></td>
+                                    <td><?php echo $job["hours_worked"]; ?></td>
+                                </tr>
+                                <?php endforeach; ?>
+                            <?php else:?>
+                                <tr>
+                                    <td colspan="6">
+                                        <div class="text-center">
+                                            <h4 class="display-5">No Jobs Records</h4>
+                                            <p class="h5">No records exist that track any hours worked yet</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php endif;?>
                         </tbody>
                     </table>
                 </div>
-                <p class="text-right font-weight-bold">Total Hours Worked: <?php echo array_sum(array_column($history, 'Hours')); ?></p>
+                <p class="text-right font-weight-bold">Total Hours Worked: <?php echo array_sum(array_column($jobs, 'hours_worked')); ?></p>
             </div>
         </div>
     </div>
 </div>
 
 <?php require_once "../templates/footer.php"; ?>
-
-<!-- Chart.js script -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
-<script src="<?=$websiteUrl?>/assets/js/script.js"></script>
