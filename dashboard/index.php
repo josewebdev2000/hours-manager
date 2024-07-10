@@ -126,14 +126,16 @@ if (!array_key_exists("error", $num_jobs_assoc))
                     </table>
                 </div>
             </div>
-            <div class="row text-center">
-                <div class="col-sm-6">
-                    <p class="badge rounded-pill text-bg-dark text-white p-3 fs-6">Total Wages Earned: $<?php echo array_sum(array_column($jobs, 'wages')); ?></p>
+            <?php if(!array_key_exists("error", $jobs)):?>
+                <div class="row text-center">
+                    <div class="col-sm-6">
+                        <p class="badge rounded-pill text-bg-dark text-white p-3 fs-6">Total Wages Earned: $<?php echo array_sum(array_column($jobs, 'wages')); ?></p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="badge rounded-pill text-bg-dark text-white p-3 fs-6">Total Hours Worked: <?php echo array_sum(array_column($jobs, 'hours_worked')); ?> Hr</p>
+                    </div>
                 </div>
-                <div class="col-sm-6">
-                    <p class="badge rounded-pill text-bg-dark text-white p-3 fs-6">Total Hours Worked: <?php echo array_sum(array_column($jobs, 'hours_worked')); ?> Hr</p>
-                </div>
-            </div>
+            <?php endif;?>
         </div>
     </div>
 </div>
