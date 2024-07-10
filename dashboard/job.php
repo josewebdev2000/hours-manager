@@ -3,7 +3,6 @@
 <?php require_once "../templates/header.php"; ?>
 
 <?php require_once "../db/job-db-funcs.php";
-require_once "../db/working-day-db-funcs.php";
 /*  Job Page Infrastructure
     
     This file will need to use GET parameter to conditionally render what is required-->
@@ -105,6 +104,13 @@ require_once "../db/working-day-db-funcs.php";
                                     <li class="breadcrumb-item"><a href="<?=$websiteUrl?>dashboard/">Dashboard</a></li>
                                     <li class="breadcrumb-item active">Job</li>
                                 </ol>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <div class="text-left mt-3">
+                                    <a href="<?=$websiteUrl?>dashboard/jobs.php" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Back to jobs</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -328,6 +334,7 @@ require_once "../db/working-day-db-funcs.php";
                                     </ol>
                                 </div>
                             </div>
+                            
                         </div>
                     </section>
                     <section class="content">
@@ -356,6 +363,13 @@ require_once "../db/working-day-db-funcs.php";
                                         <li class="breadcrumb-item"><a href="<?=$websiteUrl?>dashboard/">Dashboard</a></li>
                                         <li class="breadcrumb-item active">Job</li>
                                     </ol>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-sm-6">
+                                    <div class="text-left mt-3">
+                                        <a href="<?=$websiteUrl?>dashboard/jobs.php" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Back to jobs</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -614,6 +628,13 @@ require_once "../db/working-day-db-funcs.php";
                                         <li class="breadcrumb-item"><a href="<?=$websiteUrl?>dashboard/">Dashboard</a></li>
                                         <li class="breadcrumb-item active">Job</li>
                                     </ol>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-sm-6">
+                                    <div class="text-left mt-3">
+                                        <a href="<?=$websiteUrl?>dashboard/jobs.php" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Back to jobs</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

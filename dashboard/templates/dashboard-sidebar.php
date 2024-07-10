@@ -34,9 +34,9 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?=$websiteUrl?>dashboard/profile.php" class="nav-link">
-                        <i class="nav-icon fas fa-portrait"></i>
-                        <p>Profile</p>
+                    <a href="<?=$websiteUrl?>dashboard/calculations.php" class="nav-link">
+                        <i class="nav-icon fas fa-calculator"></i>
+                        <p>Calculations</p>
                     </a>
                 </li>
                 <li class="nav-header">DETAILS</li>
