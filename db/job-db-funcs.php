@@ -846,11 +846,13 @@ function getJobRecordsForDashboardPage($user_id)
                 j.role AS job_role,
                 e.name AS employer_name,
                 ws.id AS worksession_id,
-                ws.start_time AS start_time,
-                ws.end_time AS end_time,
-                ROUND(TIME_TO_SEC(ws.duration) / 3600, 3) AS hours_worked
+                pr.rate_type AS rate_type,
+                pr.rate_amount AS rate_amount,
+                ROUND(SUM(TIME_TO_SEC(ws.duration) / 3600), 3) AS hours_worked,
+                ROUND(ROUND(SUM(TIME_TO_SEC(ws.duration) / 3600), 3) * pr.rate_amount, 3) AS wages
             FROM jobs j
                 INNER JOIN employers e ON j.user_id = e.user_id
+                INNER JOIN payrates pr ON j.user_id = pr.user_id
                 INNER JOIN worksessions ws ON j.user_id = ws.user_id
             WHERE
                 j.user_id = ?
@@ -860,7 +862,88 @@ function getJobRecordsForDashboardPage($user_id)
                 YEAR(start_time) = YEAR(CURDATE()) 
             AND 
                 WEEK(start_time) = WEEK(CURDATE())
-            ORDER BY ws.start_time
+            ORDER BY ws.id
+    ";
+
+    // Make a prepared SQL statement
+    $stmt = $conn->prepare($sql);
+
+    // If it couldn't be prepared, return error
+    if (!$stmt)
+    {
+        return [
+            "error" => "Could not prepare to get job data",
+            "error_code" => "preparation_error"
+        ];
+    }
+
+    // Bind the user id parameter
+    $stmt->bind_param("i", $user_id);
+
+    // If statement could not be executed, return error
+    if (!$stmt->execute())
+    {
+        return [
+            "error" => "Could not try to get job",
+            "error_code" => "excecution_error"
+        ];
+    }
+
+    // Now grab the results
+    $result = $stmt->get_result();
+
+    // If the result has no rows, then return jobs not found error
+    if ($result->num_rows == 0)
+    {
+        return [
+            "error" => "Could not find any job",
+            "error_code" => "job_not_found_error"
+        ];
+    }
+
+    // If there were jobs found, grab them
+    $jobs = [];
+
+    // Loop through all jobs and add them to the jobs array
+    while ($job = $result->fetch_assoc())
+    {
+        $jobs[$job["worksession_id"]] = $job;
+    }
+
+    // Close the statement
+    $stmt->close();
+
+    // Return jobs array
+    return $jobs;
+}
+
+function getJobRecordsForCalculationPage($user_id)
+{
+    /** Get the weekly earned income per job */
+    global $conn;
+
+    $sql = "SELECT
+                j.title AS job_title,
+                j.role AS job_role,
+                e.name AS employer_name,
+                pr.rate_type AS rate_type,
+                pr.rate_amount AS rate_amount,
+                ws.id AS worksession_id,
+                ws.start_time AS start_time,
+                ws.end_time AS end_time,
+                ROUND(TIME_TO_SEC(ws.duration) / 3600, 3) AS total_hours,
+                ROUND(ROUND(TIME_TO_SEC(ws.duration) / 3600, 3) * pr.rate_amount, 3) AS wages
+            FROM
+                jobs j
+            INNER JOIN employers e ON j.user_id = e.user_id 
+            INNER JOIN payrates pr ON j.user_id = pr.user_id
+            INNER JOIN worksessions ws ON j.user_id = ws.user_id
+            WHERE
+                j.user_id = ?
+            AND
+                ws.duration IS NOT NULL
+            ORDER BY
+                ws.start_time, j.id
     ";
 
     // Make a prepared SQL statement

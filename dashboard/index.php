@@ -95,11 +95,9 @@ if (!array_key_exists("error", $num_jobs_assoc))
                                 <th>Job Title</th>
                                 <th>Job Role</th>
                                 <th>Employer Name</th>
-                                <th>Start Date</th>
-                                <th>Start Time</th>
-                                <th>End Date</th>
-                                <th>End Time</th>
-                                <th>Estimated Hours Worked</th>
+                                <th>Pay Rate</th>
+                                <th>Total Hours Worked</th>
+                                <th>Wages</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -109,16 +107,14 @@ if (!array_key_exists("error", $num_jobs_assoc))
                                     <td><?php echo $job["job_title"]; ?></td>
                                     <td><?php echo $job["job_role"]; ?></td>
                                     <td><?php echo $job["employer_name"]; ?></td>
-                                    <td><?php echo getDateOutOfDateTimeStr($job["start_time"]); ?></td>
-                                    <td><?php echo getTimeOutOfDateTimeStr($job["start_time"]); ?></td>
-                                    <td><?php echo getDateOutOfDateTimeStr($job["end_time"]); ?></td>
-                                    <td><?php echo getTimeOutOfDateTimeStr($job["end_time"]); ?></td>
+                                    <td><?php echo formatRateAmountByType($job["rate_amount"], $job["rate_type"]); ?></td>
                                     <td><?php echo $job["hours_worked"]; ?></td>
+                                    <td><?php echo "$" . $job["wages"]; ?></td>
                                 </tr>
                                 <?php endforeach; ?>
                             <?php else:?>
                                 <tr>
-                                    <td colspan="8">
+                                    <td colspan="6">
                                         <div class="text-center">
                                             <h4 class="display-5">No Jobs Records</h4>
                                             <p class="h5">No records exist that track any hours worked yet</p>
@@ -129,7 +125,14 @@ if (!array_key_exists("error", $num_jobs_assoc))
                         </tbody>
                     </table>
                 </div>
-                <p class="text-right font-weight-bold">Total Hours Worked: <?php echo array_sum(array_column($jobs, 'hours_worked')); ?></p>
+            </div>
+            <div class="row text-center">
+                <div class="col-sm-6">
+                    <p class="badge rounded-pill text-bg-dark text-white p-3 fs-6">Total Wages Earned: $<?php echo array_sum(array_column($jobs, 'wages')); ?></p>
+                </div>
+                <div class="col-sm-6">
+                    <p class="badge rounded-pill text-bg-dark text-white p-3 fs-6">Total Hours Worked: <?php echo array_sum(array_column($jobs, 'hours_worked')); ?> Hr</p>
+                </div>
             </div>
         </div>
     </div>
