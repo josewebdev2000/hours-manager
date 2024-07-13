@@ -849,11 +849,11 @@ function getJobRecordsForDashboardPage($user_id)
                 pr.rate_type AS rate_type,
                 pr.rate_amount AS rate_amount,
                 ROUND(SUM(TIME_TO_SEC(ws.duration) / 3600), 3) AS hours_worked,
-                ROUND(ROUND(SUM(TIME_TO_SEC(ws.duration) / 3600), 3) * pr.rate_amount, 3) AS wages
+                ROUND(SUM((TIME_TO_SEC(ws.duration) / 3600) * pr.rate_amount), 3) AS wages
             FROM jobs j
-                INNER JOIN employers e ON j.user_id = e.user_id
-                INNER JOIN payrates pr ON j.user_id = pr.user_id
-                INNER JOIN worksessions ws ON j.user_id = ws.user_id
+                INNER JOIN employers e ON j.user_id = e.user_id AND j.employer_id = e.id
+                INNER JOIN payrates pr ON j.user_id = pr.user_id AND j.id = pr.job_id
+                INNER JOIN worksessions ws ON j.user_id = ws.user_id AND j.id = ws.job_id
             WHERE
                 j.user_id = ?
             AND
@@ -862,6 +862,7 @@ function getJobRecordsForDashboardPage($user_id)
                 YEAR(start_time) = YEAR(CURDATE()) 
             AND 
                 WEEK(start_time) = WEEK(CURDATE())
+            GROUP BY j.role
             ORDER BY ws.id
     ";
 
@@ -931,13 +932,13 @@ function getJobRecordsForCalculationPage($user_id)
                 ws.id AS worksession_id,
                 ws.start_time AS start_time,
                 ws.end_time AS end_time,
-                ROUND(TIME_TO_SEC(ws.duration) / 3600, 3) AS total_hours,
+                ROUND((TIME_TO_SEC(ws.duration) / 3600), 3) AS total_hours,
                 ROUND(ROUND(TIME_TO_SEC(ws.duration) / 3600, 3) * pr.rate_amount, 3) AS wages
             FROM
                 jobs j
-            INNER JOIN employers e ON j.user_id = e.user_id 
-            INNER JOIN payrates pr ON j.user_id = pr.user_id
-            INNER JOIN worksessions ws ON j.user_id = ws.user_id
+            INNER JOIN employers e ON j.user_id = e.user_id AND j.employer_id = e.id
+            INNER JOIN payrates pr ON j.user_id = pr.user_id AND j.id = pr.job_id
+            INNER JOIN worksessions ws ON j.user_id = ws.user_id AND j.id = ws.job_id
             WHERE
                 j.user_id = ?
             AND
