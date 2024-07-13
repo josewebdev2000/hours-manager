@@ -2,9 +2,15 @@
 <?php require_once "templates/dashboard-header.php"; ?>
 <?php require_once "../templates/header.php"; ?>
 
-<?php require_once "../db/job-db-funcs.php"; 
+<?php 
+
+require_once "../db/job-db-funcs.php"; 
+require_once "../db/pay-rate-db-funcs.php";
+require_once "../db/worksession-db-funcs.php";
 
 $num_jobs_assoc = getNumRegisteredJobs($user["id"]);
+$total_earnings = getTotalMoneyEarned($user["id"]);
+$total_hours = getAllHoursEverWorkedByUser($user["id"]);
 $num_jobs = NULL;
 
 $jobs = getJobRecordsForDashboardPage($user["id"]);
@@ -60,7 +66,7 @@ if (!array_key_exists("error", $num_jobs_assoc))
                         <div class="card text-white h-100">
                             <div class="card-body d-flex flex-column justify-content-center align-items-center">
                                 <h2 class="card-title">Earnings</h2>
-                                <p class="card-text">$384</p>
+                                <p class="card-text">$<?php echo (!array_key_exists("error", $total_earnings)) ? $total_earnings["total_earnings"]: 0?></p>
                             </div>
                         </div>
                     </a>
@@ -70,7 +76,7 @@ if (!array_key_exists("error", $num_jobs_assoc))
                         <div class="card text-white h-100">
                             <div class="card-body d-flex flex-column justify-content-center align-items-center">
                                 <h2 class="card-title">Hours worked</h2>
-                                <p class="card-text">16</p>
+                                <p class="card-text"><?php echo (!array_key_exists("error", $total_hours)) ? $total_hours["total_hours"] : 0?> Hr</p>
                             </div>
                         </div>
                     </a>

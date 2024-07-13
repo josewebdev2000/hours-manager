@@ -4,6 +4,64 @@
 
 /** PHP File that deals with DB interactions regarding the WorkSession Entity/Table */
 
+function getAllHoursEverWorkedByUser($user_id)
+{
+    /** Get all the hours ever worked by the user */
+    global $conn;
+
+    $sql = "SELECT
+                ROUND(SUM(TIME_TO_SEC(duration) / 3600), 3) AS total_hours
+            FROM 
+                worksessions
+            WHERE
+                worksessions.user_id = ?
+            AND
+                duration IS NOT NULL
+    ";
+
+    $stmt = $conn->prepare($sql);
+
+    // If it couldn't be prepared, return error
+    if (!$stmt)
+    {
+        return [
+            "error" => "Could not prepare to get total hours worked",
+            "error_code" => "preparation_error"
+        ];
+    }
+
+    // Bind the user id parameter
+    $stmt->bind_param("i", $user_id);
+
+    // If statement could not be executed, return error
+    if (!$stmt->execute())
+    {
+        return [
+            "error" => "Could not try to get total hours worked",
+            "error_code" => "excecution_error"
+        ];
+    }
+
+    // Now grab the results
+    $result = $stmt->get_result();
+
+    // If the result has no rows, then return jobs not found error
+    if ($result->num_rows != 1)
+    {
+        return [
+            "error" => "Could not find total hours worked",
+            "error_code" => "job_not_found_error"
+        ];
+    }
+
+    $total_hours = $result->fetch_assoc();
+
+    $stmt->close();
+
+    return $total_hours;
+
+}
+
 function insertNewWorkSession($user_id, $job_id, $start_time)
 {
     /** Insert a New WorkSession To The DB */
